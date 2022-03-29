@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d0562a1aa6432f822eca19ad986e97, type: 3}
+  m_Name: Hammer
+  m_EditorClassIdentifier: 
+  id: hammer
+  equipmentName: A Primitive Hammer
+  type: 0
+  slot: 0
+  prefab: {fileID: 686940883744596655, guid: b13f1a509d0435b4fbf2056338822823, type: 3}
+  audioSheathe: {fileID: 0}
+  audioDraw: {fileID: 0}

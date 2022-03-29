@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46b20713e6d83a94b89eabf2f072c25d, type: 3}
+  m_Name: Axe
+  m_EditorClassIdentifier: 
+  id: axe
+  itemName: Primitive Axe
+  icon: {fileID: 21300000, guid: 4f27d4cd48bb668429b1cfedebaf1d0a, type: 3}
+  itemDescription: A rudimentary axe, capable of chopping down small trees
+  isStackable: 0
+  equipmentData: {fileID: 11400000, guid: a797a8ca41ac2e742a248e57a56cc4a1, type: 2}
+  usageType: 4
+  onUse:
+    m_PersistentCalls:
+      m_Calls: []
+  onEquip:
+    m_PersistentCalls:
+      m_Calls: []
+  onUnequip:
+    m_PersistentCalls:
+      m_Calls: []
+  prefab: {fileID: 0}

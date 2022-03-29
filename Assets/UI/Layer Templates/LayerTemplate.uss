@@ -1,0 +1,23 @@
+#enhanced-editor-window-root {
+    height: 100%;
+    width: 100%;
+    --color-main: rgb(46, 46, 46);
+    --color-accent: rgb(53, 53, 53);
+    --color-text--main: rgb(46, 46, 46);
+    --color-text--accent: rgb(212, 212, 212);
+}
+
+:root {
+    --color-main: rgba(0, 0, 0, 0.5);
+    --color-accent: rgba(100, 255, 100, 0.8);
+    --color-text: rgb(226, 226, 226);
+}
+
+#eew-content {
+    height: 100%;
+    width: 100%;
+}
+
+.title {
+    font-size: 20px;
+}

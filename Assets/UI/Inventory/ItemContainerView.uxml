@@ -1,0 +1,41 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+  <ui:VisualElement name="item-container" class="item-panel col" style="overflow: hidden;">
+    <Style src="/Assets/UI/common.uss" />
+    <Style src="ItemContainerMenu.uss" />
+    <ui:VisualElement name="title-wrapper" class="grid">
+      <ui:VisualElement class="row">
+        <ui:VisualElement class="col span-6">
+          <ui:Label text="Wooden Chest" name="ic-name" class="h1" />
+        </ui:VisualElement>
+        <ui:VisualElement class="col span-3 span-offset-3">
+          <ui:Label text="34/40 Slots" name="ic-slot-count" class="p-t-xl" style="-unity-text-align: upper-right;" />
+        </ui:VisualElement>
+      </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="item-slots-wrapper" class="grid">
+      <ui:VisualElement name="item-slots-wrapper-row" class="row" />
+    </ui:VisualElement>
+    <ui:VisualElement name="pagination-controls" class="grid ux">
+      <ui:VisualElement class="row">
+        <ui:VisualElement class="col span-4" style="justify-content: flex-end;">
+          <RuntimeControls.SelectControl />
+        </ui:VisualElement>
+        <ui:VisualElement class="col span-4" style="justify-content: flex-end;">
+          <ui:Label text="Page 01/03" display-tooltip-when-elided="True" name="pageLabel" style="-unity-text-align: upper-right;" />
+        </ui:VisualElement>
+        <ui:VisualElement class="col span-1">
+          <ui:Button text="&lt;&lt;" display-tooltip-when-elided="True" name="btnFirst" />
+        </ui:VisualElement>
+        <ui:VisualElement class="col span-1">
+          <ui:Button text="&lt;" display-tooltip-when-elided="True" name="btnPrev" />
+        </ui:VisualElement>
+        <ui:VisualElement class="col span-1">
+          <ui:Button text="&gt;" display-tooltip-when-elided="True" name="btnNext" />
+        </ui:VisualElement>
+        <ui:VisualElement class="col span-1">
+          <ui:Button text="&gt;&gt;" display-tooltip-when-elided="True" name="btnLast" />
+        </ui:VisualElement>
+      </ui:VisualElement>
+    </ui:VisualElement>
+  </ui:VisualElement>
+</ui:UXML>

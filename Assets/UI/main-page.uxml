@@ -1,0 +1,22 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="root" class="screen row" style="flex-direction: row; flex-grow: 1; width: auto; height: auto;">
+        <Style src="/Assets/UI/common.uss" />
+        <Style src="util.uss" />
+        <Style src="main-page.uss" />
+        <ui:VisualElement name="left" class="col bar">
+            <ui:VisualElement name="corner-tl" class="row bar" />
+            <ui:VisualElement name="bar-left" class="row main" />
+            <ui:VisualElement name="corner-bl" class="row bar" />
+        </ui:VisualElement>
+        <ui:VisualElement class="col main">
+            <ui:VisualElement name="bar-top" class="row bar" style="width: 100%;" />
+            <ui:VisualElement name="center" class="row main" />
+            <ui:VisualElement name="bar-bottom" class="row bar" />
+        </ui:VisualElement>
+        <ui:VisualElement name="right" class="col bar">
+            <ui:VisualElement name="corner-tr" class="bar row" />
+            <ui:VisualElement name="bar-right" class="row main" />
+            <ui:VisualElement name="corner-br" class="bar row" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

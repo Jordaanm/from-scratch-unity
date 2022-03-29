@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:VisualElement name="item-view">
+        <Style src="Item.uss" />
+        <Style src="/Assets/UI/common.uss" />
+        <ui:VisualElement name="item-wrapper">
+            <ui:VisualElement name="item-icon" />
+        </ui:VisualElement>
+        <ui:VisualElement name="stack-wrapper">
+            <ui:Label text="x99" name="item-count" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

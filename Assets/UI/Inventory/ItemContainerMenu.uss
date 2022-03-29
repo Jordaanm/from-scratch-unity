@@ -1,0 +1,24 @@
+.item-panel {
+    padding: 25px;
+    width: 45%;
+}
+
+.item-panel > * {
+}
+
+.item-panel #title-wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.item-panel #filter-wrapper {
+    flex-direction: row;
+}
+
+.item-panel #item-slots-wrapper {
+}
+
+.item-slot {
+    height: 50px;
+    width: 50px;
+}

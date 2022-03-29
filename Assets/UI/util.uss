@@ -1,0 +1,21 @@
+.full {
+    width: 100%;
+    height: 100%;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.col {
+    flex-direction: col;
+}
+
+.center {
+    align-items: center;
+    justify-content: center;
+}
+
+.menu {
+    color: rgb(220, 220, 220);
+}

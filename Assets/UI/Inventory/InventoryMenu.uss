@@ -1,0 +1,101 @@
+#wrapper {
+    position: relative;
+    margin: 5px;
+    padding: 2px;
+    height: 100px;
+    width: 100px;
+    border-radius: 2px;
+    border-width: 2px;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0.5);
+    -unity-font: url('/Assets/Resources/Fonts/fira-code/FiraCode-Regular.ttf');
+}
+
+#wrapper.empty {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+#wrapper #item-wrapper {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 2px;
+}
+
+#wrapper.empty #item-wrapper {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#wrapper.empty * {
+    visibility: Hidden;
+}
+
+#item-wrapper {
+    height: 100%;
+    width: 100%;
+}
+
+#stack-wrapper {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 4px;
+    padding: 2px;
+    border-radius: 2px;
+    border-width: 1px;
+    border-color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#item-count {
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+}
+
+#item-icon {
+    height: 100%;
+    width: 100%;
+}
+
+#wrapper.none #item-wrapper {
+    background-color: rgba(190, 63, 190, 0.75);
+}
+
+#wrapper.use #item-wrapper {
+    background-color: rgba(63, 190, 63, 0.75);
+}
+
+#wrapper.consume #item-wrapper {
+    background-color: rgba(190, 63, 0, 0.75);
+}
+
+#wrapper.equip #item-wrapper {
+    background-color: rgba(63, 63, 190, 0.75);
+}
+
+#wrapper.place #item-wrapper {
+    background-color: rgba(190, 190, 63, 0.75);
+}
+
+#hotbar-container-center {
+    align-items: center;
+    flex-direction: row;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    justify-content: center;
+}
+
+#hotbar-container {
+    flex-direction: row;
+}
+
+#item-container {
+    flex-grow: 1;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:VisualElement name="sidepanel-root" class="side-panel layer-item" style="flex-shrink: 0; width: auto; height: auto; min-width: 200px;">
+        <Style src="LayerManager.uss" />
+        <ui:VisualElement name="layer-item__title__section" style="background-color: rgba(53, 53, 53, 0.71);">
+            <ui:VisualElement name="layer-item__title__contents" class="title__contents">
+                <ui:Label text="Label" display-tooltip-when-elided="True" name="layer-item__title" class="title" />
+                <ui:Button display-tooltip-when-elided="True" name="layer-item__title__close" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="layer-item__content" style="flex-grow: 1; flex-basis: 250px;" />
+        <ui:VisualElement name="layer-item__actions__section" style="background-color: rgba(255, 255, 255, 0.5);">
+            <ui:VisualElement name="layer-item__actions" style="flex-direction: row; align-items: center; justify-content: flex-end;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

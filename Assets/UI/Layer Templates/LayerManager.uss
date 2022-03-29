@@ -1,0 +1,109 @@
+:root {
+    --color-main: rgba(0, 0, 0, 0.5);
+    --color-accent: rgba(100, 255, 100, 0.8);
+    --color-text: rgb(255, 255, 255);
+}
+
+.layer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: 10px;
+}
+
+.layer.scrim {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.layer-item {
+    background-color: rgba(0, 0, 0, 0.75);
+    background-color: var(--color-main);
+    color: var(--color-text--main);
+}
+
+.side-panel {
+    position: absolute;
+    top: -10px;
+    bottom: -10px;
+    left: -10px;
+    border-right-width: 3px;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    border-right-color: rgba(159, 159, 159, 0.5);
+    border-top-color: rgba(159, 159, 159, 0.5);
+    border-bottom-color: rgba(159, 159, 159, 0.5);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.side-panel.from-right {
+    left: auto;
+    right: 0;
+    border-right-width: 0;
+    border-left-width: 3px;
+    border-left-color: rgba(159, 159, 159, 0.5);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.dialog {
+    background-color: rgb(152, 148, 148);
+    background-color: var(--color-main);
+    color: var(--color-text--main);
+    border-left-width: 3px;
+    border-right-width: 3px;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    border-left-color: rgba(159, 159, 159, 0.5);
+    border-right-color: rgba(159, 159, 159, 0.5);
+    border-top-color: rgba(159, 159, 159, 0.5);
+    border-bottom-color: rgba(159, 159, 159, 0.5);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#layer-item__title__section {
+    padding: 5px;
+    background-color: var(--color-accent);
+    color: var(--color-text);
+}
+
+#layer-item__title__contents {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#layer-item__title__close {
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+}
+
+#layer-item__content {
+    padding: 10px;
+}
+
+#layer-item__actions__section {
+    padding: 5px;
+    color: var(--color-text);
+    min-height: 20px;
+}
+
+#layer-item__actions button {
+    margin-left: 10px;
+}
+
+.title {
+    font-size: 20px;
+}
+
+#layer-item__title__close {
+    background-image: url('/Assets/Downloaded Assets/Clean Vector Icons/T_11_no_.png');
+}
