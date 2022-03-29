@@ -27,7 +27,8 @@ namespace UI.Layers
         private const string menuActionTreeAssetKey = "content-menu-action";
         private VisualTreeAsset menuActionTreeAsset;
         
-        public ContextMenuLayer(VisualElement anchor, bool animateOpen = false, bool matchWidth = false) : base(anchor, animateOpen, matchWidth)
+        public ContextMenuLayer(VisualElement anchor, PopoutAnchorPosition anchorPosition = PopoutAnchorPosition.RightOfParent, bool animateOpen = false, bool matchWidth = false) 
+            : base(anchor, anchorPosition, animateOpen, matchWidth)
         {
             menuActions = new List<ContextMenuAction>();
             menuActionTreeAsset = VisualTreeAssetReference.Instance.GetAsset(menuActionTreeAssetKey);

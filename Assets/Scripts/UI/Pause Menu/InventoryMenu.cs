@@ -139,7 +139,7 @@ namespace UI
             ContextMenuAction testAction = new ContextMenuAction("test", "Test Action", () => Debug.Log("Woo"));
             ContextMenuAction equipAction = new ContextMenuAction("equip", "Equip",
                 () => player.character.characterEquipment.EquipItem(itemStack));
-            var layer = new ContextMenuLayer(visualElement);
+            var layer = new ContextMenuLayer(visualElement, PopoutAnchorPosition.RightOfParent);
             layer.AddAction(testAction);
             layer.AddAction(equipAction);
             // var layer = new PopoutLayer(visualElement, false);
