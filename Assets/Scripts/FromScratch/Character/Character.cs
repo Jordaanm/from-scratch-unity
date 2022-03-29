@@ -46,13 +46,16 @@ namespace FromScratch.Character
         private Vector3 direction = Vector3.zero;
         private Vector3 directionVelocity = Vector3.zero;
         [BoxGroup("Movement"), HideInInspector] public Vector3 intendedDirection;
-
+        [BoxGroup("Movement"), HideInInspector] public bool wantsToSprint; 
+        
         [BoxGroup("Movement")]
         public bool useAcceleration = true;
         [BoxGroup("Movement")]
         public float acceleration = 4f;
         [BoxGroup("Movement")]
         public float deceleration = 2f;
+        [BoxGroup("Movement")]
+        public float sprintMultiplier = 2f;
 
         // Rotation
         private const float MinimumDeltaToRotate = 0.1f;
@@ -63,7 +66,8 @@ namespace FromScratch.Character
         // Animation
         private int speedHash;
         private int isJumpingHash;
-
+        private int isSprintingHash;
+        
         public Animator Animator => animator;
         
         private void Awake()
@@ -90,6 +94,7 @@ namespace FromScratch.Character
             characterAnimation.Setup(animator);
             speedHash = Animator.StringToHash("speed");
             isJumpingHash = Animator.StringToHash("isJumping");
+            isSprintingHash = Animator.StringToHash("isSprinting");
         }
 
         void Update()
@@ -132,9 +137,13 @@ namespace FromScratch.Character
 
         private void HandleAnimation()
         {
-            Vector3 movementSpeed = characterController.velocity;
-            movementSpeed.y = 0;
-            animator.SetFloat(speedHash, movementSpeed.magnitude);
+            Vector3 normalizedVelocity = characterController.velocity / this.movementSpeed;
+            normalizedVelocity.y = 0;
+            //Walking speed bound between 0 and 0.5. Sprinting bound between 0.5 and 1;
+            float speed = Mathf.Min(0.5f, normalizedVelocity.magnitude) + (wantsToSprint ? 0.5f : 0f);
+            
+            animator.SetFloat(speedHash, speed);
+            animator.SetBool(isSprintingHash, wantsToSprint);
         }
 
         private void HandleDirection()
@@ -175,7 +184,8 @@ namespace FromScratch.Character
 
         private void HandleMovement()
         {
-            float scaling = Time.deltaTime * movementSpeed;
+            float sprintScaling = wantsToSprint ? sprintMultiplier : 1;
+            float scaling = Time.deltaTime * movementSpeed * sprintScaling;
             Vector3 movement = new Vector3(direction.x, fallSpeed, direction.z);
             characterController.Move(movement * scaling);
         }

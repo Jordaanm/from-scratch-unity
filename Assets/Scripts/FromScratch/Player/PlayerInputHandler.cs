@@ -18,6 +18,7 @@ namespace FromScratch.Player
         private InputAction interactAction;
         private InputAction jumpAction;
         private InputAction moveAction;
+        private InputAction sprintAction;
         
         private void Awake()
         {
@@ -29,6 +30,7 @@ namespace FromScratch.Player
             interactAction = fromScratchControls.Player.Interact;
             jumpAction = fromScratchControls.Player.Jump;
             moveAction = fromScratchControls.Player.Move;
+            sprintAction = fromScratchControls.Player.Sprint;
             camera = Camera.main;
         }
         
@@ -42,11 +44,18 @@ namespace FromScratch.Player
             jumpAction.Enable();
             jumpAction.started += OnJump;
             jumpAction.canceled += OnJump;
+            
+            sprintAction.Enable();
+            sprintAction.started += OnSprint;
+            sprintAction.canceled += OnSprint;
         }
 
         private void OnDisable()
         {
             moveAction.Disable();
+            
+            sprintAction.started -= OnSprint;
+            sprintAction.canceled -= OnSprint;
             
             
             interactAction.Disable();
@@ -55,6 +64,11 @@ namespace FromScratch.Player
             jumpAction.Disable();
             jumpAction.started -= OnJump;
             jumpAction.canceled -= OnJump;
+        }
+
+        private void OnSprint(InputAction.CallbackContext context)
+        {
+            character.wantsToSprint = context.ReadValueAsButton();
         }
 
         private void OnJump(InputAction.CallbackContext context)

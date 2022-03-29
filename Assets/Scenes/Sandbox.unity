@@ -3206,9 +3206,11 @@ MonoBehaviour:
   terminalVelocity: -20
   movementSpeed: 4
   intendedDirection: {x: 0, y: 0, z: 0}
+  wantsToSprint: 0
   useAcceleration: 1
   acceleration: 4
   deceleration: 2
+  sprintMultiplier: 2
   angularSpeed: 540
 --- !u!95 &5042490517923671472
 Animator:
@@ -3756,7 +3758,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 6c7601037374e0d4aaeb4f27e01bccb1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
