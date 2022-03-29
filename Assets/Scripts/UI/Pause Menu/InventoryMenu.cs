@@ -13,8 +13,10 @@ namespace UI
         public static string MenuName = "Inventory";
         public static string MenuID = "INVENTORY";
         public static string EmptyItemName = "None";
+        
 
         private LayerManager layerManager;
+        
         #region UI References
         protected static VisualTreeAsset treeAsset;
         protected const string treeAssetKey = "inventory-menu";
@@ -23,6 +25,8 @@ namespace UI
 
         private VisualElement veRoot = null;
         private VisualElement veItemContainer = null;
+
+        private IUserInterfaceLayer openContextMenu = null;
         #endregion
 
         private FromScratchPlayer player;
@@ -136,14 +140,23 @@ namespace UI
 
         private void DisplayMenuForItem(Item itemStack, VisualElement visualElement)
         {
+            if (openContextMenu != null)
+            {
+                layerManager.RemoveLayer(openContextMenu);
+            }
+
             ContextMenuAction testAction = new ContextMenuAction("test", "Test Action", () => Debug.Log("Woo"));
             ContextMenuAction equipAction = new ContextMenuAction("equip", "Equip",
                 () => player.character.characterEquipment.EquipItem(itemStack));
-            var layer = new ContextMenuLayer(visualElement, PopoutAnchorPosition.RightOfParent);
+            
+            var layer = new ContextMenuLayer(visualElement);
+
             layer.AddAction(testAction);
             layer.AddAction(equipAction);
+            
             // var layer = new PopoutLayer(visualElement, false);
             layerManager.AddLayer(layer);
+            openContextMenu = layer;
         }
 
         #endregion
