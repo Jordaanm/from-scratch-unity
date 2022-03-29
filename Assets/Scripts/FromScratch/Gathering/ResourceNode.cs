@@ -15,8 +15,8 @@ namespace FromScratch.Gathering
         public GameObject host;
         [HideInInspector] public int remainingStock;
 
-        [SerializeField, HideInInspector] private ResourceNodeEvent onGathered = new ResourceNodeEvent();
-        [SerializeField, HideInInspector] private ResourceNodeEvent onDepleted = new ResourceNodeEvent();
+        [HideInInspector] public ResourceNodeEvent onGathered = new ResourceNodeEvent();
+        [HideInInspector] public ResourceNodeEvent onDepleted = new ResourceNodeEvent();
 
         void Start()
         {
