@@ -48,19 +48,27 @@ namespace FromScratch.Character
                 return null;
             }
 
-            GameObject instance = Instantiate(item.itemData.equipmentData.prefab); // TODO: Use equipmentInfo instead
+            EquipmentData equipmentData = item.itemData.equipmentData;
+
+            if (equipmentData == null || equipmentData.prefab == null)
+            {
+                return null;
+            }
+            
+            GameObject instance = Instantiate(item.itemData.equipmentData.prefab);
             Equipment.Equipment equipment = instance.GetComponent<Equipment.Equipment>();
 
             if (equipment == null)
             {
-                Debug.LogFormat("Unable to find equipment from {0}'s prefab", item.itemData.itemName);
+                Debug.LogFormat("Unable to find equipment from {0}'s prefab", equipmentData.equipmentName);
                 return null;
             }
 
             equipment.item = item;
             equipment.instance = instance;
             Equip(equipment);
-            
+            instance.transform.localScale = equipmentData.prefab.transform.localScale;
+
             item.IsEquipped = true;
 
             return equipment;
