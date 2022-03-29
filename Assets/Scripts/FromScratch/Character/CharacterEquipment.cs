@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using FromScratch.Equipment;
+using FromScratch.Interaction;
 using FromScratch.Inventory;
 using UnityEngine;
 
 namespace FromScratch.Character
 {
-    public class CharacterEquipment: MonoBehaviour
+    public class CharacterEquipment: MonoBehaviour, IInteractionSource
     {
         private Character character;
 
@@ -116,6 +118,17 @@ namespace FromScratch.Character
                 }
                 Destroy(existingEquipment.gameObject);
             }
+        }
+
+        public List<Interaction.Interaction> GetActionsForTarget(IInteractable target)
+        {
+            return equipped.Values.ToList()
+                .FindAll(x => x != null) //Filter out empty slots
+                .SelectMany(equipment => equipment.data.providedActions) //FlatMap to equipment actions
+                .Distinct()
+                .Select(id => Interaction.Interaction.GetInteraction(id)) //Map from IDs to actual interactions
+                .ToList()
+                .FindAll(x => x != null);
         }
     }
 }

@@ -7,6 +7,7 @@ namespace FromScratch.Interaction
 {
     public enum InteractionType
     {
+        Other,
         ResourceNode,
         Pickup
     }

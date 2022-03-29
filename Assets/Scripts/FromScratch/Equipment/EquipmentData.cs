@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using Util;
+using System.Collections.Generic;
 
 namespace FromScratch.Equipment
 {
@@ -24,5 +25,7 @@ namespace FromScratch.Equipment
 
         public override string GetID() => id;
         public static string GetAssetPath() => "Assets/Data/Equipment";
+
+        public List<string> providedActions = new List<string>();
     }
 }

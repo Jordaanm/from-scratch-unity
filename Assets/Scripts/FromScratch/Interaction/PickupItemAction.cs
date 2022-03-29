@@ -12,6 +12,11 @@ namespace FromScratch.Interaction
             _label = "Pick Up";
         }
         
+        public override bool CanInteractWith(IInteractable interactable)
+        {
+            return interactable.GetInteractionType() == InteractionType.Pickup;
+        } 
+        
         public override void Start(IInteractor interactor, IInteractable target)
         {
             GameObject interactorGO = interactor.GetGameObject();
@@ -22,7 +27,7 @@ namespace FromScratch.Interaction
 
             ItemData itemData = targetGO.GetComponent<Pickup>().item;
             
-            GameObject.DestroyImmediate(targetGO);
+            GameObject.Destroy(targetGO);
             charInventory.Container.AddItem(new Item(itemData));
         }
     }

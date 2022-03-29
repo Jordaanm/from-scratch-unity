@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Wood_Log
   itemName: Wood Log
-  icon: {fileID: 21300000, guid: 271d77d169b2b4f72ae85f33315bb826, type: 3}
+  icon: {fileID: 21300000, guid: 825217937f322d7478e479dbe4637748, type: 3}
   itemDescription: A log of wood
   isStackable: 1
   usageType: 0

@@ -6,19 +6,20 @@ using UnityEngine;
 
 namespace FromScratch.Interaction
 {
-    [Interaction(id = "gather")]
-    public class GatherResourceAction: Interaction
-    {
-        public GatherResourceAction()
+    [Interaction(id="fell-tree")]
+    public class FellTreeInteraction: Interaction
+    {        
+        public FellTreeInteraction()
         {
-            _id = "GATHER_RESOURCE";
-            _label = "Gather";
+            _id = "FELL_TREE";
+            _label = "Fell Tree";
         }
         
-        
+                
         public override bool CanInteractWith(IInteractable interactable)
         {
-            return interactable.GetInteractionType() == InteractionType.ResourceNode;
+            var tree = interactable.GetGameObject().GetComponent<FromScratchTree>();
+            return tree != null;
         } 
         
         public override async void Start(IInteractor interactor, IInteractable target)

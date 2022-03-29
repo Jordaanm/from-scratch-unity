@@ -1,4 +1,5 @@
 ﻿using FromScratch.Interaction;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,11 +11,12 @@ namespace FromScratch.Gathering
     public class ResourceNode: MonoBehaviour, IInteractable
     {
         public ResourceNodeInfo resourceNodeInfo;
-        [HideInInspector] public int remainingStock;
+        public InteractionType interactionType = InteractionType.ResourceNode;
         public GameObject host;
+        [HideInInspector] public int remainingStock;
 
-        [SerializeField] private ResourceNodeEvent onGathered = new ResourceNodeEvent();
-        [SerializeField] private ResourceNodeEvent onDepleted = new ResourceNodeEvent();
+        [SerializeField, HideInInspector] private ResourceNodeEvent onGathered = new ResourceNodeEvent();
+        [SerializeField, HideInInspector] private ResourceNodeEvent onDepleted = new ResourceNodeEvent();
 
         void Start()
         {
@@ -63,7 +65,7 @@ namespace FromScratch.Gathering
 
         public InteractionType GetInteractionType()
         {
-            return InteractionType.ResourceNode;
+            return interactionType;
         }
 
         public GameObject GetGameObject()

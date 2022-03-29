@@ -19,6 +19,7 @@ namespace FromScratch.Player
             pickupItemActionSource = new PickupItemActionSource();
             interactor.AddInteractionSource(gatherActionSource);
             interactor.AddInteractionSource(pickupItemActionSource);
+            interactor.AddInteractionSource(character.characterEquipment);
         }
 
         public GameObject GetGameObject()

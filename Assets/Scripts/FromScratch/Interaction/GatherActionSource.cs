@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace FromScratch.Interaction
 {
     public class GatherActionSource: IInteractionSource
     {
-        private static GatherResourceAction gatherResourceAction;
+        private static Interaction gatherResourceAction;
         public GatherActionSource()
         {
             if (gatherResourceAction == null)
             {
-                gatherResourceAction = new GatherResourceAction();
+                gatherResourceAction = Interaction.GetInteraction("gather");
             }
         }
         

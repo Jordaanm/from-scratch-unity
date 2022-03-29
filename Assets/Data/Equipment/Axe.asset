@@ -19,3 +19,5 @@ MonoBehaviour:
   prefab: {fileID: 686940883744596655, guid: 9314cf14bc14a664eb077b4b05e74e57, type: 3}
   audioSheathe: {fileID: 0}
   audioDraw: {fileID: 0}
+  providedActions:
+  - fell-tree
