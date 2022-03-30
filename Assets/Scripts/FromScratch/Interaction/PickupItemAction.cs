@@ -1,4 +1,5 @@
-﻿using FromScratch.Character;
+﻿using System.Threading.Tasks;
+using FromScratch.Character;
 using FromScratch.Inventory;
 using UnityEngine;
 
@@ -17,15 +18,19 @@ namespace FromScratch.Interaction
             return interactable.GetInteractionType() == InteractionType.Pickup;
         } 
         
-        public override void Start(IInteractor interactor, IInteractable target)
+        public override async void Start(IInteractor interactor, IInteractable target)
         {
             GameObject interactorGO = interactor.GetGameObject();
             GameObject targetGO = target.GetGameObject();
             
-            Character.Character character = interactorGO.GetComponent<Character.Character>();
             CharacterInventory charInventory = interactorGO.GetComponent<CharacterInventory>();
 
             ItemData itemData = targetGO.GetComponent<Pickup>().item;
+
+            //Temporary hack to force onTriggerExist before Destroy is called
+            var collider = targetGO.GetComponent<Collider>();
+            collider.transform.localScale = Vector3.zero;
+            await Task.Delay(100);
             
             GameObject.Destroy(targetGO);
             charInventory.Container.AddItem(new Item(itemData));
