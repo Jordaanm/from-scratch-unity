@@ -15,13 +15,15 @@ namespace FromScratch.Interaction
         
         public List<Interaction> GetActionsForTarget(IInteractable target)
         {
-            InteractionType interactionType = target.GetInteractionType();
-            if (interactionType == InteractionType.Pickup)
+            if (target != null)
             {
-                return new List<Interaction>()
+                if (pickupItemAction.CanInteractWith(target))
                 {
-                    pickupItemAction
-                };
+                    return new List<Interaction>
+                    {
+                        pickupItemAction
+                    };
+                }
             }
 
             return new List<Interaction>();

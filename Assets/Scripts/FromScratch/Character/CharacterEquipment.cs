@@ -136,6 +136,7 @@ namespace FromScratch.Character
                 .Distinct()
                 .Select(id => Interaction.Interaction.GetInteraction(id)) //Map from IDs to actual interactions
                 .ToList()
+                .FindAll(x => x.CanInteractWith(target)) // Can be interacted with
                 .FindAll(x => x != null);
         }
     }

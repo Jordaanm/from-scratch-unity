@@ -18,10 +18,9 @@ namespace FromScratch.Interaction
         {
             if (target != null)
             {
-                InteractionType interactionType = target.GetInteractionType();
-                if (interactionType == InteractionType.ResourceNode)
+                if (gatherResourceAction.CanInteractWith(target))
                 {
-                    return new List<Interaction>()
+                    return new List<Interaction>
                     {
                         gatherResourceAction
                     };
