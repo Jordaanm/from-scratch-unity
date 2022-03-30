@@ -7,7 +7,7 @@ namespace FromScratch.Gathering
     public class ResourceNodeInfo: ScriptableObject
     {
         public string nodeName = "My Resource Node";
-        public ItemData itemData; //TODO: Replace with LootTable
+        public LootTable lootTable;
         public AnimationClip animation;
         public float animationDuration = -1f;
         public bool isRepeatable = true;

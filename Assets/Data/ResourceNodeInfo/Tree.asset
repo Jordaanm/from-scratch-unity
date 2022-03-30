@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeName: A Tree
   itemData: {fileID: 11400000, guid: 063b560f54cde3c4c8074f004641d867, type: 2}
+  lootTable: {fileID: 11400000, guid: 2cbe50cc18f88134bb58b4df565f8844, type: 2}
   animation: {fileID: 7400000, guid: c8997e2ce856e24448b259898ba2bb68, type: 3}
   animationDuration: -1
   isRepeatable: 0

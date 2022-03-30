@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:VisualElement name="loot-table-editor">
+        <Style src="LootTable.uss" />
+        <ui:VisualElement name="properties">
+            <uie:PropertyField binding-path="noDropWeight" name="prop__noDropWeight" />
+            <uie:PropertyField name="prop__loot" label="loot" />
+        </ui:VisualElement>
+        <ui:VisualElement name="summary" style="flex-grow: 1; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;">
+            <ui:Label text="Summary&#10;" display-tooltip-when-elided="True" style="-unity-text-align: middle-center;" />
+            <ui:VisualElement style="align-items: center;">
+                <ui:Button text="Refresh" display-tooltip-when-elided="True" name="refresh-summary" style="align-items: center;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="graph-container" style="padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;" />
+            <ui:VisualElement name="legend-container" style="padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

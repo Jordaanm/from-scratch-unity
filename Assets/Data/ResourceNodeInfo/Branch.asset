@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 16a86bd8fc674dfe8f743b53374f0c4b, type: 3}
-  m_Name: Grass
+  m_Name: Branch
   m_EditorClassIdentifier: 
-  nodeName: Grass
-  itemData: {fileID: 11400000, guid: 46802e94dc103774294208c1a5a546a1, type: 2}
-  lootTable: {fileID: 11400000, guid: a10e0452d1955614198f4c82eb51905e, type: 2}
+  nodeName: Tree Branch
+  lootTable: {fileID: 11400000, guid: a0ee34f47982e484185057e7f2eccbaf, type: 2}
   animation: {fileID: 7400000, guid: 321c52155a28d1b46938ce9541d33947, type: 3}
   animationDuration: -1
   isRepeatable: 1
-  initialStock: 2
+  initialStock: 99

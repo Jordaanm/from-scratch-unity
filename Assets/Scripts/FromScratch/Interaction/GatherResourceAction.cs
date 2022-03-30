@@ -43,8 +43,9 @@ namespace FromScratch.Interaction
 
             await Task.Delay(Mathf.CeilToInt(waitTime * 1000f));
 
-            resourceNode.DepleteResources(1);
-            charInventory.Container.AddItem(new Item(resourceNodeInfo.itemData));
+            LootTable.LootResult lootResult = resourceNodeInfo.lootTable.Get();
+            resourceNode.DepleteResources(lootResult.amount);
+            charInventory.Container.AddItem(new Item(lootResult.itemData, lootResult.amount));
 
             character.EnableControls();
         }
