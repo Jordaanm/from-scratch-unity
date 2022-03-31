@@ -1,4 +1,5 @@
 ﻿using FromScratch.Inventory;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace FromScratch.Gathering
@@ -7,10 +8,16 @@ namespace FromScratch.Gathering
     public class ResourceNodeInfo: ScriptableObject
     {
         public string nodeName = "My Resource Node";
+
+        [AssetSelector(Paths = "Assets/Data/Loot Tables/"), InlineEditor(InlineEditorObjectFieldModes.Foldout)]
         public LootTable lootTable;
-        public AnimationClip animation;
-        public float animationDuration = -1f;
         public bool isRepeatable = true;
         public int initialStock = 99;
+
+        [PreviewField, InlineEditor(InlineEditorModes.SmallPreview)]
+        [BoxGroup("Animation")]
+        public AnimationClip animation;
+        [BoxGroup("Animation")]
+        public float animationDuration = -1f;
     }
 }

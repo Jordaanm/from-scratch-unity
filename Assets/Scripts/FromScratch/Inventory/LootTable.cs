@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace FromScratch.Inventory
@@ -11,6 +12,7 @@ namespace FromScratch.Inventory
         [System.Serializable]
         public class Loot
         {
+            [InlineEditor(InlineEditorModes.LargePreview)]
             public ItemData itemData;
             public int amount = 1;
             public int weight = 1;
@@ -33,6 +35,7 @@ namespace FromScratch.Inventory
         [System.Serializable]
         public class LootResult
         {
+            [AssetSelector(Paths = "Assets/Data/Items"), ]
             public ItemData itemData = null;
             public int amount = 0;
 
@@ -46,8 +49,9 @@ namespace FromScratch.Inventory
         #endregion
 
         public int noDropWeight = 0;
-        public Loot[] loot = new Loot[0];
-
+        [TableList]
+        public List<Loot> loot = new List<Loot>();
+        
         public LootResult Get()
         {
             List<Loot> chances = new List<Loot>();
@@ -59,7 +63,7 @@ namespace FromScratch.Inventory
                 chances.Add(new Loot(null, 0, this.noDropWeight));
             }
 
-            for (int i = 0; i < this.loot.Length; ++i)
+            for (int i = 0; i < this.loot.Count; ++i)
             {
                 chances.Add(this.loot[i]);
                 totalWeight += this.loot[i].weight;

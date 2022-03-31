@@ -34,7 +34,7 @@ namespace FromScratch.Inventory
         public bool isStackable = true;
         // [Range(1, 99)]
         // public int maxStacks = 1;
-        [SerializeField]
+        [SerializeField, EnumToggleButtons]
         public UsageType usageType = UsageType.None;
         #endregion Basic Properties
         

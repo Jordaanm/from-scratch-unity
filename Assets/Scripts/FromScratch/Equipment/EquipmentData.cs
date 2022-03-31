@@ -11,16 +11,20 @@ namespace FromScratch.Equipment
     {
         [BoxGroup("Basics")]
         public string id;
+        [BoxGroup("Basics")]
         public string equipmentName;
+        [BoxGroup("Basics"), EnumToggleButtons]
         public EquipmentType type;
+        [BoxGroup("Basics"), EnumToggleButtons]
         public EquipmentSlot slot;
 
-        [BoxGroup("Prefab")]
         [PreviewField, AssetsOnly]
+        [BoxGroup("Prefab")]
         public GameObject prefab;
 
         [BoxGroup("Audio")]
         public AudioClip audioSheathe;
+        [BoxGroup("Audio")]
         public AudioClip audioDraw;
 
         public override string GetID() => id;
