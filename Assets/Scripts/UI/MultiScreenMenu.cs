@@ -11,8 +11,8 @@ public class MultiScreenMenu : FullscreenMenuHost.FullScreenMenu
         string GetTitle();
         string GetID();
         VisualElement GetRoot();
-        void OnMount();
-        void OnUnmount();
+        void OnOpen();
+        void OnClose();
         void SetIsActive(bool state);
     }
 
@@ -99,6 +99,7 @@ public class MultiScreenMenu : FullscreenMenuHost.FullScreenMenu
     private void SetActiveSubmenu(Submenu submenu) {
         if(m_activeSubmenu != null) {
             //DEACTIVATE
+            m_activeSubmenu.OnClose();
             m_activeSubmenu.SetIsActive(false);
             m_activeSubmenu.GetRoot().RemoveFromHierarchy();
         }
@@ -107,6 +108,7 @@ public class MultiScreenMenu : FullscreenMenuHost.FullScreenMenu
         m_activeSubmenu = submenu;
         m_activeSubmenu.SetIsActive(true);
         m_veMain.Add(m_activeSubmenu.GetRoot());
+        m_activeSubmenu.OnOpen();
         UpdateTitle();
     }
 

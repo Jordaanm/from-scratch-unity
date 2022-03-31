@@ -145,7 +145,7 @@ namespace UI
                 layerManager.RemoveLayer(openContextMenu);
             }
 
-            ContextMenuAction testAction = new ContextMenuAction("test", "Test Action", () => Debug.Log("Woo"));
+            ContextMenuAction testAction = new ContextMenuAction("test", "Inspect", () => Debug.Log("TODO: Implement Inspect Menu"));
             ContextMenuAction equipAction = new ContextMenuAction("equip", "Equip",
                 () => player.character.characterEquipment.EquipItem(itemStack));
             
@@ -210,10 +210,14 @@ namespace UI
             return MenuID;
         }
 
-        public void OnMount() {
+        public void OnOpen() {
         }
 
-        public void OnUnmount() {
+        public void OnClose() {
+            if (openContextMenu != null)
+            {
+                layerManager.RemoveLayer(openContextMenu);
+            }
         }
 
         public void SetIsActive(bool state) {
