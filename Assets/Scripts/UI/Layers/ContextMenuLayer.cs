@@ -23,6 +23,8 @@ namespace UI.Layers
     
     public class ContextMenuLayer: PopoutLayer
     {
+        private string title = "";
+        private VisualElement titleElement = null;
         private List<ContextMenuAction> menuActions;
         private const string menuActionTreeAssetKey = "content-menu-action";
         private VisualTreeAsset menuActionTreeAsset;
@@ -37,6 +39,7 @@ namespace UI.Layers
         protected override VisualElement BuildLayerContents()
         {
             var ve = new VisualElement();
+            ve.Insert(0, RenderTitle());
             RenderActions(ve);
             return ve;
         }
@@ -45,6 +48,38 @@ namespace UI.Layers
         {
             menuActions.Add(action);
             RenderActions();
+        }
+
+        public void SetTitle(string title)
+        {
+            if (this.title == title)
+            {
+                return; 
+            }
+            
+            this.title = title;
+            RenderTitle();
+        }
+
+        public VisualElement RenderTitle()
+        {
+            var text = this.title ?? "";
+            
+            if (titleElement == null)
+            {
+                titleElement = new VisualElement();
+                titleElement.AddToClassList("context-menu-title");
+                var label = new Label(text);
+                label.AddToClassList("context-menu-title-label");
+                titleElement.Add(label);
+            }
+            else
+            {
+                var label = titleElement.Q<Label>(".context-menu-title-label");
+                if(label != null) { label.text = text; }
+            }
+
+            return titleElement;
         }
 
         public void AddActions(IEnumerable<ContextMenuAction> actions)
@@ -65,7 +100,16 @@ namespace UI.Layers
             VisualElement contents = host != null ? host : Root?.Q(ContentSelector)?.Children().First();
             if (contents != null)
             {
-                contents.Clear();
+                var existingActions = contents
+                    .Children()
+                    .ToList()
+                    .FindAll(x => x.ClassListContains("context-menu-action"))
+                    .ToArray();
+                for (int x = existingActions.Length - 1; x >= 0; --x)
+                {
+                    contents.Remove(existingActions[x]);
+                }
+
                 foreach (var contextMenuAction in menuActions)
                 {
                     VisualElement veAction = RenderAction(contextMenuAction);

@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="content-menu-action" style="border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-left-radius: 1px; border-bottom-left-radius: 1px; border-top-right-radius: 1px; border-bottom-right-radius: 1px; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; padding-left: 2px; padding-right: 2px; padding-top: 2px; padding-bottom: 2px; margin-bottom: 2px;">
+    <ui:VisualElement class="context-menu-action">
         <ui:Label text="ACTION" display-tooltip-when-elided="true" name="label" />
     </ui:VisualElement>
 </ui:UXML>

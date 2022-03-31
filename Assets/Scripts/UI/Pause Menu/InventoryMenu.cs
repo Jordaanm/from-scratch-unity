@@ -148,8 +148,11 @@ namespace UI
             ContextMenuAction testAction = new ContextMenuAction("test", "Inspect", () => Debug.Log("TODO: Implement Inspect Menu"));
             ContextMenuAction equipAction = new ContextMenuAction("equip", "Equip",
                 () => player.character.characterEquipment.EquipItem(itemStack));
-            
+
             var layer = new ContextMenuLayer(visualElement);
+
+            var title = itemStack?.itemData != null ? itemStack.itemData.itemName : "";
+            layer.SetTitle(title);
 
             layer.AddAction(testAction);
             layer.AddAction(equipAction);

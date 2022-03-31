@@ -1,0 +1,28 @@
+.context-menu {
+    background-color: rgba(0,0,0,0.75);
+}
+
+.context-menu-title {
+    padding: 12px;
+    background-color: rgba(0,0,0,0.75);
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-top: -10px;
+}
+
+.context-menu-action {
+    padding: 6px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    color: white;
+    border-bottom-color: rgba(255, 255,255, 0.25);
+    border-bottom-width: 1px;
+}
+
+.context-menu-action:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    margin-left: -10px;
+    margin-right: -10px;
+    padding-left: 16px;
+}

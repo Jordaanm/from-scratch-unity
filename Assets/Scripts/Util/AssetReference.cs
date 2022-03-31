@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Util
@@ -9,9 +10,11 @@ namespace Util
         public class AssetEntry
         {
             public string key;
+            [PreviewField]
             public T value;
         }
 
+        [TableList]
         public List<AssetEntry> entries = new List<AssetEntry>();
 
         public T GetAsset(string key) {
