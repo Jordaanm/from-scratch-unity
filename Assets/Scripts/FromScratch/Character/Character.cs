@@ -113,6 +113,7 @@ namespace FromScratch.Character
 
         public void DisableControls()
         {
+            direction = Vector3.zero;
             areControlsDisabled = true;
         }
 
