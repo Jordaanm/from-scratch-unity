@@ -90,6 +90,12 @@
     padding: 10px;
 }
 
+#layer-item.no-padding #layer-item__content {
+    padding: 0;
+    height: auto;
+    flex-basis: 1px;
+}
+
 #layer-item__actions__section {
     padding: 5px;
     color: var(--color-text);

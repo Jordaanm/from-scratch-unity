@@ -64,7 +64,5 @@ namespace UI
                 return m_menu != null;
             }
         }
-
-
     }
 }

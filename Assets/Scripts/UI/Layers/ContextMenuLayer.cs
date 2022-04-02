@@ -36,9 +36,17 @@ namespace UI.Layers
             menuActionTreeAsset = VisualTreeAssetReference.Instance.GetAsset(menuActionTreeAssetKey);
         }
 
+        public override VisualElement BuildContents() {
+            var ve = base.BuildContents();
+            ve.AddToClassList("context-menu-layer");
+            ve.AddToClassList("no-padding");
+            return ve;
+        }
+        
         protected override VisualElement BuildLayerContents()
         {
             var ve = new VisualElement();
+            ve.AddToClassList("context-menu");
             ve.Insert(0, RenderTitle());
             RenderActions(ve);
             return ve;

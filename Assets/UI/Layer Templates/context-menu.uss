@@ -1,13 +1,24 @@
+.context-menu-layer #layer-item__actions__section {
+    display: none;
+    padding: 0;
+}
+
+.context-menu-layer #layer-item__content {
+    height: auto;
+    flex-basis: auto;
+    padding: 0;
+    margin: 0;
+    min-height: 0;
+}
+
 .context-menu {
     background-color: rgba(0,0,0,0.75);
+    height: auto;
 }
 
 .context-menu-title {
     padding: 12px;
     background-color: rgba(0,0,0,0.75);
-    margin-left: -10px;
-    margin-right: -10px;
-    margin-top: -10px;
 }
 
 .context-menu-action {
@@ -22,7 +33,4 @@
 .context-menu-action:hover {
     background-color: rgba(255, 255, 255, 0.25);
     border-bottom-color: rgba(255, 255, 255, 0);
-    margin-left: -10px;
-    margin-right: -10px;
-    padding-left: 16px;
 }
