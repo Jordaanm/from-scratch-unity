@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="EquipmentMenu.uss" />
+    <ui:VisualElement name="equipment-menu">
+        <ui:VisualElement class="equipment-menu-container" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;">
+            <ui:Image name="player-preview" stlye="min-width: 100px; min-height: 100px" style="border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 2px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="equipment-slots" style="flex-wrap: wrap;">
+            <ui:Instance template="EquipmentMenuSlot" name="EquipmentMenuSlot" class="slot--head" />
+            <ui:Instance template="EquipmentMenuSlot" name="EquipmentMenuSlot" class="slot--chest" />
+            <ui:Instance template="EquipmentMenuSlot" name="EquipmentMenuSlot" class="slot--legs" />
+            <ui:Instance template="EquipmentMenuSlot" name="EquipmentMenuSlot" class="slot--feet" />
+            <ui:Instance template="EquipmentMenuSlot" name="EquipmentMenuSlot" class="slot--primary-hand" />
+            <ui:Instance template="EquipmentMenuSlot" name="EquipmentMenuSlot" class="slot--secondary-hand" />
+            <ui:Instance template="EquipmentMenuSlot" name="EquipmentMenuSlot" class="slot--back" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

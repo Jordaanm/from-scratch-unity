@@ -15,7 +15,9 @@ namespace FromScratch.Equipment
         Twohanded,
         Head,
         Chest,
-        Legs
+        Legs,
+        Feet,
+        Back
     }
     
     public class Equipment: MonoBehaviour

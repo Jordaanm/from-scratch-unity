@@ -1,0 +1,46 @@
+#equipment-menu {
+    flex-grow: 1;
+}
+
+#equipment-menu #equipment-slots {
+    height: 50%;
+    width: 20%;
+    flex-direction: column;
+}
+
+.equipment-menu-container {
+    flex-direction: row;
+    flex-grow: 1;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#equipment-menu #player-preview {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    width: 33%;
+}
+
+.equipment-menu-slot {
+    height: 0;
+    width: 50%;
+    position: relative;
+    padding: 2px;
+    padding-bottom: 50%;
+    border-width: 1px;
+    margin: 2px;
+    background-color: rgba(0,0,0,0.75);
+}
+
+.equipment-menu-slot:hover {
+    border-color: rgba(255,255,255,0.5);
+    background-color: rgba(0,0,0,0.5);
+}
+
+.equipment-slot--label {
+    font-size: 12px;
+    -unity-font: url("/Assets/Resources/Fonts/fira-code/FiraCode-Regular.ttf");
+}

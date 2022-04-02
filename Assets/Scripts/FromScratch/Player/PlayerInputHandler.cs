@@ -56,8 +56,7 @@ namespace FromScratch.Player
             
             sprintAction.started -= OnSprint;
             sprintAction.canceled -= OnSprint;
-            
-            
+
             interactAction.Disable();
             interactAction.performed -= OnInteract;
             
