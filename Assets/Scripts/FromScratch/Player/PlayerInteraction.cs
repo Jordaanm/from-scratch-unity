@@ -27,6 +27,11 @@ namespace FromScratch.Player
             return character == null ? gameObject : character.gameObject;
         }
 
+        public void RemoveInteractable(IInteractable interactable)
+        {
+            interactor.RemoveInteractable(interactable);
+        }
+
         public void Activate()
         {
             Debug.Log("PlayerInteraction::Activate");

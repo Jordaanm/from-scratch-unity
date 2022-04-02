@@ -15,6 +15,7 @@ namespace FromScratch.Interaction
     public interface IInteractor
     {
         GameObject GetGameObject();
+        void RemoveInteractable(IInteractable interactable);
     }
 
     public interface IInteractable
@@ -105,16 +106,20 @@ namespace FromScratch.Interaction
             }
         }
 
-        public void RemoveInteractable(GameObject gameObject)
+        public void RemoveInteractable(IInteractable interactable)
         {
-            IInteractable interactable = gameObject.GetComponent<IInteractable>();
-
             if (interactable != null)
             {
                 nearbyInteractables.Remove(interactable);
                 OnChange.Invoke();
                 Debug.LogFormat("{0} Interactables remaining nearby", nearbyInteractables.Count.ToString());
             }
+        }
+
+        public void RemoveInteractable(GameObject gameObject)
+        {
+            IInteractable interactable = gameObject.GetComponent<IInteractable>();
+            RemoveInteractable(interactable);
         }
     }
 

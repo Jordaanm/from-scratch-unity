@@ -27,10 +27,7 @@ namespace FromScratch.Interaction
 
             ItemData itemData = targetGO.GetComponent<Pickup>().item;
 
-            //Temporary hack to force onTriggerExist before Destroy is called
-            var collider = targetGO.GetComponent<Collider>();
-            collider.transform.localScale = Vector3.zero;
-            await Task.Delay(100);
+            interactor.RemoveInteractable(target);
             
             GameObject.Destroy(targetGO);
             charInventory.Container.AddItem(new Item(itemData));

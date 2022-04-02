@@ -1838,7 +1838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f7fa359d9a430c90154a734adf5207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceNodeInfo: {fileID: 11400000, guid: 08a7aff22e913ea4cacbc3f8cea22ddf, type: 2}
+  resourceNodeInfo: {fileID: 11400000, guid: a93291cde9c9baa4f9d6eeff41e9d31a, type: 2}
   interactionType: 1
   host: {fileID: 0}
   remainingStock: 0
