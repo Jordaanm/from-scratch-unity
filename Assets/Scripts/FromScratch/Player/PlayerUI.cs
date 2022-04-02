@@ -11,6 +11,7 @@ namespace FromScratch.Player
         private PauseMenu pauseMenu;
         private @FromScratchControls fromScratchControls;
         private InputAction openMenuAction;
+        private InputAction moveAction;
 
         private void Awake()
         {
@@ -20,6 +21,7 @@ namespace FromScratch.Player
 
         private void Start()
         {
+            pauseMenu.AddSubmenu(new EquipmentMenu(player));
             pauseMenu.AddSubmenu(new InventoryMenu(player));
         }
 
@@ -28,12 +30,34 @@ namespace FromScratch.Player
             openMenuAction = fromScratchControls.Player.Pause;
             openMenuAction.Enable();
             openMenuAction.performed += OnTogglePauseMenu;
+
+            // TODO: Create new action map for menus
+            moveAction = fromScratchControls.Player.Move;
+            moveAction.Enable();
+            moveAction.started += OnMenuMove;
+        }
+
+        private void OnMenuMove(InputAction.CallbackContext context)
+        {
+            float direction = context.ReadValue<Vector2>().x;
+            if (pauseMenu.IsOpen())
+            {
+                if (direction > 0.5)
+                {
+                    pauseMenu.NextMenu();
+                } else if (direction < -0.5)
+                {
+                    pauseMenu.NextMenu(-1);
+                }
+            }
         }
 
         private void OnDisable()
         {
             openMenuAction.Disable();
             openMenuAction.performed -= OnTogglePauseMenu;
+            
+            moveAction.Disable();
         }
 
         private void OnTogglePauseMenu(InputAction.CallbackContext context)
