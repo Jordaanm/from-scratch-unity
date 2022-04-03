@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f5e3398b2ed4af693c69a0cbb32c7f7, type: 3}
-  m_Name: EquipmentDatabase
+  m_Script: {fileID: 11500000, guid: 057b86cab8b7419493cd900e476c5c5a, type: 3}
+  m_Name: RecipeDatabase
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -22,5 +22,4 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   entries:
-  - {fileID: 11400000, guid: a3387aafbf43ee946b964cbddee02a00, type: 2}
-  - {fileID: 11400000, guid: a797a8ca41ac2e742a248e57a56cc4a1, type: 2}
+  - {fileID: 11400000, guid: 90e985cf26182424d94ff2f73e892bc7, type: 2}

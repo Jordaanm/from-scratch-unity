@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AssetReferences;
+using FromScratch.Character;
 using FromScratch.Equipment;
 using FromScratch.Player;
 using UnityEngine;
@@ -22,7 +23,7 @@ namespace UI
         protected static VisualTreeAsset slotTreeAsset;
         protected const string slotTreeAssetKey = "equipment-menu-slot";
         
-        private VisualElement veRoot = null;
+        private VisualElement veRoot;
         private IUserInterfaceLayer openContextMenu = null;
         #endregion
         
@@ -81,6 +82,29 @@ namespace UI
             }
         }
 
+        private void UpdateSlots()
+        {
+            CharacterEquipment characterEquipment = player.character.characterEquipment;
+            var equipmentSlots = veRoot.Q("equipment-slots");
+            foreach (var equipmentSlot in SlotElements)
+            {
+                Equipment equipment = characterEquipment.EquippedInSlot(equipmentSlot.Key);
+                UpdateSlot(equipmentSlot.Value, equipment);
+            }
+        }
+
+        private void UpdateSlot(VisualElement slot, Equipment equipment)
+        {
+            if (equipment == null)
+            {
+                slot.Q<Label>(null, "equipment-slot--label").text = "";
+            }
+            else
+            {
+                slot.Q<Label>(null, "equipment-slot--label").text = equipment.equipmentName;
+            }
+        }
+
         private void BuildPreview()
         {
             var preview = veRoot.Q("player-preview");
@@ -103,6 +127,7 @@ namespace UI
 
             return veRoot;
         }
+        
         public string GetTitle()
         {            
             return MenuName;
@@ -116,6 +141,7 @@ namespace UI
         public void OnOpen()
         {
             BuildPreview();
+            UpdateSlots();
         }
 
         public void OnClose() {
@@ -131,6 +157,7 @@ namespace UI
                 // UpdateHotbar();
             }
         }
+        
         #endregion
        
     }

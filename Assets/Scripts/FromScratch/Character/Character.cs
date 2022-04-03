@@ -16,7 +16,8 @@ namespace FromScratch.Character
         public CharacterController characterController;
         [BoxGroup("Character"), HideInInspector]
         public CharacterInventory characterInventory;
-
+        [BoxGroup("Character"), HideInInspector]
+        public CharacterCrafting characterCrafting;
         [BoxGroup("Character"), HideInInspector]
         public CharacterEquipment characterEquipment;
 
@@ -76,6 +77,7 @@ namespace FromScratch.Character
             characterAnimation = GetComponent<CharacterAnimation>();
             characterInventory = GetComponent<CharacterInventory>();
             characterEquipment = GetComponent<CharacterEquipment>();
+            characterCrafting = GetComponent<CharacterCrafting>();
             
             areControlsDisabled = false;
             setupJumpVariables();

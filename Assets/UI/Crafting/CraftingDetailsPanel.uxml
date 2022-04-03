@@ -1,0 +1,20 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:VisualElement name="crafting-details" class="full">
+        <Style src="/Assets/UI/util.uss" />
+        <ui:VisualElement name="output-details" style="">
+            <ui:VisualElement class="full" style="flex-direction: column;">
+                <ui:VisualElement style="flex-direction: row;">
+                    <ui:VisualElement name="item-icon" />
+                    <ui:Label text="Label" display-tooltip-when-elided="true" name="item-name" />
+                </ui:VisualElement>
+                <ui:VisualElement>
+                    <ui:Label text="Label" display-tooltip-when-elided="true" name="item-description" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="ingredients-section" style="" />
+        <ui:VisualElement name="actions">
+            <ui:Button text="Craft" display-tooltip-when-elided="true" name="btnCraft" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

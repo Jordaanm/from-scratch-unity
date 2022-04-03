@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:VisualElement name="ingredients-list-item" >
+        <ui:VisualElement name="icon-wrapper">
+            <ui:VisualElement name="ingredient-icon" />
+        </ui:VisualElement>
+        <ui:VisualElement name="ingredient-text" style="">
+            <ui:Label text="Label" display-tooltip-when-elided="true" name="ingredient-name" />
+            <ui:Label text="Label" display-tooltip-when-elided="true" name="ingredient-count" style="" />
+        </ui:VisualElement>
+    </ui:VisualElement>    
+</ui:UXML>

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25efd41a81014c12a5c7df714ba03edd, type: 3}
+  m_Name: Primitive Hammer
+  m_EditorClassIdentifier: 
+  id: primitive-hammer
+  label: Primitive Hammer
+  description: Create a primitive hammer by lashing a Rock to a stick handle using
+    grass and vines
+  input:
+  - amount: 4
+    item: {fileID: 11400000, guid: 46802e94dc103774294208c1a5a546a1, type: 2}
+  - amount: 1
+    item: {fileID: 11400000, guid: 2d6e6c1c8be62fa41bd90c1181636d58, type: 2}
+  - amount: 1
+    item: {fileID: 11400000, guid: 1cbde25ba8a36484f83f26957467bd82, type: 2}
+  output:
+    amount: 1
+    item: {fileID: 11400000, guid: c04f5df9667988340bdc4d23d0146ed4, type: 2}
+  craftingTime: -1
+  animation: {fileID: 7400000, guid: 33fd3fd1787918841a98b627bb4087d5, type: 3}

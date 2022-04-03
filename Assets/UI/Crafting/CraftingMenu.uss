@@ -1,0 +1,154 @@
+#crafting-menu {
+    flex-direction: row;
+    padding: 10px;
+}
+
+#crafting-menu #recipes-section {
+    flex-shrink: 2; flex-grow: 2;
+}
+
+#crafting-menu #filters {
+    
+}
+
+#crafting-menu #recipe-list-container {
+    flex-grow: 1;
+    padding: 10px 0 0 10px;
+    border-left-width: 1px; 
+    border-right-width: 1px; 
+    border-top-width: 1px; 
+    border-bottom-width: 1px;
+    border-radius: 2px;
+    border-left-color: rgba(255, 255, 255, 0.5); 
+    border-right-color: rgba(255, 255, 255, 0.5); 
+    border-top-color: rgba(255, 255, 255, 0.5); 
+    border-bottom-color: rgba(255, 255, 255, 0.5);    
+}
+
+#crafting-menu #details-section {
+    flex-grow: 1;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-color: rgba(255, 255, 255, 0.5); 
+    border-right-color: rgba(255, 255, 255, 0.5); 
+    border-top-color: rgba(255, 255, 255, 0.5); 
+    border-bottom-color: rgba(255, 255, 255, 0.5);
+    border-radius: 2px;
+    margin-left: 10px;
+}
+
+#crafting-menu #recipe-item-wrapper {
+    padding: 5px;
+    width: 200px; 
+    height: 200px;
+}
+
+#crafting-menu #recipe-item {
+    border-left-width: 1px; 
+    border-right-width: 1px; 
+    border-top-width: 1px; 
+    border-bottom-width: 1px;
+    border-radius: 2px;
+    border-left-color: rgba(255, 255, 255, 0.5); 
+    border-right-color: rgba(255, 255, 255, 0.5); 
+    border-top-color: rgba(255, 255, 255, 0.5); 
+    border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+#crafting-menu #recipe-item #recipe-name {
+    margin: 2px;
+    -unity-text-align: middle-center; 
+    font-size: 14px; 
+    flex-grow: 1; 
+    flex-shrink: 1;
+}
+
+#crafting-menu #ingredients-list-item {
+    background-color: rgba(0, 171, 0, 0.5);
+}
+
+#crafting-menu #ingredients-list-item.not-enough {
+    background-color: rgba(171, 0, 0, 0.5);
+}
+
+#crafting-menu #crafting-details {
+    flex-grow: 2; 
+    flex-shrink: 1;
+}
+
+#crafting-menu #output-details {
+    flex-grow: 2;
+    margin: 5px;
+    border-color: rgba(255, 255, 255, 0.5);
+    border-width: 1px;
+    border-radius: 2px;
+}
+
+#crafting-menu #output-details #item-icon {
+    width: 150px;
+    height: 150px;
+}
+
+#crafting-menu #ingredients-section {
+    border-width: 1px;
+    border-radius: 2px;
+    flex-grow: 1; 
+    border-color: rgba(255, 255, 255, 0.5);
+    margin: 5px;
+}
+
+#crafting-menu #recipe-ingredient-root {
+    margin-bottom: 10px; 
+    padding-bottom: 10px;
+}
+
+#crafting-menu #recipe-ingredient-root #properties {
+    margin-left: 10px; 
+    flex-direction: row; 
+    align-items: center;
+}
+
+
+#crafting-menu #recipe-ingredient-root #amount__row {
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: flex-end;
+}
+
+#crafting-menu #recipe-ingredient-root #item {
+    flex-grow: 0;
+}
+
+#crafting-menu #ingredients-list-item {
+    flex-direction: row;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+#crafting-menu #ingredients-list-item #icon-wrapper{
+    padding: 5px;
+    border-color: rgba(255, 255, 255, 0.5); 
+    border-width: 1px; 
+    border-radius: 2px;
+}
+
+#crafting-menu #ingredients-list-item #ingredient-icon {
+    width: 100px; 
+    height: 100px;
+    padding: 5px;
+}
+
+#crafting-menu #ingredients-list-item #ingredient-text {
+    flex-grow: 1;
+    padding: 5px;
+}
+
+#crafting-menu #ingredients-list-item #ingredient-text #ingredient-name{
+    
+}
+
+#crafting-menu #ingredients-list-item #ingredient-text #ingredient-count{
+    -unity-font-style: bold;
+}

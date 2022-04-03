@@ -56,6 +56,7 @@ namespace FromScratch.Character
             }
             
             GameObject instance = Instantiate(item.itemData.equipmentData.prefab);
+            instance.layer = LayerMask.NameToLayer("Equipment");
             Equipment.Equipment equipment = instance.GetComponent<Equipment.Equipment>();
 
             if (equipment == null)
@@ -89,6 +90,11 @@ namespace FromScratch.Character
             
             equipped.Add(equipment.slot, equipment);
         }
+
+        public Equipment.Equipment EquippedInSlot(EquipmentSlot slot)
+        {
+            return equipped.ContainsKey(slot) ? equipped[slot] : null;
+        }
         
         void AttachToBody(
             GameObject _gameObject, 
@@ -106,7 +112,6 @@ namespace FromScratch.Character
             _gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
             _gameObject.transform.localPosition = positionOffset;
             _gameObject.transform.localRotation = rotationOffset;
-            
         }
         
         public void UnequipSlot(EquipmentSlot slot)
@@ -118,6 +123,7 @@ namespace FromScratch.Character
             if (isSlotOccupied && existingEquipment != null)
             {
                 equipped.Remove(slot);
+                existingEquipment.instance.layer = LayerMask.NameToLayer("Default");
                 existingEquipment.transform.SetParent(null);
                 if (existingEquipment.item != null)
                 {

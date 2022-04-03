@@ -63,21 +63,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hammer
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3b238889c5f641e47a58224472df80ec, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3b238889c5f641e47a58224472df80ec, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3b238889c5f641e47a58224472df80ec, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.03
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3b238889c5f641e47a58224472df80ec, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.03
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3b238889c5f641e47a58224472df80ec, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.03
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3b238889c5f641e47a58224472df80ec, type: 3}
       propertyPath: m_LocalPosition.x

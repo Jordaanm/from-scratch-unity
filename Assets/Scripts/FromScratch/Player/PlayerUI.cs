@@ -23,6 +23,7 @@ namespace FromScratch.Player
         {
             pauseMenu.AddSubmenu(new EquipmentMenu(player));
             pauseMenu.AddSubmenu(new InventoryMenu(player));
+            pauseMenu.AddSubmenu(new CraftingSubmenu(player));
         }
 
         private void OnEnable()

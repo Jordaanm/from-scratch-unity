@@ -17,7 +17,7 @@ namespace FromScratch.Editor
 
         private Type selectedType;
 
-        [MenuItem("Tools/From Scratch/Data Manager")]
+        [MenuItem("From Scratch/Data Manager")]
         private static void OpenEditor() => GetWindow<DataManager>();
 
         protected override OdinMenuTree BuildMenuTree()

@@ -115,5 +115,18 @@ namespace FromScratch.Inventory
                 Debug.LogFormat("Dropping Item: {0}", item.itemData.Name);
             }
         }
+
+        public int GetItemCount(ItemData targetItem)
+        {
+            if (targetItem == null)
+            {
+                return 0;
+            }
+
+            return Slots
+                .FindAll(item => item?.itemData != null && item.itemData.id == targetItem.id) //Find all slots with a matching item
+                .Select(item => item.stacks) //Get the stacks in each matching slot
+                .Aggregate(0, (sum, amount) => sum + amount); //Sum total
+        }
     }
 }

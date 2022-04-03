@@ -3,5 +3,7 @@
 @import url("Layer Templates/context-menu.uss");
 @import url("Equipment/EquipmentMenu.uss");
 @import url("Inventory/InventoryMenu.uss");
+@import url("Crafting/CraftingMenu.uss");
+
 
 VisualElement {}

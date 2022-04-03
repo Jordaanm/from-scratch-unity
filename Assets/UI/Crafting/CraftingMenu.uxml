@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:VisualElement name="crafting-menu" class="full row menu">
+        <Style src="/Assets/Scripts/Inventory/UI/util.uss" />
+        <ui:VisualElement name="recipes-section" class="col">
+            <ui:VisualElement name="filters">
+                <ui:Label text="Label" display-tooltip-when-elided="true" />
+            </ui:VisualElement>
+            <ui:VisualElement name="recipe-list-container" />
+        </ui:VisualElement>
+        <ui:VisualElement name="details-section" class="col">
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
