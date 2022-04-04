@@ -59,11 +59,16 @@ namespace FromScratch.Inventory
             }
         }
 
+        public bool AddItem(ItemData itemData, int amount)
+        {
+            return AddItem(new Item(itemData, amount));
+        }
+        
         public bool AddItem(Item item)
         {
             Debug.LogFormat("Adding {0}x {1} to Item Container", item.stacks.ToString(), item.itemData.itemName);
             
-            if(item.itemData.isStackable && HasStackOfItem(item))
+            if(item.itemData.isStackable && HasStackOfItem(item.itemData))
             {
                 AddStacks(item);
                 return true;
@@ -98,9 +103,9 @@ namespace FromScratch.Inventory
 
         private bool HasEmptySlot => itemSlots.GetRange(0, maxSlots).Any(item => item == null);
 
-        private bool HasStackOfItem(Item item)
+        private bool HasStackOfItem(ItemData itemData)
         {
-            return itemSlots.GetRange(0, maxSlots).Any(existingItem => existingItem != null && existingItem.itemData.id == item.itemData.id);
+            return itemSlots.GetRange(0, maxSlots).Any(existingItem => existingItem != null && existingItem.itemData.id == itemData.id);
         }
 
         private void DropItem(int i)

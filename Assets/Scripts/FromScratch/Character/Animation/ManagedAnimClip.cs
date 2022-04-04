@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
@@ -19,7 +20,7 @@ namespace FromScratch.Character.Animation
         private AnimationLayerMixerPlayable mixer;
     
         private double endFreezeTime = -100.0;
-    
+        public string Guid { get; private set; }
     
         public Playable Mixer => this.mixer;
         public Playable Input0 => this.mixer.GetInput(0);
@@ -35,6 +36,8 @@ namespace FromScratch.Character.Animation
 
             this.speed = speed;
             this.weight = 1.0f;
+            
+            Guid = System.Guid.NewGuid().ToString();
         }
     
         public static ManagedAnimClip Create<TInput0, TOutput>(

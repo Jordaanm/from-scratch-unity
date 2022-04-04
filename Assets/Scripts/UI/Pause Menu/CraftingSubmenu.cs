@@ -110,8 +110,8 @@ namespace UI
             craftingButton.SetEnabled(false);
 
             craftingButton.clicked += (() => {
+                player?.character?.characterCrafting?.Craft(selectedRecipe, null);
                 Debug.Log("CRAFTARINO");
-                //TODO: Craft Selected Recipe
             });
         }
         

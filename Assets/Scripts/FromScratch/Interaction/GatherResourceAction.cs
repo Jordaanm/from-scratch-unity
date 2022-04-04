@@ -34,20 +34,24 @@ namespace FromScratch.Interaction
             ResourceNodeInfo resourceNodeInfo = resourceNode.resourceNodeInfo;
 
             character.DisableControls();
-            
-            charAnimation.PlayClip(resourceNodeInfo.animation);
 
-            float waitTime = resourceNodeInfo.animationDuration > 0
-                ? resourceNodeInfo.animationDuration
-                : resourceNodeInfo.animation.length;
+            //TODO: Allow for dynamic play time
+            // float waitTime = resourceNodeInfo.animationDuration > 0
+            //     ? resourceNodeInfo.animationDuration
+            //     : resourceNodeInfo.animation.length;
 
-            await Task.Delay(Mathf.CeilToInt(waitTime * 1000f));
+            Debug.Log("A");
+            charAnimation.PlayClip(resourceNodeInfo.animation, () =>
+            {
+                Debug.Log("B");
+                LootTable.LootResult lootResult = resourceNodeInfo.lootTable.Get();
+                resourceNode.DepleteResources(lootResult.amount);
+                charInventory.Container.AddItem(new Item(lootResult.itemData, lootResult.amount));
 
-            LootTable.LootResult lootResult = resourceNodeInfo.lootTable.Get();
-            resourceNode.DepleteResources(lootResult.amount);
-            charInventory.Container.AddItem(new Item(lootResult.itemData, lootResult.amount));
+                character.EnableControls();
+            });
 
-            character.EnableControls();
+            // await Task.Delay(Mathf.CeilToInt(waitTime * 1000f));
         }
     }
 }

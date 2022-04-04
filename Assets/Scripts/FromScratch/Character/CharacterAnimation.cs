@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using FromScratch.Character.Animation;
 using UnityEngine;
 using UnityEngine.Animations;
@@ -21,8 +23,11 @@ namespace FromScratch.Character
         private AnimationMixerPlayable mixerStatesInput;
 
         private List<ManagedAnimClip> clips;
+        private List<string> activeGUIDs;
         public void Setup(Animator animator)
         {
+            activeGUIDs = new List<string>();
+            
             // //Destroy Existing Graph for Idempotency
             if (animator.playableGraph.IsValid())
             {
@@ -73,7 +78,7 @@ namespace FromScratch.Character
             graph.Destroy();
         }
 
-        public void PlayClip(AnimationClip clip)
+        public Coroutine PlayClip(AnimationClip clip, Action callback = null)
         {
             Debug.Log("CharacterAnimation::PlayClip");
             //Create Self Contained Clip from clip
@@ -84,8 +89,18 @@ namespace FromScratch.Character
 
             // Add to tracking list, so we know when to remove it's finished and remove it from the graph
             clips.Add(managedClip);
+            activeGUIDs.Add(managedClip.Guid);
+
+            Coroutine animCoroutine = StartCoroutine(TrackAnimation(managedClip.Guid, callback));
+            return animCoroutine;
 
             //Splice into Graph ( currently handled by Create method )
+        }
+
+        private IEnumerator TrackAnimation(string guid, Action callback = null)
+        {
+            yield return new WaitUntil(()=> !activeGUIDs.Contains(guid));
+            callback?.Invoke();
         }
 
         public void Update()
@@ -95,8 +110,10 @@ namespace FromScratch.Character
                 bool shouldRemove = clips[i].Update();
                 if (shouldRemove)
                 {
+                    activeGUIDs.Remove(clips[i].Guid);
                     clips[i].Destroy(this);
                     clips.RemoveAt(i);
+                    
                 }
             }
         }

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using FromScratch.Crafting;
 using FromScratch.Inventory;
 using UnityEngine;
@@ -29,6 +31,7 @@ namespace FromScratch.Character
 
         public bool KnowsRecipe(Recipe recipe)
         {
+            return true;
             return knownRecipes.Contains(recipe);
         }
 
@@ -41,9 +44,22 @@ namespace FromScratch.Character
             return recipe.input.All(ingredient => HasEnoughIngredient(ingredient));
         }
 
-        public void Craft(Recipe recipe)
+        public async void Craft(Recipe recipe, GameObject station)
         {
+            if(!CanCraft(recipe)) { return; }
+
+            if (station != null)
+            {
+                Debug.Log("TODO: Turn to face crafting station");
+                await Task.Delay(100);
+            }
             
+            character.characterAnimation.PlayClip(recipe.animation, () => CompleteCraft(recipe));
+        }
+
+        private void CompleteCraft(Recipe recipe)
+        {
+            characterInventory.Container.AddItem(recipe.output.item, recipe.output.amount);
         }
 
         public int IngredientCount(ItemData itemData)
