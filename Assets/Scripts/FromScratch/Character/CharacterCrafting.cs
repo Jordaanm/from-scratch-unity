@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FromScratch.Crafting;
+using FromScratch.Interaction;
 using FromScratch.Inventory;
 using UnityEngine;
 
 namespace FromScratch.Character
 {
-    public class CharacterCrafting: MonoBehaviour
+    public class CharacterCrafting: MonoBehaviour, IInteractionSource
     {
         private Character character;
         private CharacterInventory characterInventory;
@@ -71,6 +72,14 @@ namespace FromScratch.Character
         {
             int count = characterInventory.Container.GetItemCount(ingredient.item);
             return count >= ingredient.amount;
+        }
+
+        public List<Interaction.Interaction> GetActionsForTarget(IInteractable target)
+        {
+            return new List<Interaction.Interaction>
+            {
+                Interaction.Interaction.GetInteraction("craftingtable")
+            };
         }
     }
 }

@@ -32,6 +32,7 @@ namespace UI
         public void OpenMenu(FullScreenMenu menu) {
             if(m_menu != null) {
                 m_menu.CloseMenu();
+                m_menu.GetRoot().RemoveFromHierarchy();                
             }
 
             m_menu = menu;

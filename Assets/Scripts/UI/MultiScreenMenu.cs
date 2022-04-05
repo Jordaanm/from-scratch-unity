@@ -49,15 +49,6 @@ public class MultiScreenMenu : FullscreenMenuHost.FullScreenMenu
         return this;
     }
 
-    public virtual void OpenMenu() {
-        m_currentSubmenuIndex = 0;
-        SetActiveSubmenu(CurrentSubmenu);
-    }
-
-    public virtual void CloseMenu() {
-
-    }
-
     public virtual void NextMenu(int offset = 1) {
         m_currentSubmenuIndex = GetRelativeIndex(offset);
         SetActiveSubmenu(GetSubmenuAtIndex(m_currentSubmenuIndex));
@@ -81,6 +72,14 @@ public class MultiScreenMenu : FullscreenMenuHost.FullScreenMenu
         return m_veRoot;
     }
 
+    public virtual void OpenMenu() {
+        m_currentSubmenuIndex = 0;
+        SetActiveSubmenu(CurrentSubmenu);
+    }
+
+    public virtual void CloseMenu() {
+
+    }
 
     #endregion
 

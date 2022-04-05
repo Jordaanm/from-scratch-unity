@@ -9,7 +9,8 @@ namespace FromScratch.Interaction
     {
         Other,
         ResourceNode,
-        Pickup
+        Pickup,
+        CraftingStation
     }
 
     public interface IInteractor

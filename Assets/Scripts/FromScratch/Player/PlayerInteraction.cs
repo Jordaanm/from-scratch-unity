@@ -20,6 +20,7 @@ namespace FromScratch.Player
             interactor.AddInteractionSource(gatherActionSource);
             interactor.AddInteractionSource(pickupItemActionSource);
             interactor.AddInteractionSource(character.characterEquipment);
+            interactor.AddInteractionSource(character.characterCrafting);
         }
 
         public GameObject GetGameObject()

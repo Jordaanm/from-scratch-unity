@@ -40,13 +40,18 @@ namespace UI
         private List<Recipe> recipes;
         private Recipe selectedRecipe = null;
 
-        public CraftingSubmenu(FromScratchPlayer player)
+        public CraftingSubmenu(FromScratchPlayer player = null)
         {
             this.player = player;
             BuildUI();
             recipes = new List<Recipe>();
         }
 
+        public void SetPlayer(FromScratchPlayer player)
+        {
+            this.player = player;
+        }
+        
         #region BuildUI
         
         private void BuildUI()
