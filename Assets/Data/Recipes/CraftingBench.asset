@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25efd41a81014c12a5c7df714ba03edd, type: 3}
+  m_Name: CraftingBench
+  m_EditorClassIdentifier: 
+  id: craftingbench
+  label: Crafting Bench
+  description: Construct a basic crafting bench from wooden parts
+  requiredCapability: 0
+  input:
+  - amount: 8
+    item: {fileID: 11400000, guid: 828e67087684d674fbd75208233a5ed9, type: 2}
+  - amount: 4
+    item: {fileID: 11400000, guid: c66aac65c6650fd488a4a2eb8e24e750, type: 2}
+  output:
+    amount: 1
+    item: {fileID: 11400000, guid: 225d312e2bad80040bd32911434c2fe0, type: 2}
+  craftingTime: -1
+  animation: {fileID: 7400000, guid: 29a01bd85c33f1a4d9d5f7be77387a57, type: 3}
