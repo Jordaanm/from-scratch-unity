@@ -165,5 +165,10 @@ namespace FromScratch.Inventory
             
             OnChange.Invoke();
         }
+
+        public void SwapSlots(int source, int dest)
+        {
+            (Slots[source], Slots[dest]) = (Slots[dest], Slots[source]);
+        }
     }
 }

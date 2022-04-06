@@ -1,10 +1,13 @@
 ﻿using System.Linq;
 using AssetReferences;
+using FromScratch.Character;
 using FromScratch.Inventory;
 using FromScratch.Player;
 using UI.Layers;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Util;
 
 namespace UI
 {
@@ -14,8 +17,8 @@ namespace UI
         public static string MenuID = "INVENTORY";
         public static string EmptyItemName = "None";
         
-
         private LayerManager layerManager;
+        private RuntimeDragDrop runDnd;
         
         #region UI References
         protected static VisualTreeAsset treeAsset;
@@ -25,12 +28,12 @@ namespace UI
 
         private VisualElement veRoot = null;
         private VisualElement veItemContainer = null;
+        private VisualElement veHotbarContainer = null;
 
         private IUserInterfaceLayer openContextMenu = null;
         #endregion
 
         private FromScratchPlayer player;
-        
         public InventoryMenu(FromScratchPlayer player)
         {
             this.player = player;
@@ -61,13 +64,15 @@ namespace UI
 
             veRoot = treeAsset.CloneTree().Children().First();
             layerManager = new LayerManager(veRoot);
-            
-            //TODO: Setup Drag and Drop
+
+            SetupDragDrop();
             
             veItemContainer = veRoot.Q("item-container");
+            veHotbarContainer = veRoot.Q("hotbar-container");
             DrawInventory();
+            DrawHotbar();
         }
-
+        
         private void DrawInventory()
         {
             veItemContainer.Clear();
@@ -83,6 +88,23 @@ namespace UI
                 veItemContainer.Add(slot);
             }
         }
+
+        private void DrawHotbar()
+        {
+            for(int x = 0; x < CharacterInventory.QuickbarSize; ++x) {
+                VisualElement hotbarSlot  = BuildHotbarSlot(x);
+                veHotbarContainer.Add(hotbarSlot);
+            }
+        }
+        
+        private VisualElement BuildHotbarSlot(int index) {
+            CharacterInventory characterInventory = player.character.characterInventory;
+            var itemRoot = VisualTreeAssetReference.Create(itemTreeAsset);
+            Item itemStack = characterInventory.GetQuickbarSlot(index);
+            UpdateItemStack(itemStack, itemRoot);
+            runDnd.MakeDropTarget(itemRoot, "QuickBar", () => index.ToString());
+            return itemRoot;
+        }
         
         private VisualElement BuildInventorySlot(int index) {
             Item itemStack = Inventory.Slots[index];
@@ -91,7 +113,8 @@ namespace UI
             itemRoot.RegisterCallback<MouseDownEvent>(OnItemClick);
             UpdateItemStack(itemStack, itemRoot);
 
-            // runDnd.MakeDraggable(itemRoot, "ItemStack", () => index.ToString());
+            runDnd.MakeDropTarget(itemRoot, "ItemStack", () => index.ToString());
+            runDnd.MakeDraggable(itemRoot, "ItemStack", () => index.ToString());
 
             return itemRoot;
         }
@@ -157,7 +180,6 @@ namespace UI
             layer.AddAction(testAction);
             layer.AddAction(equipAction);
             
-            // var layer = new PopoutLayer(visualElement, false);
             layerManager.AddLayer(layer);
             openContextMenu = layer;
         }
@@ -194,6 +216,71 @@ namespace UI
                 UpdateItemStack(stack, itemRoot);
             }
         }
+        
+        void UpdateHotbar()
+        {
+            var characterInventory = player.character.characterInventory;
+            VisualElement[] slots = veHotbarContainer.Children().ToArray();
+
+            for (int x = 0; x < CharacterInventory.QuickbarSize; ++x) {
+                var itemStack = characterInventory.GetQuickbarSlot(x);
+                var itemRoot = slots[x];
+                UpdateItemStack(itemStack, itemRoot);
+            }
+        }
+        #endregion
+        
+        #region Drag and Drop
+        
+        
+        private void SetupDragDrop() {
+            runDnd = RuntimeDragDrop.Initialise(veRoot);
+
+            runDnd.AddDragCase(new RunDndDragCase(
+                (type, data) => type == "ItemStack",
+                (type, data) => CreateItemPreview(int.Parse(data as string))
+            ));
+
+            runDnd.AddDropCase(new RunDndDropCase(
+                (dragType, dropType, dragData, dropData) => dragType == "ItemStack" && dropType == "QuickBar",
+                (dragType, dropType, dragData, dropData) =>
+                {
+                    var characterInventory = player.character.characterInventory;
+                    
+                    int quickbarIndex = int.Parse(dropData as string);
+                    int inventoryIndex = int.Parse(dragData as string);
+                    ItemData itemData = null;
+
+                    characterInventory.SetQuickbarSlot(quickbarIndex, inventoryIndex);
+                    UpdateHotbar();
+                }
+            ));
+
+            runDnd.AddDropCase(new RunDndDropCase(
+                (dragType, dropType, dragData, dropData) => dragType == "ItemStack" && dropType == "ItemStack",
+                (dragType, dropType, dragData, dropData) =>
+                {
+                    int dest = int.Parse(dropData as string);
+                    int source = int.Parse(dragData as string);
+
+                    player.character.characterInventory.Container.SwapSlots(source, dest);
+                    UpdateInventory();
+                }
+            ));
+        }
+
+        private VisualElement CreateItemPreview(int index) {
+            var container = player.character.characterInventory.Container;
+
+            Item itemStack = container.Slots[index];
+            var itemRoot = itemTreeAsset.CloneTree().Children().First();
+            UpdateItemStack(itemStack, itemRoot);
+            itemRoot.Q("stack-wrapper").pickingMode = PickingMode.Ignore;
+            itemRoot.Q("item-wrapper").pickingMode = PickingMode.Ignore;
+            itemRoot.Q("item-icon").pickingMode = PickingMode.Ignore;
+            return itemRoot;
+        }
+        
         #endregion
         
         #region MultiScreenMenu.Submenu contract
@@ -226,7 +313,7 @@ namespace UI
         public void SetIsActive(bool state) {
             if (state) {
                 UpdateInventory();
-                // UpdateHotbar();
+                UpdateHotbar();
             }
         }
 

@@ -14,5 +14,10 @@ namespace FromScratch.Inventory
             this.stacks = stacks;
             IsEquipped = false;
         }
+
+        public static bool IsEmpty(Item item)
+        {
+            return item == null || item.stacks == 0;
+        }
     }
 }
