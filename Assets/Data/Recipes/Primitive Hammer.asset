@@ -16,6 +16,7 @@ MonoBehaviour:
   label: Primitive Hammer
   description: Create a primitive hammer by lashing a Rock to a stick handle using
     grass and vines
+  requiredCapability: 0
   input:
   - amount: 4
     item: {fileID: 11400000, guid: 46802e94dc103774294208c1a5a546a1, type: 2}

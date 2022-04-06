@@ -36,6 +36,9 @@ namespace FromScratch.Crafting
 
         [BoxGroup("BasicInfo")]
         public string description;
+
+        [BoxGroup("Capabilities")] [EnumToggleButtons]
+        public CraftingStationCapability requiredCapability;
         
         [BoxGroup("Ingredients")]
         public List<RecipeIngredient> input;

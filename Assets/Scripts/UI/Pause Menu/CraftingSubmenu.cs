@@ -37,12 +37,17 @@ namespace UI
         #endregion
         
         private FromScratchPlayer player;
+        private CraftingTable craftingTable;
         private List<Recipe> recipes;
         private Recipe selectedRecipe = null;
+        
+        //Filters
+        private bool onlyRecipesWithAllIngredients = false;
 
-        public CraftingSubmenu(FromScratchPlayer player = null)
+        public CraftingSubmenu(FromScratchPlayer player = null, CraftingTable table = null)
         {
             this.player = player;
+            this.craftingTable = table;
             BuildUI();
             recipes = new List<Recipe>();
         }
@@ -122,7 +127,7 @@ namespace UI
         
         private void BindRecipeItem(VisualElement element, int index) {
             Recipe recipe = recipes[index];
-            element.Q<Label>("recipe-name").text = recipe.output.item.itemName;
+            element.Q<Label>("recipe-name").text = recipe.label;
             element.Q("recipe-item").style.backgroundImage = new StyleBackground(recipe.output.item.icon);
         }
         
@@ -169,10 +174,17 @@ namespace UI
         
         private void UpdateAvailableRecipes()
         {
-            recipes = GameDatabases.Instance.recipes.entries;
-            //TODO: Apply Filters
+            List<Recipe> allRecipes = GameDatabases.Instance.recipes.entries;
+
+            recipes = allRecipes
+                .FindAll(x => x != null) // Not Null
+                .FindAll(StationCanCraftRecipe) // Station is capable of crafting
+                .FindAll(CharacterKnowsRecipe) // Recipe has been unlocked by the character/player
+                .FindAll(HasAllIngredients) // Character has all the needed ingredients (controlled by UI toggle)
+                .ToList();
             UpdateRecipeList();
         }
+
 
         private void UpdateRecipeList()
         {
@@ -211,6 +223,52 @@ namespace UI
             bool canBuild = player.character.characterCrafting.CanCraft(recipe);
             
             craftingButton.SetEnabled(canBuild);
+        }
+        
+        #endregion
+        
+        #region Filter Predicates
+
+        private bool HasAllIngredients(Recipe recipe)
+        {
+            if (!onlyRecipesWithAllIngredients)
+            {
+                return true;
+            }
+
+            var crafting = player?.character?.characterCrafting;
+            if (crafting == null)
+            {
+                return false;
+            }
+
+            return crafting.HasAllIngredients(recipe);
+        }
+        
+        private bool CharacterKnowsRecipe(Recipe recipe)
+        {
+            var crafting = player?.character?.characterCrafting;
+            if (crafting == null)
+            {
+                return false;
+            }
+
+            return crafting.KnowsRecipe(recipe);
+        }
+
+        private bool StationCanCraftRecipe(Recipe recipe)
+        {
+            if (recipe == null)
+            {
+                return false;
+            }
+            
+            if (craftingTable == null) //Table = null means it's being accessed through the Pause Crafting submenu, simple recipes only
+            {
+                return recipe.requiredCapability == CraftingStationCapability.None;
+            }
+
+            return craftingTable.capabilities.HasFlag(recipe.requiredCapability);
         }
         
         #endregion
