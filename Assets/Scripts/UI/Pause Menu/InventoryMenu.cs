@@ -122,37 +122,6 @@ namespace UI
 
             return itemRoot;
         }
-        //
-        // private void OnItemMouseDown(MouseDownEvent evt)
-        // {
-        //     VisualElement veTarget = (VisualElement)evt.currentTarget;
-        //     if (veTarget != null)
-        //     {
-        //         Item itemStack = (Item)veTarget.userData;
-        //         ItemData itemData = itemStack?.itemData;
-        //
-        //         if (itemData != null)
-        //         {
-        //             clickedIndex = player.character.characterInventory.Container.Slots.IndexOf(itemStack);
-        //             clickedTimestamp = evt.timestamp;
-        //         }
-        //     }
-        // }
-        //
-        // private void OnItemMouseUp(MouseUpEvent evt)
-        // {
-        //     VisualElement veTarget = (VisualElement)evt.currentTarget;
-        //     if (veTarget != null)
-        //     {
-        //         Item itemStack = (Item)veTarget.userData;
-        //         ItemData itemData = itemStack?.itemData;
-        //
-        //         if (itemData != null)
-        //         {
-        //             var index = player.character.characterInventory.Container.Slots.IndexOf(itemStack);
-        //         }
-        //     }
-        // }
 
         private void OnItemClick(ClickEvent evt)
         {
