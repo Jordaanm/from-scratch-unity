@@ -56,6 +56,11 @@ namespace UI
             }
         }
 
+        private void DropItemStack(Item item)
+        {
+            player.character.characterInventory.DropItem(item);
+        }
+
         #region BuildUI
         
         private void BuildUI()
@@ -125,7 +130,6 @@ namespace UI
 
         private void OnItemClick(ClickEvent evt)
         {
-            Debug.Log("Click Click");
             VisualElement veTarget = (VisualElement)evt.currentTarget;
             if (veTarget != null)
             {
@@ -176,6 +180,7 @@ namespace UI
             ContextMenuAction testAction = new ContextMenuAction("test", "Inspect", () => Debug.Log("TODO: Implement Inspect Menu"));
             ContextMenuAction equipAction = new ContextMenuAction("equip", "Equip",
                 () => player.character.characterEquipment.EquipItem(itemStack));
+            ContextMenuAction dropAction = new ContextMenuAction("drop", "Drop", () => DropItemStack(itemStack));
 
             var layer = new ContextMenuLayer(visualElement);
 
@@ -184,6 +189,7 @@ namespace UI
 
             layer.AddAction(testAction);
             layer.AddAction(equipAction);
+            layer.AddAction(dropAction);
             
             layerManager.AddLayer(layer);
             openContextMenu = layer;
@@ -305,7 +311,10 @@ namespace UI
             return MenuID;
         }
 
-        public void OnOpen() {
+        public void OnOpen()
+        {
+            player.character.characterInventory.OnQuickbarChange.AddListener(UpdateHotbar);
+            player.character.characterInventory.Container.OnChange.AddListener(UpdateInventory);
         }
 
         public void OnClose() {
@@ -313,6 +322,8 @@ namespace UI
             {
                 layerManager.RemoveLayer(openContextMenu);
             }
+            player.character.characterInventory.OnQuickbarChange.RemoveListener(UpdateHotbar);
+            player.character.characterInventory.Container.OnChange.RemoveListener(UpdateInventory);
         }
 
         public void SetIsActive(bool state) {

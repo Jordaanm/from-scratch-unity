@@ -156,6 +156,7 @@ namespace UI
                 ghost.style.position = Position.Absolute;
                 AttachGhost(ghost);
                 ghost.pickingMode = PickingMode.Ignore;
+                MoveGhost(evt.localMousePosition);
             }
         }
 

@@ -54,7 +54,6 @@ namespace FromScratch.Inventory
         [ShowIf("@usageType == UsageType.Equip")]
         public UnityEvent<Item> onUnequip = new UnityEvent<Item>();
 
-        [ShowIf("IsUsable")]
         [PreviewField, AssetsOnly]
         public GameObject prefab;
         #endregion Use Properties

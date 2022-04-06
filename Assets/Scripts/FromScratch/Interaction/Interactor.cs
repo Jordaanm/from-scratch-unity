@@ -61,11 +61,12 @@ namespace FromScratch.Interaction
         public List<Interaction> GetActionsForTarget(IInteractable target)
         {
             return AllInteractionSources()
-                .SelectMany(actionSource => 
-                    actionSource == null 
-                        ? new List<Interaction>() 
+                .SelectMany(actionSource =>
+                    actionSource == null
+                        ? new List<Interaction>()
                         : actionSource.GetActionsForTarget(target))
-                .ToList();
+                .ToList()
+                .FindAll(x => x.CanInteractWith(target));
         }
 
         List<IInteractionSource> AllInteractionSources()

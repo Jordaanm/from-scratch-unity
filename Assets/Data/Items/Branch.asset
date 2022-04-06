@@ -28,4 +28,4 @@ MonoBehaviour:
   onUnequip:
     m_PersistentCalls:
       m_Calls: []
-  prefab: {fileID: 0}
+  prefab: {fileID: 4354336094881948404, guid: 2e6311c514c2c3f499cebd71a18bf001, type: 3}

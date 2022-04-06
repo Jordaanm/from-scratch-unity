@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FromScratch.Interaction;
 using FromScratch.Inventory;
 using UnityEngine;
 using UnityEngine.Events;
@@ -40,6 +41,24 @@ namespace FromScratch.Character
             if(quickbarIndex < 0 || quickbarIndex >= QuickbarSize) { return null; }
 
             return quickbar[quickbarIndex];
+        }
+
+        public void DropItem(Item item)
+        {
+            //Remove from item container
+            Container.RemoveItem(item);
+            //If has prefab, spawn prefab, and add a pickup script to it
+            if (!(item == null || item.itemData == null || item.itemData.prefab == null))
+            {
+                //Spawn Prefab at character's feet
+                Transform t = character.transform;
+                var pickSpawnPos = t.position + t.forward * 1;
+                var instance = GameObject.Instantiate(item.itemData.prefab, pickSpawnPos, t.rotation);
+                //Add a pickup script to it.
+                Pickup pickupComp = instance.AddComponent<Pickup>();
+                pickupComp.item = item.itemData;
+
+            }
         }
     }
 }

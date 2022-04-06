@@ -170,5 +170,15 @@ namespace FromScratch.Inventory
         {
             (Slots[source], Slots[dest]) = (Slots[dest], Slots[source]);
         }
+
+        public void RemoveItem(Item item)
+        {
+            var index = Slots.FindIndex(x => x == item);
+            if (index >= 0)
+            {
+                Slots[index] = null;
+            }
+            OnChange.Invoke();
+        }
     }
 }
