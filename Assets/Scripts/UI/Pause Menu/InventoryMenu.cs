@@ -33,6 +33,10 @@ namespace UI
         private IUserInterfaceLayer openContextMenu = null;
         #endregion
 
+        // Click Tracking
+        private int clickedIndex = -0;
+        private long clickedTimestamp;
+        
         private FromScratchPlayer player;
         public InventoryMenu(FromScratchPlayer player)
         {
@@ -110,7 +114,7 @@ namespace UI
             Item itemStack = Inventory.Slots[index];
 
             var itemRoot = itemTreeAsset.CloneTree().Children().First();
-            itemRoot.RegisterCallback<MouseDownEvent>(OnItemClick);
+            itemRoot.RegisterCallback<ClickEvent>(OnItemClick);
             UpdateItemStack(itemStack, itemRoot);
 
             runDnd.MakeDropTarget(itemRoot, "ItemStack", () => index.ToString());
@@ -118,9 +122,41 @@ namespace UI
 
             return itemRoot;
         }
+        //
+        // private void OnItemMouseDown(MouseDownEvent evt)
+        // {
+        //     VisualElement veTarget = (VisualElement)evt.currentTarget;
+        //     if (veTarget != null)
+        //     {
+        //         Item itemStack = (Item)veTarget.userData;
+        //         ItemData itemData = itemStack?.itemData;
+        //
+        //         if (itemData != null)
+        //         {
+        //             clickedIndex = player.character.characterInventory.Container.Slots.IndexOf(itemStack);
+        //             clickedTimestamp = evt.timestamp;
+        //         }
+        //     }
+        // }
+        //
+        // private void OnItemMouseUp(MouseUpEvent evt)
+        // {
+        //     VisualElement veTarget = (VisualElement)evt.currentTarget;
+        //     if (veTarget != null)
+        //     {
+        //         Item itemStack = (Item)veTarget.userData;
+        //         ItemData itemData = itemStack?.itemData;
+        //
+        //         if (itemData != null)
+        //         {
+        //             var index = player.character.characterInventory.Container.Slots.IndexOf(itemStack);
+        //         }
+        //     }
+        // }
 
-        private void OnItemClick(MouseDownEvent evt)
+        private void OnItemClick(ClickEvent evt)
         {
+            Debug.Log("Click Click");
             VisualElement veTarget = (VisualElement)evt.currentTarget;
             if (veTarget != null)
             {
