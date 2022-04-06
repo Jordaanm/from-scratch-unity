@@ -60,7 +60,16 @@ namespace FromScratch.Character
 
         private void CompleteCraft(Recipe recipe)
         {
+            ConsumeIngredients(recipe);
             characterInventory.Container.AddItem(recipe.output.item, recipe.output.amount);
+        }
+
+        private void ConsumeIngredients(Recipe recipe)
+        {
+            foreach (var recipeIngredient in recipe.input)
+            {
+                characterInventory.Container.ReduceStacks(recipeIngredient.item, recipeIngredient.amount);
+            }
         }
 
         public int IngredientCount(ItemData itemData)

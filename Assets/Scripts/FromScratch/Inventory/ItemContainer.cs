@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
@@ -71,10 +72,14 @@ namespace FromScratch.Inventory
             if(item.itemData.isStackable && HasStackOfItem(item.itemData))
             {
                 AddStacks(item);
+                
+                OnChange.Invoke();
                 return true;
             } else if (HasEmptySlot)
             {
                 AddToEmptySlot(item);
+                
+                OnChange.Invoke();
                 return true;
             }
 
@@ -118,6 +123,7 @@ namespace FromScratch.Inventory
             {
                 //TODO: Logic for Dropping Item
                 Debug.LogFormat("Dropping Item: {0}", item.itemData.Name);
+                OnChange.Invoke();
             }
         }
 
@@ -132,6 +138,32 @@ namespace FromScratch.Inventory
                 .FindAll(item => item?.itemData != null && item.itemData.id == targetItem.id) //Find all slots with a matching item
                 .Select(item => item.stacks) //Get the stacks in each matching slot
                 .Aggregate(0, (sum, amount) => sum + amount); //Sum total
+        }
+
+        public int GetFirstStack(ItemData itemData)
+        {
+            return Slots.FindIndex(item => item?.itemData.id == itemData.id);
+        }
+
+        public void ReduceStacks(ItemData itemData, int amount)
+        {
+            int remaining = amount;
+
+            while (remaining > 0 && HasStackOfItem(itemData))
+            {
+                int slotIndex = GetFirstStack(itemData);
+                var slot = Slots[slotIndex];
+                int stacksToRemove = Math.Min(remaining, slot.stacks);
+
+                slot.stacks -= stacksToRemove;
+                remaining -= stacksToRemove;
+                if (slot.stacks == 0)
+                {
+                    Slots[slotIndex] = null;
+                }
+            }
+            
+            OnChange.Invoke();
         }
     }
 }
