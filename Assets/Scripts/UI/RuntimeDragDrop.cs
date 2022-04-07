@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -18,6 +19,7 @@ namespace UI
         List<RunDndDropCase> dropCaseHandlers = new List<RunDndDropCase>();
 
         static System.Predicate<object> defaultPredicate = (object x) => true;
+        private Vector2 mousePos;
 
         public static RuntimeDragDrop Initialise(VisualElement root, VisualElement source = null)
         {
@@ -92,21 +94,35 @@ namespace UI
 
         void HandleMouseUpSource(MouseUpEvent evt)
         {
+            KillGhost();
             //CancelDrag();
         }
 
         void HandleMouseMoveSource(MouseMoveEvent evt)
         {
+            UpdateMousePos(evt.localMousePosition);
             if (ghost != null)
             {
-                MoveGhost(evt.localMousePosition);
+                MoveGhost();
             }
         }
 
-        void MoveGhost(Vector2 localMousePosition)
+        public void UpdateMousePos(Vector2 newPos)
         {
-            ghost.style.left = new StyleLength(localMousePosition.x - ghost.worldBound.width / 2);
-            ghost.style.top = new StyleLength(localMousePosition.y - ghost.worldBound.height / 2);
+            this.mousePos = newPos;
+        }
+        
+        void MoveGhost()
+        {
+            if (ghost == null)
+            {
+                return;
+            }
+            
+            Debug.LogFormat("Ghost:: Mouse Move {0}, {1}", mousePos.x.ToString(), mousePos.y.ToString());
+            Debug.LogFormat("GG {0}, {1}", ghost.style.left.ToString(), ghost.style.top.ToString());
+            ghost.style.left = new StyleLength(mousePos.x - ghost.worldBound.width / 2);
+            ghost.style.top = new StyleLength(mousePos.y - ghost.worldBound.height / 2);
         }
 
         #endregion
@@ -123,7 +139,7 @@ namespace UI
             element.RegisterCallback<MouseDownEvent>(evt => HandleMouseDownTarget(evt, type, getDataCallback, canDrag));
         }
 
-        private void HandleMouseDownTarget(
+        private async void HandleMouseDownTarget(
             MouseDownEvent evt,
             string type,
             System.Func<object> getDataCallback,
@@ -154,9 +170,14 @@ namespace UI
                 // Create Ghost
                 ghost = matchingCase.makeGhost(currentDragType, currentDragData);
                 ghost.style.position = Position.Absolute;
-                AttachGhost(ghost);
                 ghost.pickingMode = PickingMode.Ignore;
-                MoveGhost(evt.localMousePosition);
+                ghost.style.visibility = Visibility.Hidden;
+                AttachGhost(ghost);
+
+                //Add a delay so the bounds/size of the element are known, allowing us to properly center it over the cursor.
+                await Task.Delay(1);
+                ghost.style.visibility = Visibility.Visible;
+                MoveGhost();
             }
         }
 
@@ -208,6 +229,7 @@ namespace UI
             if (ghost != null)
             {
                 ghost.RemoveFromHierarchy();
+                ghost = null;
             }
         }
 
