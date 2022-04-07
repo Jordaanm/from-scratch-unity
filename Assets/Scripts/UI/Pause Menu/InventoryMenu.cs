@@ -310,6 +310,8 @@ namespace UI
         {
             player.character.characterInventory.OnQuickbarChange.AddListener(UpdateHotbar);
             player.character.characterInventory.Container.OnChange.AddListener(UpdateInventory);
+            UpdateInventory();
+            UpdateHotbar();
         }
 
         public void OnClose() {
@@ -321,12 +323,7 @@ namespace UI
             player.character.characterInventory.Container.OnChange.RemoveListener(UpdateInventory);
         }
 
-        public void SetIsActive(bool state) {
-            if (state) {
-                UpdateInventory();
-                UpdateHotbar();
-            }
-        }
+        public void SetIsActive(bool state) {}
 
         #endregion
     }

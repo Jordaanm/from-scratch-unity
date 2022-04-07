@@ -294,7 +294,6 @@ namespace UI
 
         public void OnOpen()
         {
-            //TODO: Setup
             UpdateAvailableRecipes();
         }
 
@@ -302,7 +301,6 @@ namespace UI
         {
             selectedRecipe = null;
             UpdateDetailsSection(null);
-            //TODO: Cleanup
         }
 
         public void SetIsActive(bool state)

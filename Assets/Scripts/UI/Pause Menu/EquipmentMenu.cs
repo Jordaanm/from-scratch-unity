@@ -151,12 +151,7 @@ namespace UI
             }
         }
 
-        public void SetIsActive(bool state) {
-            if (state) {
-                // UpdateInventory();
-                // UpdateHotbar();
-            }
-        }
+        public void SetIsActive(bool state) { }
         
         #endregion
        

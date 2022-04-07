@@ -5,13 +5,14 @@
         <Style src="Layer Templates/LayerManager.uss" />
         <ui:VisualElement name="title__container" style="background-color: rgba(0, 0, 0, 0.5);">
             <ui:VisualElement name="title__container__inner" style="height: 100%;">
-                <ui:Label text="PREV" display-tooltip-when-elided="True" name="title__prev" />
-                <ui:Label text="MAIN" display-tooltip-when-elided="True" name="title__main" />
-                <ui:Label text="NEXT" display-tooltip-when-elided="True" name="title__next" />
+                <ui:Label text="PREV" display-tooltip-when-elided="true" name="title__prev" />
+                <ui:Label text="MAIN" display-tooltip-when-elided="true" name="title__main" />
+                <ui:Label text="NEXT" display-tooltip-when-elided="true" name="title__next" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="main__container" style="background-color: rgba(0, 0, 0, 0.5);">
             <ui:VisualElement name="main" />
+            <ui:VisualElement name="next" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
