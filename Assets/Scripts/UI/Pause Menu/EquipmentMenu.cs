@@ -152,8 +152,22 @@ namespace UI
         }
 
         public void SetIsActive(bool state) { }
-        
+
+        public void Update()
+        {
+        }
+
+        public bool HasOpenLayer()
+        {
+            return layerManager.HasOpenLayer;
+        }
+
+        public void CloseTopLayer()
+        {
+            layerManager.CloseTopLayer();
+        }
+
         #endregion
-       
+
     }
 }

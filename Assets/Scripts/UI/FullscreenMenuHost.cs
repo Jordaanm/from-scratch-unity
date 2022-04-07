@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 using Util;
 
@@ -11,34 +13,47 @@ namespace UI
             VisualElement GetRoot();
             void OpenMenu();
             void CloseMenu();
+
+            void Update();
+
+            bool HasOpenLayer();
+            void CloseTopLayer();
         }
 
-        private FullScreenMenu m_menu; 
-        public UIDocument m_uiDoc;
+        private FullScreenMenu currentMenu; 
+        public UIDocument uiDoc;
         public GameObject blurOject;
         public UIDocument hudDocument;
 
-        private const int SORT_ORDER_OPEN = 10;
-        private const int SORT_ORDER_CLOSED = -1;
+        private const int SortOrderOpen = 10;
+        private const int SortOrderClosed = -1;
 
         public void Start() { 
-            if(m_uiDoc == null) {
-                m_uiDoc = GetComponent<UIDocument>();
+            if(uiDoc == null) {
+                uiDoc = GetComponent<UIDocument>();
             }
         
-            m_uiDoc.sortingOrder = SORT_ORDER_CLOSED;
+            uiDoc.sortingOrder = SortOrderClosed;
+        }
+
+        private void Update()
+        {
+            if (currentMenu != null)
+            {
+                currentMenu.Update();
+            }
         }
 
         public void OpenMenu(FullScreenMenu menu) {
-            if(m_menu != null) {
-                m_menu.CloseMenu();
-                m_menu.GetRoot().RemoveFromHierarchy();                
+            if(currentMenu != null) {
+                currentMenu.CloseMenu();
+                currentMenu.GetRoot().RemoveFromHierarchy();                
             }
 
-            m_menu = menu;
-            m_uiDoc.rootVisualElement.Add(m_menu.GetRoot());
-            m_menu.OpenMenu();
-            m_uiDoc.sortingOrder = SORT_ORDER_OPEN;
+            currentMenu = menu;
+            uiDoc.rootVisualElement.Add(currentMenu.GetRoot());
+            currentMenu.OpenMenu();
+            uiDoc.sortingOrder = SortOrderOpen;
             if (blurOject != null)
             {
                 blurOject.SetActive(true);
@@ -46,13 +61,25 @@ namespace UI
             hudDocument.rootVisualElement.visible = false;
         }
 
-        public void CloseCurrentMenu() {
-            if(m_menu != null) {
-                m_menu.GetRoot().RemoveFromHierarchy();
-                m_menu.CloseMenu();
+        public void CloseTopLayer()
+        {
+            if (currentMenu.HasOpenLayer())
+            {
+                currentMenu.CloseTopLayer();
             }
-            m_menu = null;
-            m_uiDoc.sortingOrder = SORT_ORDER_CLOSED;
+            else
+            {
+                CloseCurrentMenu();
+            }
+        }
+
+        public void CloseCurrentMenu() {
+            if(currentMenu != null) {
+                currentMenu.GetRoot().RemoveFromHierarchy();
+                currentMenu.CloseMenu();
+            }
+            currentMenu = null;
+            uiDoc.sortingOrder = SortOrderClosed;
             if (blurOject != null)
             {
                 blurOject.SetActive(false);
@@ -60,10 +87,6 @@ namespace UI
             hudDocument.rootVisualElement.visible = true;
         }
 
-        public bool HasMenuOpen {
-            get {
-                return m_menu != null;
-            }
-        }
+        public bool HasMenuOpen => currentMenu != null;
     }
 }

@@ -322,6 +322,21 @@ namespace UI
             player.character.characterInventory.OnQuickbarChange.RemoveListener(UpdateHotbar);
             player.character.characterInventory.Container.OnChange.RemoveListener(UpdateInventory);
         }
+        
+        public void Update()
+        {
+            
+        }
+        
+        public bool HasOpenLayer()
+        {
+            return layerManager.HasOpenLayer;
+        }
+
+        public void CloseTopLayer()
+        {
+            layerManager.CloseTopLayer();
+        }
 
         public void SetIsActive(bool state) {}
 

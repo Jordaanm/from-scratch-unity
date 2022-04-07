@@ -45,7 +45,21 @@ namespace UI.Crafting
             player?.character.EnableControls();
             craftingSubmenu.OnClose();
         }
-        
+ 
+        public void Update()
+        {
+            
+        }
+
+        public bool HasOpenLayer()
+        {
+            return false;
+        }
+
+        public void CloseTopLayer()
+        {
+        }
+
         #endregion
         
         virtual protected void BuildUI()

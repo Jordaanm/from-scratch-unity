@@ -31,7 +31,6 @@ namespace UI
     public class LayerManager
     {
         protected List<LayerDetails> m_layerDetails = new List<LayerDetails>();
-        protected List<IUserInterfaceLayer> m_layers = new List<IUserInterfaceLayer>();
         protected VisualElement m_layerHost;
 
         public LayerManager(VisualElement host) {
@@ -106,6 +105,18 @@ namespace UI
             }
 
             return null;
+        }
+
+        public bool HasOpenLayer => m_layerDetails.Count > 0;
+
+        public void CloseTopLayer()
+        {
+            if (!HasOpenLayer)
+            {
+                return; 
+            }
+
+            RemoveLayer(m_layerDetails[m_layerDetails.Count - 1].instance);
         }
     }
 

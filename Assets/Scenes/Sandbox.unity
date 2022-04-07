@@ -1109,7 +1109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e357c1e7d173491ea76a32dc9b8a086c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_uiDoc: {fileID: 659827422}
+  uiDoc: {fileID: 659827422}
   blurOject: {fileID: 0}
   hudDocument: {fileID: 1503605190}
 --- !u!1 &787072987

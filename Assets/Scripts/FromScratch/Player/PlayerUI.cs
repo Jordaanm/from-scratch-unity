@@ -64,13 +64,13 @@ namespace FromScratch.Player
         private void OnTogglePauseMenu(InputAction.CallbackContext context)
         {
             Debug.Log("Toggling Pause Menu");
-            if (!pauseMenu.IsOpen())
+            if (FullscreenMenuHost.Instance.HasMenuOpen)
             {
-                FullscreenMenuHost.Instance.OpenMenu(pauseMenu);
+                FullscreenMenuHost.Instance.CloseTopLayer();
             }
             else
             {
-                FullscreenMenuHost.Instance.CloseCurrentMenu();
+                FullscreenMenuHost.Instance.OpenMenu(pauseMenu);
             }
         }
     }

@@ -15,9 +15,7 @@ namespace UI
     {        
         public static string menuName = "Crafting";
         public static string menuID = "CRAFTING";
-        
-        private LayerManager layerManager;
-                
+
         #region UI References        
         protected static VisualTreeAsset treeAsset;
         protected const string TreeAssetKey = "crafting-menu";
@@ -69,7 +67,6 @@ namespace UI
             }
 
             veRoot = VisualTreeAssetReference.Create(treeAsset);
-            layerManager = new LayerManager(veRoot);
 
             BuildRecipeList();
             BuildDetailsSection();
@@ -308,6 +305,19 @@ namespace UI
             //TODO: Cleanup when Inactive
         }
         
+        public void Update()
+        {
+        }
+
+        public bool HasOpenLayer()
+        {
+            return false;
+        }
+
+        public void CloseTopLayer()
+        {
+        }
+
         #endregion
     }
 }
