@@ -15,7 +15,7 @@ namespace FromScratch.Player
 
         private void Awake()
         {
-            pauseMenu = new PauseMenu();
+            pauseMenu = new PauseMenu(player);
             fromScratchControls = new FromScratchControls();
         }
 

@@ -16,6 +16,12 @@ namespace UI
             VisualElement GetRoot();
             void OnOpen();
             void OnClose();
+
+            /// <summary>
+            /// Used to disable interactions while transitioning between screens.
+            /// A Submenu is only active while it is the main screen AND not transitioning to/from.
+            /// </summary>
+            /// <param name="state">Whether or not the Submenu is active</param>
             void SetIsActive(bool state);
 
             void Update();
@@ -40,7 +46,7 @@ namespace UI
         #endregion
 
         private bool isAnimating = false;
-        private const float ScreenTransitionDuration = 0.2f;
+        private const float ScreenTransitionDuration = 0.3f;
     
         public Submenu CurrentSubmenu {
             get {
@@ -57,15 +63,7 @@ namespace UI
             submenus.Remove(menu);
             return this;
         }
-
-        public void OpenTo(string id) {
-            int index = submenus.FindIndex(x => x.GetID() == id);
-            if(index != -1) {
-                currentSubmenuIndex = index;
-                SetActiveSubmenu(CurrentSubmenu);
-            }
-        }
-
+        
         #region FullScreenMenu contract
 
         public VisualElement GetRoot() {
@@ -79,7 +77,17 @@ namespace UI
         public virtual void OpenMenu() {
             currentSubmenuIndex = 0;
             SetActiveSubmenu(CurrentSubmenu);
+            
         }
+        
+        public void OpenTo(string id) {
+            int index = submenus.FindIndex(x => x.GetID() == id);
+            if(index != -1) {
+                currentSubmenuIndex = index;
+                SetActiveSubmenu(CurrentSubmenu);
+            }
+        }
+
 
         public virtual void CloseMenu() {
 
@@ -178,18 +186,25 @@ namespace UI
 
         private IEnumerator AnimateLeft(VisualElement element, float from, float to, Action callback = null)
         {
-            float changePerSecond = (to - from) / ScreenTransitionDuration;
+            //TODO: Make Non-Linear
+            
+            float changePerMS = (to - from) / (ScreenTransitionDuration * 1000f);
 
             float value = from;
-            float lastUpdateTime = Time.time;
+            float lastUpdateTime = Time.realtimeSinceStartup;
             bool Predicate(float val) => @from > to ? val > to : val < to;
 
             while (Predicate(value))
             {
                 yield return null;
-                float now = Time.time;
-                float deltaTime = now - lastUpdateTime;
-                float delta = deltaTime * changePerSecond / 1000f;
+                float now = Time.realtimeSinceStartup;
+
+                float deltaTime = (now - lastUpdateTime) * 1000;
+                lastUpdateTime = now;
+
+                float delta = deltaTime * changePerMS;
+                Debug.LogFormat("Delta {0}, {1}", delta.ToString(), deltaTime.ToString());
+                
                 value += delta;
                 element.style.left = new Length(value, LengthUnit.Percent);
             }

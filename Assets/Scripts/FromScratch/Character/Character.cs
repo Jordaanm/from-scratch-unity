@@ -126,7 +126,7 @@ namespace FromScratch.Character
 
         private void HandleJump()
         {
-            if (!isJumping && characterController.isGrounded && wantsToJump)
+            if (!isJumping && characterController.isGrounded && wantsToJump && !areControlsDisabled)
             {
                 animator.SetBool(isJumpingHash, true);
                 isJumping = true;
