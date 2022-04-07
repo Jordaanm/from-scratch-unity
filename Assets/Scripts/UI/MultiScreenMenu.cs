@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using AssetReferences;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Util;
 
 namespace UI
 {
@@ -145,33 +146,41 @@ namespace UI
             isAnimating = true;
             float nextStart = offset > 0 ? 100 : -100;
             float mainEnd = offset > 0 ? -100 : 100;
-            FullscreenMenuHost.Instance.StartCoroutine(AnimateLeft(veMain, 0, mainEnd));
-            FullscreenMenuHost.Instance.StartCoroutine(AnimateLeft(veNext, nextStart, 0, () =>
-            {
-                //Clear Next Menu
-                veNext.Clear();
-                nextMenu.GetRoot().RemoveFromHierarchy();
-            
-                //Clear Current Menu
-                veMain.Clear();
-                currentSub.GetRoot().RemoveFromHierarchy();
+            FullscreenMenuHost.Instance.StartCoroutine(Tween.Linear(
+                ScreenTransitionDuration,
+                (v) => veMain.style.left = new Length(v * mainEnd, LengthUnit.Percent)
+            ));
 
-                //Close "Prev" menu
-                currentSub.OnClose();
-            
-                //Set current Menu
-                currentSubmenuIndex = nextSubmenuIndex;
-                activeSubmenu = nextMenu;
-                CurrentSubmenu.SetIsActive(true);
-                veMain.Add(CurrentSubmenu.GetRoot());
-                
-                //Set Positions
-                veMain.style.left = 0;
-                veNext.style.left = new Length(100, LengthUnit.Percent);
+            FullscreenMenuHost.Instance.StartCoroutine(Tween.Linear(
+                ScreenTransitionDuration,
+                (v) => veNext.style.left = new Length(nextStart * (1f - v), LengthUnit.Percent),
+                () =>
+                {
+                    //Clear Next Menu
+                    veNext.Clear();
+                    nextMenu.GetRoot().RemoveFromHierarchy();
 
-                UpdateTitle();
-                isAnimating = false;
-            }));
+                    //Clear Current Menu
+                    veMain.Clear();
+                    currentSub.GetRoot().RemoveFromHierarchy();
+
+                    //Close "Prev" menu
+                    currentSub.OnClose();
+
+                    //Set current Menu
+                    currentSubmenuIndex = nextSubmenuIndex;
+                    activeSubmenu = nextMenu;
+                    CurrentSubmenu.SetIsActive(true);
+                    veMain.Add(CurrentSubmenu.GetRoot());
+
+                    //Set Positions
+                    veMain.style.left = 0;
+                    veNext.style.left = new Length(100, LengthUnit.Percent);
+
+                    UpdateTitle();
+                    isAnimating = false;
+                }
+            ));
         }
     
         private void SetNextMenu(Submenu submenu)
@@ -184,34 +193,6 @@ namespace UI
             nextSubmenu.SetIsActive(false);
         }
 
-        private IEnumerator AnimateLeft(VisualElement element, float from, float to, Action callback = null)
-        {
-            //TODO: Make Non-Linear
-            
-            float changePerMS = (to - from) / (ScreenTransitionDuration * 1000f);
-
-            float value = from;
-            float lastUpdateTime = Time.realtimeSinceStartup;
-            bool Predicate(float val) => @from > to ? val > to : val < to;
-
-            while (Predicate(value))
-            {
-                yield return null;
-                float now = Time.realtimeSinceStartup;
-
-                float deltaTime = (now - lastUpdateTime) * 1000;
-                lastUpdateTime = now;
-
-                float delta = deltaTime * changePerMS;
-                Debug.LogFormat("Delta {0}, {1}", delta.ToString(), deltaTime.ToString());
-                
-                value += delta;
-                element.style.left = new Length(value, LengthUnit.Percent);
-            }
-        
-            callback?.Invoke();
-        } 
-    
         private void SetActiveSubmenu(Submenu submenu) {
             if(activeSubmenu != null) {
                 //DEACTIVATE
