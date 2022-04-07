@@ -18,7 +18,7 @@ namespace FromScratch.Interaction
             return interactable.GetInteractionType() == InteractionType.Pickup;
         } 
         
-        public override async void Start(IInteractor interactor, IInteractable target)
+        public override void Start(IInteractor interactor, IInteractable target)
         {
             GameObject interactorGO = interactor.GetGameObject();
             GameObject targetGO = target.GetGameObject();

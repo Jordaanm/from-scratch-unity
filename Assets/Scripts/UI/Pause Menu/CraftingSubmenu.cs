@@ -33,7 +33,6 @@ namespace UI
         private ListView recipeListView;
         private Button craftingButton;
         
-        private IUserInterfaceLayer openContextMenu = null;
         #endregion
         
         private FromScratchPlayer player;

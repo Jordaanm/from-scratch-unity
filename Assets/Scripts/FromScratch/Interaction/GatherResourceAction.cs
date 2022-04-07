@@ -21,37 +21,30 @@ namespace FromScratch.Interaction
             return interactable.GetInteractionType() == InteractionType.ResourceNode;
         } 
         
-        public override async void Start(IInteractor interactor, IInteractable target)
+        public override void Start(IInteractor interactor, IInteractable target)
         {
-            GameObject interactorGO = interactor.GetGameObject();
-            GameObject targetGO = target.GetGameObject();
+            GameObject interactorGameObject = interactor.GetGameObject();
+            GameObject targetGameObject = target.GetGameObject();
             
-            Character.Character character = interactorGO.GetComponent<Character.Character>();
-            CharacterAnimation charAnimation = interactorGO.GetComponent<CharacterAnimation>();
-            CharacterInventory charInventory = interactorGO.GetComponent<CharacterInventory>();
+            Character.Character character = interactorGameObject.GetComponent<Character.Character>();
+            CharacterAnimation charAnimation = interactorGameObject.GetComponent<CharacterAnimation>();
+            CharacterInventory charInventory = interactorGameObject.GetComponent<CharacterInventory>();
 
-            ResourceNode resourceNode = targetGO.GetComponent<ResourceNode>();
+            ResourceNode resourceNode = targetGameObject.GetComponent<ResourceNode>();
             ResourceNodeInfo resourceNodeInfo = resourceNode.resourceNodeInfo;
 
             character.DisableControls();
 
             //TODO: Allow for dynamic play time
-            // float waitTime = resourceNodeInfo.animationDuration > 0
-            //     ? resourceNodeInfo.animationDuration
-            //     : resourceNodeInfo.animation.length;
 
-            Debug.Log("A");
             charAnimation.PlayClip(resourceNodeInfo.animation, () =>
             {
-                Debug.Log("B");
                 LootTable.LootResult lootResult = resourceNodeInfo.lootTable.Get();
                 resourceNode.DepleteResources(lootResult.amount);
                 charInventory.Container.AddItem(new Item(lootResult.itemData, lootResult.amount));
 
                 character.EnableControls();
             });
-
-            // await Task.Delay(Mathf.CeilToInt(waitTime * 1000f));
         }
     }
 }

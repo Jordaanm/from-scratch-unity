@@ -32,10 +32,6 @@ namespace UI
 
         private IUserInterfaceLayer openContextMenu = null;
         #endregion
-
-        // Click Tracking
-        private int clickedIndex = -0;
-        private long clickedTimestamp;
         
         private FromScratchPlayer player;
         public InventoryMenu(FromScratchPlayer player)
@@ -258,9 +254,8 @@ namespace UI
                 {
                     var characterInventory = player.character.characterInventory;
                     
-                    int quickbarIndex = int.Parse(dropData as string);
-                    int inventoryIndex = int.Parse(dragData as string);
-                    ItemData itemData = null;
+                    int quickbarIndex = int.Parse(dropData as string ?? "");
+                    int inventoryIndex = int.Parse(dragData as string ?? "");
 
                     characterInventory.SetQuickbarSlot(quickbarIndex, inventoryIndex);
                     UpdateHotbar();

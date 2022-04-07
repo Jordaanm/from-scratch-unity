@@ -12,7 +12,7 @@ namespace FromScratch.Player
         private FromScratchPlayer player;
         private PlayerInteraction playerInteraction;
         private Character.Character character;
-        private Camera camera;
+        private Camera playerCamera;
         
         private FromScratchControls fromScratchControls;
         private InputAction interactAction;
@@ -31,7 +31,7 @@ namespace FromScratch.Player
             jumpAction = fromScratchControls.Player.Jump;
             moveAction = fromScratchControls.Player.Move;
             sprintAction = fromScratchControls.Player.Sprint;
-            camera = Camera.main;
+            playerCamera = Camera.main;
         }
         
         private void OnEnable()
@@ -84,7 +84,7 @@ namespace FromScratch.Player
         private void Update()
         {
             var inputDirection = moveAction.ReadValue<Vector2>();
-            var camT = camera.transform;
+            var camT = playerCamera.transform;
 
             Vector3 intendedDirection = camT.forward * inputDirection.y + camT.right * inputDirection.x;
             intendedDirection.y = 0;
