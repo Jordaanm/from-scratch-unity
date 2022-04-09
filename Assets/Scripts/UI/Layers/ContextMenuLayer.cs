@@ -58,6 +58,19 @@ namespace UI.Layers
             RenderActions();
         }
 
+        public void AddActions(IEnumerable<ContextMenuAction> actions)
+        {
+            menuActions.AddRange(actions);
+            RenderActions();
+        }
+
+        public void RemoveAction(string id)
+        {
+            ContextMenuAction action = menuActions.Find(a => a.id == id);
+            menuActions.Remove(action);
+            RenderActions();
+        }
+        
         public void SetTitle(string title)
         {
             if (this.title == title)
@@ -88,19 +101,6 @@ namespace UI.Layers
             }
 
             return titleElement;
-        }
-
-        public void AddActions(IEnumerable<ContextMenuAction> actions)
-        {
-            menuActions.AddRange(actions);
-            RenderActions();
-        }
-
-        public void RemoveAction(string id)
-        {
-            ContextMenuAction action = menuActions.Find(a => a.id == id);
-            menuActions.Remove(action);
-            RenderActions();
         }
 
         private void RenderActions(VisualElement host = null)

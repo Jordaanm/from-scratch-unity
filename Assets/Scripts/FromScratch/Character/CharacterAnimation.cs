@@ -22,7 +22,7 @@ namespace FromScratch.Character
         private AnimationMixerPlayable mixerStatesOutput;
         private AnimationMixerPlayable mixerStatesInput;
 
-        private List<ManagedAnimClip> clips;
+        private List<ManagedAnimClip> clips = new List<ManagedAnimClip>();
         private List<string> activeGUIDs;
         public void Setup(Animator animator)
         {

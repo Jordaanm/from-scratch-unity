@@ -7,6 +7,8 @@ namespace FromScratch.Player
 {
     public class PlayerDebug : MonoBehaviour
     {
+        [HideInInspector]
+        public FromScratchPlayer player;
         public ItemData itemData;
         public CharacterEquipment characterEquipment;
 
@@ -14,6 +16,7 @@ namespace FromScratch.Player
         private InputAction debugAction;
         private void Awake()
         {
+            player = GetComponent<FromScratchPlayer>();
             fromScratchControls = new FromScratchControls();
         }
 
@@ -37,7 +40,7 @@ namespace FromScratch.Player
             if (characterEquipment != null && itemData != null)
             {
                 Item item = new Item(itemData);
-                characterEquipment.EquipItem(item);
+                player.character.characterInventory.Container.AddItem(item);
             }
         }
     }

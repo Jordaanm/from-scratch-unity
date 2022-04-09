@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FromScratch.Character.Modes;
 using FromScratch.Interaction;
 using FromScratch.Inventory;
 using UnityEngine;
@@ -59,6 +60,27 @@ namespace FromScratch.Character
                 pickupComp.item = item.itemData;
 
             }
+        }
+
+        public void Consume(Item item)
+        {
+            Debug.Log("TODO: Implement Consume functionality");
+        }
+
+        public void StartItemPlacement(Item item)
+        {
+            Debug.Log("TODO: Implement Place Functionality");
+            var placementMode = character.modeManager.SetActiveMode<PlacementMode>();
+            if (placementMode == null)
+            {
+                return; 
+            }
+            placementMode.SetItemToPlace(item);
+        }
+
+        public void PlaceItem(Item item, Vector3 position, Quaternion rotation)
+        {
+            Debug.Log("Placing Item");
         }
     }
 }

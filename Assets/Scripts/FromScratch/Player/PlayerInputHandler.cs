@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Numerics;
+using FromScratch.Character;
+using FromScratch.Character.Modes;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Plane = UnityEngine.Plane;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
@@ -83,15 +86,45 @@ namespace FromScratch.Player
 
         private void Update()
         {
-            var inputDirection = moveAction.ReadValue<Vector2>();
             var camT = playerCamera.transform;
 
-            Vector3 intendedDirection = camT.forward * inputDirection.y + camT.right * inputDirection.x;
-            intendedDirection.y = 0;
-            intendedDirection.Normalize();
-            intendedDirection *= inputDirection.magnitude;
+            MovementType movementType = character.modeManager.MovementType;
+            CharacterMode activeMode = character.modeManager.GetActiveMode();
+            
+            if (movementType == MovementType.OnFoot || movementType == MovementType.Vehicle)
+            {
+                var inputDirection = moveAction.ReadValue<Vector2>();
+            
+                Vector3 intendedDirection = camT.forward * inputDirection.y + camT.right * inputDirection.x;
+                intendedDirection.y = 0;
+                intendedDirection.Normalize();
+                intendedDirection *= inputDirection.magnitude;
 
-            character.intendedDirection = intendedDirection;
+                character.intendedDirection = intendedDirection;
+            }
+
+            if (movementType == MovementType.Menu)
+            {
+                //TODO: Pass Inputs to open menu to Parse
+            }
+
+            if (movementType == MovementType.Overview)
+            {
+                //In overview (Top Down), parse inputs to move camera around
+                //Mouse movement should move the reticule
+                Plane plane = new Plane(Vector3.up, 0);
+                float distance;
+                Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+                if (plane.Raycast(ray, out distance))
+                {
+                    Vector3 position = ray.GetPoint(distance);
+                    PlacementMode placementMode = activeMode as PlacementMode;
+                    if (placementMode != null)
+                    {
+                        placementMode.MoveReticule(position);
+                    }
+                }
+            }
         }
     }
 }

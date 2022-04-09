@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AssetReferences;
 using FromScratch.Character;
 using FromScratch.Inventory;
@@ -173,22 +174,57 @@ namespace UI
                 layerManager.RemoveLayer(openContextMenu);
             }
 
-            ContextMenuAction testAction = new ContextMenuAction("test", "Inspect", () => Debug.Log("TODO: Implement Inspect Menu"));
-            ContextMenuAction equipAction = new ContextMenuAction("equip", "Equip",
-                () => player.character.characterEquipment.EquipItem(itemStack));
-            ContextMenuAction dropAction = new ContextMenuAction("drop", "Drop", () => DropItemStack(itemStack));
-
+            
             var layer = new ContextMenuLayer(visualElement);
 
             var title = itemStack?.itemData != null ? itemStack.itemData.itemName : "";
             layer.SetTitle(title);
-
-            layer.AddAction(testAction);
-            layer.AddAction(equipAction);
-            layer.AddAction(dropAction);
             
+            var actions = ContextMenuActionsForItem(itemStack);
+            layer.AddActions(actions);
+
             layerManager.AddLayer(layer);
             openContextMenu = layer;
+        }
+
+        private List<ContextMenuAction> ContextMenuActionsForItem(Item item)
+        {
+            var actionList = new List<ContextMenuAction>();
+            
+            ContextMenuAction inspectAction = new ContextMenuAction("test", "Inspect", () => Debug.Log("TODO: Implement Inspect Menu"));
+            actionList.Add(inspectAction);
+
+            switch (item?.itemData.usageType)
+            {
+                case ItemData.UsageType.Consume:
+                {
+                    actionList.Add(new ContextMenuAction("consume", "Consume", () => 
+                        player.character.characterInventory.Consume(item)
+                    ));
+                    break;
+                }
+                case ItemData.UsageType.Equip:
+                {
+                    actionList.Add(new ContextMenuAction("equip", "Equip", () =>
+                        player.character.characterEquipment.EquipItem(item)
+                    ));
+                    break;
+                }
+                case ItemData.UsageType.Place:
+                {
+                    actionList.Add(new ContextMenuAction("place", "Place", () =>
+                        {
+                            FullscreenMenuHost.Instance.CloseCurrentMenu();
+                            player.character.characterInventory.StartItemPlacement(item);
+                        }
+                    ));
+                    break;
+                }
+            }
+            ContextMenuAction dropAction = new ContextMenuAction("drop", "Drop", () => DropItemStack(item));
+            actionList.Add(dropAction);
+
+            return actionList;
         }
 
         #endregion
