@@ -125,7 +125,7 @@ namespace FromScratch.Character
             ManagedAnimState prevPlayable;
             ManagedAnimState nextPlayable;
 
-            int insertIndex = this.GetSurroundingStates(layer,
+            int insertIndex = GetSurroundingStates(layer,
                 out prevPlayable,
                 out nextPlayable
             );
@@ -161,6 +161,45 @@ namespace FromScratch.Character
                     ref graph,
                     nextPlayable,
                     parameters
+                ));
+            }
+        }
+        
+        public void SetState(AnimationClip animationClip, AvatarMask avatarMask,
+            float weight, float transition, float speed, int layer) {
+            ManagedAnimState prevPlayable;
+            ManagedAnimState nextPlayable;
+
+            int insertIndex = this.GetSurroundingStates(layer,
+                out prevPlayable,
+                out nextPlayable
+            );
+
+            if (prevPlayable == null && nextPlayable == null) {
+                this.states.Add(ManagedAnimStateClip.Create(
+                    animationClip, avatarMask, layer, 0f,
+                    transition, speed, weight,
+                    ref this.graph,
+                    ref this.mixerStatesInput,
+                    ref this.mixerStatesOutput
+                ));
+            } else if (prevPlayable != null) {
+                if (prevPlayable.Layer == layer) {
+                    prevPlayable.StretchDuration(transition);
+                }
+
+                this.states.Insert(insertIndex, ManagedAnimStateClip.CreateAfter(
+                    animationClip, avatarMask, layer, 0f,
+                    transition, speed, weight,
+                    ref this.graph,
+                    prevPlayable
+                ));
+            } else if (nextPlayable != null) {
+                this.states.Insert(insertIndex, ManagedAnimStateClip.CreateBefore(
+                    animationClip, avatarMask, layer, 0f,
+                    transition, speed, weight,
+                    ref this.graph,
+                    nextPlayable
                 ));
             }
         }
