@@ -19,6 +19,7 @@ namespace FromScratch.Player
         
         private FromScratchControls fromScratchControls;
         private InputAction interactAction;
+        private InputAction cancelAction;
         private InputAction jumpAction;
         private InputAction moveAction;
         private InputAction sprintAction;
@@ -31,9 +32,11 @@ namespace FromScratch.Player
 
             fromScratchControls = new FromScratchControls();
             interactAction = fromScratchControls.Player.Interact;
+            cancelAction = fromScratchControls.Player.Cancel;
             jumpAction = fromScratchControls.Player.Jump;
             moveAction = fromScratchControls.Player.Move;
             sprintAction = fromScratchControls.Player.Sprint;
+
             playerCamera = Camera.main;
         }
         
@@ -43,6 +46,9 @@ namespace FromScratch.Player
             
             interactAction.Enable();
             interactAction.performed += OnInteract;
+
+            cancelAction.Enable();
+            cancelAction.performed += OnCancel;
             
             jumpAction.Enable();
             jumpAction.started += OnJump;
@@ -63,6 +69,9 @@ namespace FromScratch.Player
             interactAction.Disable();
             interactAction.performed -= OnInteract;
             
+            cancelAction.Disable();
+            cancelAction.performed -= OnCancel;
+            
             jumpAction.Disable();
             jumpAction.started -= OnJump;
             jumpAction.canceled -= OnJump;
@@ -80,9 +89,41 @@ namespace FromScratch.Player
         
         private void OnInteract(InputAction.CallbackContext context)
         {
-            Debug.Log("PlayerInputHandler::OnInteract");
-            playerInteraction.Activate();
+            MovementType movementType = character.modeManager.MovementType;
+            CharacterMode activeMode = character.modeManager.GetActiveMode();
+
+            if (movementType == MovementType.OnFoot || movementType == MovementType.Vehicle)
+            {
+                Debug.Log("PlayerInputHandler::OnInteract");
+                playerInteraction.Activate();
+            }
+            
+            if (movementType == MovementType.Overview)
+            {
+                PlacementMode placementMode = activeMode as PlacementMode;
+                if (placementMode != null)
+                {
+                    placementMode.ConfirmItemPlacement();
+                }
+            }
         }
+        
+        private void OnCancel(InputAction.CallbackContext obj)
+        {
+            MovementType movementType = character.modeManager.MovementType;
+            CharacterMode activeMode = character.modeManager.GetActiveMode();
+
+            if (movementType == MovementType.Overview)
+            {
+                
+                PlacementMode placementMode = activeMode as PlacementMode;
+                if (placementMode != null)
+                {
+                    placementMode.CancelItemPlacement();
+                }
+            }
+        }
+
 
         private void Update()
         {

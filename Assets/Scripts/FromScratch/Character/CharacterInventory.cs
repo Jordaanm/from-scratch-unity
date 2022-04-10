@@ -78,9 +78,23 @@ namespace FromScratch.Character
             placementMode.SetItemToPlace(item);
         }
 
-        public void PlaceItem(Item item, Vector3 position, Quaternion rotation)
+        public void CompleteItemPlacement(Item item, Vector3 position, Quaternion rotation)
         {
-            Debug.Log("Placing Item");
+            if (!Item.IsEmpty(item))
+            {
+                //Place Item In World
+                Instantiate(item.itemData.prefab, position, rotation);
+                //Remove Item From Inventory
+                Container.RemoveItem(item);
+            }
+            
+            //Change Character Mode
+            character.modeManager.RestorePreviousMode();
+        }
+
+        public void CancelItemPlacement()
+        {
+            character.modeManager.RestorePreviousMode();
         }
     }
 }

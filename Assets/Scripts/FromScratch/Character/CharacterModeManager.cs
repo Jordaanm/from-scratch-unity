@@ -11,6 +11,7 @@ namespace FromScratch.Character
         private List<CharacterMode> modes = new List<CharacterMode>();
 
         private CharacterMode activeMode;
+        private Stack<CharacterMode> previousModes = new Stack<CharacterMode>();
         
         [ChildGameObjectsOnly]
         public CharacterMode defaultMode;
@@ -54,6 +55,7 @@ namespace FromScratch.Character
             }
 
             CharacterMode prevMode = activeMode;
+            previousModes.Push(prevMode);
             activeMode = modeToActivate;
             onModeChange.Invoke(prevMode, activeMode);
 
@@ -76,6 +78,26 @@ namespace FromScratch.Character
 
         public CharacterMode GetActiveMode()
         {
+            return activeMode;
+        }
+
+        public CharacterMode RestorePreviousMode()
+        {
+            CharacterMode currentMode = activeMode;
+            if (previousModes.Count == 0)
+            {
+                activeMode = defaultMode;
+            }
+            else
+            {
+                activeMode = previousModes.Pop();
+            }
+
+            currentMode.enabled = false;
+            activeMode.enabled = true;
+            
+            onModeChange.Invoke(currentMode, activeMode);
+
             return activeMode;
         }
     }
