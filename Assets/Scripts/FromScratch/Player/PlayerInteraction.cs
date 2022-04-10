@@ -7,18 +7,23 @@ namespace FromScratch.Player
     public class PlayerInteraction: MonoBehaviour, IInteractor
     {
         private Interactor interactor;
-        private GatherActionSource gatherActionSource;
-        private PickupItemActionSource pickupItemActionSource;
+        // private GatherActionSource gatherActionSource;
+        // private PickupItemActionSource pickupItemActionSource;
+        private BasicActionSource basicActionSource;
         
         private Character.Character character;
         private void Awake()
         {
             character = GetComponent<Character.Character>();
             interactor = new Interactor();
-            gatherActionSource = new GatherActionSource();
-            pickupItemActionSource = new PickupItemActionSource();
-            interactor.AddInteractionSource(gatherActionSource);
-            interactor.AddInteractionSource(pickupItemActionSource);
+            // gatherActionSource = new GatherActionSource();
+            // pickupItemActionSource = new PickupItemActionSource();
+            basicActionSource = new BasicActionSource();
+            interactor.AddInteractionSource(basicActionSource);
+
+            // interactor.AddInteractionSource(gatherActionSource);
+            // interactor.AddInteractionSource(pickupItemActionSource);
+            
             interactor.AddInteractionSource(character.characterEquipment);
             interactor.AddInteractionSource(character.characterCrafting);
         }

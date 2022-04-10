@@ -1,5 +1,6 @@
 ﻿using System;
 using FromScratch.Inventory;
+using Sirenix.Utilities;
 using UnityEngine;
 
 namespace FromScratch.Character.Modes
@@ -10,13 +11,11 @@ namespace FromScratch.Character.Modes
         private static readonly Vector3 Down = new Vector3(0, -1, 0); 
         private Item item;
         public Material ghostMaterial;
-        private Material originalMaterial;
         
         public GameObject reticulePrefab;
         
         private GameObject reticule;
         private GameObject ghost;
-        private Material[] originalMaterials;
 
         public override MovementType MovementType => MovementType.Overview;
 
@@ -34,36 +33,46 @@ namespace FromScratch.Character.Modes
         public void SetItemToPlace(Item item)
         {
             this.item = item;
-            SpawnGhost(item);
+            SpawnGhost();
         }
 
-        private void SpawnGhost(Item item1)
+        private void SpawnGhost()
         {
             //Instantiate and parent to reticule
             var instance = Instantiate(item.itemData.prefab, reticule.transform, false);
             instance.transform.localPosition = Vector3.zero;
-
-
-            //Change Material to Outline
-            var ghostRenderer = instance.GetComponent<Renderer>();
-            originalMaterials = ghostRenderer.materials;
-            var newMaterials = ghostRenderer.materials;
-            for (int x = 0; x < ghostRenderer.materials.Length; ++x)
-            {
-                newMaterials[x] = ghostMaterial;
-            }
-            ghostRenderer.materials = newMaterials;
             
-            //Disable any Collider
-            var colliders = instance.GetComponents<Collider>();
-            foreach (var coll in colliders)
-            {
-                coll.enabled = false;
-            }
+            Util.GameObjectUtils.TraverseHierarchy(instance, SetGhostMaterial);
+            Util.GameObjectUtils.TraverseHierarchy(instance, DisableColliders);
 
             ghost = instance;
         }
 
+        private void DisableColliders(GameObject target)
+        {
+            var colliders = target.GetComponents<Collider>();
+            foreach (var coll in colliders)
+            {
+                coll.enabled = false;
+            }
+        }
+
+        private void SetGhostMaterial(GameObject target)
+        {
+            var targetRenderer = target.GetComponent<Renderer>();
+            if (targetRenderer == null)
+            {
+                return; 
+            }
+
+            var newMaterials = targetRenderer.materials;
+            for (int x = 0; x < targetRenderer.materials.Length; ++x)
+            {
+                newMaterials[x] = ghostMaterial;
+            }
+            targetRenderer.materials = newMaterials;
+        }
+        
         private void KillGhost()
         {
             if (ghost != null)

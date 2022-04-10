@@ -2304,7 +2304,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   itemData: {fileID: 11400000, guid: 225d312e2bad80040bd32911434c2fe0, type: 2}
-  characterEquipment: {fileID: 5042490517923671476}
 --- !u!114 &1551504739
 MonoBehaviour:
   m_ObjectHideFlags: 0

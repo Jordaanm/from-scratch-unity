@@ -5,6 +5,8 @@ using UnityEngine;
 
 namespace FromScratch.Interaction
 {
+    
+    [Interaction(id = "pickup")]
     public class PickupItemAction: Interaction
     {
         public PickupItemAction()

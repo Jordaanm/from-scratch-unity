@@ -24,8 +24,6 @@ namespace FromScratch.Interaction
             var interactionTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(a => a.GetTypes().Where(t => t.IsDefined(typeof(InteractionAttribute), false)));
 
-            IEnumerable<Interaction> interactions = interactionTypes.Select<Type, Interaction>((Type type) => Activator.CreateInstance(type) as Interaction);
-
             Dictionary<string, Interaction> dictionary = new Dictionary<string, Interaction>();
             foreach (var interactionType in interactionTypes)
             {

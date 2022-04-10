@@ -18,7 +18,7 @@ namespace FromScratch.Crafting
 
         public override bool CanInteractWith(IInteractable interactable)
         {
-            return interactable.GetInteractionType() == InteractionType.CraftingStation;
+            return interactable?.GetInteractionType() == InteractionType.CraftingStation;
         }
         
         public override void Start(IInteractor interactor, IInteractable target)
