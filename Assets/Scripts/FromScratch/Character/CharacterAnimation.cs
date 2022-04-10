@@ -23,7 +23,11 @@ namespace FromScratch.Character
         private AnimationMixerPlayable mixerStatesInput;
 
         private List<ManagedAnimClip> clips = new List<ManagedAnimClip>();
+        private List<ManagedAnimState> states;
+
         private List<string> activeGUIDs;
+        
+        #region Initialization
         public void Setup(Animator animator)
         {
             activeGUIDs = new List<string>();
@@ -33,51 +37,60 @@ namespace FromScratch.Character
             {
                 animator.playableGraph.Destroy();
             }
-            if (this.graph.IsValid()) this.graph.Destroy();
-            //
+            if (graph.IsValid()) graph.Destroy();
+
             //Create the Graph
             graph = PlayableGraph.Create(GraphName);
             graph.SetTimeUpdateMode(DirectorUpdateMode.GameTime);
 
             //Create Mixer, Bind to the animator
             var playableOutput = AnimationPlayableOutput.Create(graph, GraphName, animator);
+            
+            SetupDefaultState(); // Setup Default Anim Controller
+            SetupAnimStates(); // Setup Overriding AnimController
+            SetupAnimClips(); // Setup Anim Clips
 
-            
-            // Setup Default Anim Controller
-            this.runtimeControllerPlayable = AnimatorControllerPlayable.Create(
-                this.graph,
-                this.runtimeController
-            );
-            this.mixerStatesInput = AnimationMixerPlayable.Create(this.graph, 1, true);
-            this.mixerStatesInput.ConnectInput(0, this.runtimeControllerPlayable, 0, 1f);
-            this.mixerStatesInput.SetInputWeight(0, 1f);
-            
-            // Setup Overriding AnimController
-            this.mixerStatesOutput = AnimationMixerPlayable.Create(this.graph, 1, true);
-            this.mixerStatesOutput.ConnectInput(0, this.mixerStatesInput, 0, 1f);
-            this.mixerStatesOutput.SetInputWeight(0, 1f);
-            
-            //Setup Anim Clips
-            this.clips = new List<ManagedAnimClip>();
-            
-            this.mixerGesturesInput = AnimationMixerPlayable.Create(this.graph, 1, true);
-            this.mixerGesturesInput.ConnectInput(0, this.mixerStatesOutput, 0, 1f);
-            this.mixerGesturesInput.SetInputWeight(0, 1f);
-
-            this.mixerGesturesOutput = AnimationMixerPlayable.Create(this.graph, 1, true);
-            this.mixerGesturesOutput.ConnectInput(0, this.mixerGesturesInput, 0, 1f);
-            this.mixerGesturesOutput.SetInputWeight(0, 1f);
-            
             playableOutput.SetSourcePlayable(mixerGesturesOutput, 0);
             // Play the graph
             graph.Play();
         }
 
-        void OnDisable()
+        private void SetupAnimClips()
         {
-            graph.Destroy();
+            clips = new List<ManagedAnimClip>();
+
+            mixerGesturesInput = AnimationMixerPlayable.Create(graph, 1, true);
+            mixerGesturesInput.ConnectInput(0, mixerStatesOutput, 0, 1f);
+            mixerGesturesInput.SetInputWeight(0, 1f);
+
+            mixerGesturesOutput = AnimationMixerPlayable.Create(graph, 1, true);
+            mixerGesturesOutput.ConnectInput(0, mixerGesturesInput, 0, 1f);
+            mixerGesturesOutput.SetInputWeight(0, 1f);
         }
 
+        private void SetupDefaultState()
+        {
+            runtimeControllerPlayable = AnimatorControllerPlayable.Create(
+                graph,
+                runtimeController
+            );
+            
+            mixerStatesInput = AnimationMixerPlayable.Create(graph, 1, true);
+            mixerStatesInput.ConnectInput(0, runtimeControllerPlayable, 0, 1f);
+            mixerStatesInput.SetInputWeight(0, 1f);
+        }
+
+        private void SetupAnimStates()
+        {
+            states = new List<ManagedAnimState>();
+            mixerStatesOutput = AnimationMixerPlayable.Create(graph, 1, true);
+            mixerStatesOutput.ConnectInput(0, mixerStatesInput, 0, 1f);
+            mixerStatesOutput.SetInputWeight(0, 1f);
+        }
+
+        #endregion
+        
+        #region Clips
         public Coroutine PlayClip(AnimationClip clip, Action callback = null)
         {
             Debug.Log("CharacterAnimation::PlayClip");
@@ -102,10 +115,77 @@ namespace FromScratch.Character
             yield return new WaitUntil(()=> !activeGUIDs.Contains(guid));
             callback?.Invoke();
         }
+        #endregion
+        
+        #region States
+        
+        public void SetState(RuntimeAnimatorController rtc, AvatarMask avatarMask,
+            float weight, float transition, float speed, int layer, bool syncTime,
+            params Parameter[] parameters) {
+            ManagedAnimState prevPlayable;
+            ManagedAnimState nextPlayable;
+
+            int insertIndex = this.GetSurroundingStates(layer,
+                out prevPlayable,
+                out nextPlayable
+            );
+
+            if (prevPlayable == null && nextPlayable == null) {
+                states.Add(ManagedAnimController.Create(
+                    rtc, avatarMask, layer,
+                    syncTime ? runtimeControllerPlayable.GetTime() : 0f,
+                    transition, speed, weight,
+                    ref graph,
+                    ref mixerStatesInput,
+                    ref mixerStatesOutput,
+                    parameters
+                ));
+            } else if (prevPlayable != null) {
+                if (prevPlayable.Layer == layer) {
+                    prevPlayable.StretchDuration(transition);
+                }
+
+                states.Insert(insertIndex, ManagedAnimController.CreateAfter(
+                    rtc, avatarMask, layer,
+                    syncTime ? runtimeControllerPlayable.GetTime() : 0f,
+                    transition, speed, weight,
+                    ref graph,
+                    prevPlayable,
+                    parameters
+                ));
+            } else if (nextPlayable != null) {
+                states.Insert(insertIndex, ManagedAnimController.CreateBefore(
+                    rtc, avatarMask, layer,
+                    syncTime ? runtimeControllerPlayable.GetTime() : 0f,
+                    transition, speed, weight,
+                    ref graph,
+                    nextPlayable,
+                    parameters
+                ));
+            }
+        }
+        
+        private int GetSurroundingStates(int layer, out ManagedAnimState prev, out ManagedAnimState next) {
+            prev = null;
+            next = null;
+
+            for (int i = 0; i < states.Count; ++i) {
+                if (states[i].Layer <= layer) {
+                    prev = states[i];
+                    return i;
+                }
+
+                next = states[i];
+            }
+
+            return 0;
+        }
+        
+        #endregion
 
         public void Update()
         {
-            for (int i = this.clips.Count - 1; i >= 0; --i)
+            for (int i = clips.Count - 1; i >= 0; --i)
             {
                 bool shouldRemove = clips[i].Update();
                 if (shouldRemove)
@@ -117,5 +197,11 @@ namespace FromScratch.Character
                 }
             }
         }
+
+        // void OnDisable()
+        // {
+        //     graph.Destroy();
+        // }
+
     }
 }
