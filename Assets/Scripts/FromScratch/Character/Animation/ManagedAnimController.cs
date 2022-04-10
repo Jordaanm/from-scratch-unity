@@ -30,8 +30,11 @@ namespace FromScratch.Character.Animation
                 runtimeController
             );
 
-            foreach (Parameter parameter in parameters) {
-                input1.SetFloat(parameter.id, parameter.value);
+            if (parameters != null)
+            {
+                foreach (Parameter parameter in parameters) {
+                    input1.SetFloat(parameter.id, parameter.value);
+                }
             }
 
             input1.SetTime(startTime);

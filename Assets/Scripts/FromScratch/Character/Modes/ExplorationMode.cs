@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace FromScratch.Character.Modes
@@ -80,8 +81,16 @@ namespace FromScratch.Character.Modes
             HandleJump();
             HandleAnimation();
         }
-        
-        
+
+        private void OnDisable()
+        {
+            Debug.Log("Exploration.OnDisable");
+            character.direction = Vector3.zero;
+            character.intendedDirection = Vector3.zero;
+            character.characterController.Move(Vector3.zero);
+        }
+
+
         private void HandleJump()
         {
             if (!isJumping && character.characterController.isGrounded && character.wantsToJump && !character.AreControlsDisabled)

@@ -12,7 +12,6 @@ namespace FromScratch.Character
     {
         public const float EPSILON = 0.01f;
         private const string GraphName = "FromScratch Character Graph";
-        
         private PlayableGraph graph;
         private RuntimeAnimatorController runtimeController;
         private AnimatorControllerPlayable runtimeControllerPlayable;
@@ -120,7 +119,7 @@ namespace FromScratch.Character
         #region States
         
         public void SetState(RuntimeAnimatorController rtc, AvatarMask avatarMask,
-            float weight, float transition, float speed, int layer, bool syncTime,
+            float weight = 1.0f, float transition = 0.0f, float speed = 1.0f, int layer = 0, bool syncTime = false,
             params Parameter[] parameters) {
             ManagedAnimState prevPlayable;
             ManagedAnimState nextPlayable;
@@ -166,39 +165,39 @@ namespace FromScratch.Character
         }
         
         public void SetState(AnimationClip animationClip, AvatarMask avatarMask,
-            float weight, float transition, float speed, int layer) {
+            float weight = 1.0f, float transition = 0.0f, float speed = 1.0f, int layer = 0) {
             ManagedAnimState prevPlayable;
             ManagedAnimState nextPlayable;
 
-            int insertIndex = this.GetSurroundingStates(layer,
+            int insertIndex = GetSurroundingStates(layer,
                 out prevPlayable,
                 out nextPlayable
             );
 
             if (prevPlayable == null && nextPlayable == null) {
-                this.states.Add(ManagedAnimStateClip.Create(
+                states.Add(ManagedAnimStateClip.Create(
                     animationClip, avatarMask, layer, 0f,
                     transition, speed, weight,
-                    ref this.graph,
-                    ref this.mixerStatesInput,
-                    ref this.mixerStatesOutput
+                    ref graph,
+                    ref mixerStatesInput,
+                    ref mixerStatesOutput
                 ));
             } else if (prevPlayable != null) {
                 if (prevPlayable.Layer == layer) {
                     prevPlayable.StretchDuration(transition);
                 }
 
-                this.states.Insert(insertIndex, ManagedAnimStateClip.CreateAfter(
+                states.Insert(insertIndex, ManagedAnimStateClip.CreateAfter(
                     animationClip, avatarMask, layer, 0f,
                     transition, speed, weight,
-                    ref this.graph,
+                    ref graph,
                     prevPlayable
                 ));
             } else if (nextPlayable != null) {
-                this.states.Insert(insertIndex, ManagedAnimStateClip.CreateBefore(
+                states.Insert(insertIndex, ManagedAnimStateClip.CreateBefore(
                     animationClip, avatarMask, layer, 0f,
                     transition, speed, weight,
-                    ref this.graph,
+                    ref graph,
                     nextPlayable
                 ));
             }
@@ -220,10 +219,38 @@ namespace FromScratch.Character
             return 0;
         }
         
+        
+        public void ResetState(float time, int layer) {
+            for (int i = 0; i < states.Count; ++i) {
+                if (states[i].Layer == layer) {
+                    states[i].OnExitState();
+                    states[i].Stop(time);
+                }
+            }
+        }
+
+        public void ChangeStateWeight(int layer, float weight) {
+            for (int i = states.Count - 1; i >= 0; --i) {
+                if (states[i].Layer == layer) {
+                    states[i].SetWeight(weight);
+                }
+            }
+        }
+        
         #endregion
 
         public void Update()
         {
+            for (int i = states.Count - 1; i >= 0; --i)
+            {
+                bool remove = states[i].Update();
+                if (remove)
+                {
+                    states[i].Destroy(this);
+                    states.RemoveAt(i);
+                }
+            }
+            
             for (int i = clips.Count - 1; i >= 0; --i)
             {
                 bool shouldRemove = clips[i].Update();

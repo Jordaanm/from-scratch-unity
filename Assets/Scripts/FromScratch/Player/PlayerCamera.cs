@@ -55,6 +55,7 @@ namespace FromScratch.Player
             {
                 case MovementType.OnFoot: return thirdPersonCamera;
                 case MovementType.Overview: return topDownCamera;
+                case MovementType.Stationary: return thirdPersonCamera;
                 default: return null;
             }
         }

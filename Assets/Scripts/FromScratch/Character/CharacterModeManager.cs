@@ -55,7 +55,12 @@ namespace FromScratch.Character
             }
 
             CharacterMode prevMode = activeMode;
-            previousModes.Push(prevMode);
+            if (prevMode != null)
+            {
+                prevMode.enabled = false;
+                previousModes.Push(prevMode);
+            }
+
             activeMode = modeToActivate;
             onModeChange.Invoke(prevMode, activeMode);
 
@@ -95,7 +100,6 @@ namespace FromScratch.Character
 
             currentMode.enabled = false;
             activeMode.enabled = true;
-            
             onModeChange.Invoke(currentMode, activeMode);
 
             return activeMode;

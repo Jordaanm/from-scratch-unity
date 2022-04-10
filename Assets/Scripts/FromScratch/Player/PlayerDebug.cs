@@ -1,4 +1,5 @@
 using FromScratch.Character;
+using FromScratch.Character.Modes;
 using FromScratch.Inventory;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,14 +11,18 @@ namespace FromScratch.Player
         [HideInInspector]
         public FromScratchPlayer player;
         public ItemData itemData;
-        public CharacterEquipment characterEquipment;
-
+        private CharacterEquipment characterEquipment;
+        private CharacterModeManager modeManager; 
+        
         private @FromScratchControls fromScratchControls;
         private InputAction debugAction;
         private void Awake()
         {
             player = GetComponent<FromScratchPlayer>();
             fromScratchControls = new FromScratchControls();
+
+            characterEquipment = player.GetComponentInChildren<CharacterEquipment>();
+            modeManager = player.GetComponentInChildren<CharacterModeManager>();
         }
 
         private void OnEnable()
@@ -37,11 +42,15 @@ namespace FromScratch.Player
         {
             Debug.Log("Debug");
 
-            if (characterEquipment != null && itemData != null)
+            if (modeManager != null)
             {
-                Item item = new Item(itemData);
-                player.character.characterInventory.Container.AddItem(item);
+                modeManager.SetActiveMode<SleepMode>();
             }
+            // if (characterEquipment != null && itemData != null)
+            // {
+            //     Item item = new Item(itemData);
+            //     player.character.characterInventory.Container.AddItem(item);
+            // }
         }
     }
 }

@@ -2030,6 +2030,7 @@ GameObject:
   - component: {fileID: 1343219741}
   - component: {fileID: 1343219742}
   - component: {fileID: 1343219743}
+  - component: {fileID: 1343219744}
   m_Layer: 7
   m_Name: Modes
   m_TagString: Untagged
@@ -2088,6 +2089,21 @@ MonoBehaviour:
   character: {fileID: 0}
   ghostMaterial: {fileID: 2100000, guid: 767df4406b58e0a419ead44fb561797d, type: 2}
   reticulePrefab: {fileID: 7682499880817777229, guid: 4099679a2cd7f9f4abafd52ba5f547e7, type: 3}
+--- !u!114 &1343219744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343219740}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4507d259cdd6464081fa521d5ee3bae6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 0}
+  animatorController: {fileID: 0}
+  clip: {fileID: 7400000, guid: 0c39389aa8687264c8d46ba53e6a123e, type: 3}
 --- !u!1 &1379273927
 GameObject:
   m_ObjectHideFlags: 0
