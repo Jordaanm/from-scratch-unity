@@ -11,3 +11,11 @@
     color: green;
     background-color: black;
 }
+
+#cheat-console #input TextInput {
+    background-color: black;
+}
+
+#cheat-console #input TextInput:focus {
+    border-width: 0;
+}

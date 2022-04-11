@@ -1,9 +1,11 @@
 ﻿using AssetReferences;
 using Cheats;
 using FromScratch.Player;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Task = System.Threading.Tasks.Task;
 
 namespace UI.HUD
 {
@@ -35,6 +37,7 @@ namespace UI.HUD
             //Get Text
             string text = input.text;
             cheatConsole.Execute(text, MainHUD.Instance.player);
+            input.value = "";
         }
 
         public override void Init(MainHUD mainHUD)
@@ -50,20 +53,23 @@ namespace UI.HUD
             root.style.bottom = 0;
         }
 
-        public void Open()
+        public async void Open()
         {
+            MainHUD.Instance.player.character.DisableControls();
             //Clear input field
             input.value = "";
             
             Show();
 
             //Focus input
-            input?.Focus();
+            await Task.Delay(100);
+            input.Focus();
         }
 
         public void Close()
         {
             Hide();
+            MainHUD.Instance.player.character.EnableControls();
         }
 
         public void Toggle()
