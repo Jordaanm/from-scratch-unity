@@ -1,6 +1,7 @@
 using FromScratch.Character;
 using FromScratch.Character.Modes;
 using FromScratch.Inventory;
+using UI.HUD;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -41,11 +42,12 @@ namespace FromScratch.Player
         private void OnDebug(InputAction.CallbackContext obj)
         {
             Debug.Log("Debug");
-
-            if (modeManager != null)
-            {
-                modeManager.SetActiveMode<SleepMode>();
-            }
+            MainHUD.Instance.GetHudElement<CheatConsoleHUD>().Toggle();
+            //
+            // if (modeManager != null)
+            // {
+            //     modeManager.SetActiveMode<SleepMode>();
+            // }
             // if (characterEquipment != null && itemData != null)
             // {
             //     Item item = new Item(itemData);

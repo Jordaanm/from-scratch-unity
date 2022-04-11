@@ -1983,6 +1983,8 @@ MonoBehaviour:
     value: {fileID: 9197481963319205126, guid: a1596864e19e46278d55d688f0f8f795, type: 3}
   - key: crafting-menu--ingredient
     value: {fileID: 9197481963319205126, guid: 2756ae0cc63840d7b3be16270cba169a, type: 3}
+  - key: console
+    value: {fileID: 9197481963319205126, guid: 5d589253d52b14a4397f4d20284dfb73, type: 3}
 --- !u!1 &1249399699
 GameObject:
   m_ObjectHideFlags: 0
@@ -2165,6 +2167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1503605189}
   - component: {fileID: 1503605190}
+  - component: {fileID: 1503605191}
   m_Layer: 0
   m_Name: Main HUD
   m_TagString: Untagged
@@ -2202,6 +2205,20 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 6a6f1a726f6fca04381ddfebf7c34513, type: 3}
   m_SortingOrder: 0
+--- !u!114 &1503605191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503605188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbbd385e876b4948b07a6647acf8332e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDoc: {fileID: 1503605190}
+  player: {fileID: 1551504739}
 --- !u!1 &1551504734
 GameObject:
   m_ObjectHideFlags: 0
