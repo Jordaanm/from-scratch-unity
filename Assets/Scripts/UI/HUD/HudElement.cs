@@ -8,14 +8,22 @@ namespace UI.HUD
     {
         protected VisualElement root;
         protected MainHUD hud;
+        protected bool isActive;
 
         public VisualElement Root => root;
+
+        public bool IsActive => isActive;
 
         public virtual void Init(MainHUD mainHUD)
         {
             hud = mainHUD;
             SetPosition();
             Show();
+        }
+
+        public virtual void Update()
+        {
+            
         }
 
         public virtual void SetPosition()
@@ -26,11 +34,13 @@ namespace UI.HUD
         public void Hide()
         {
             root.visible = false;
+            isActive = false;
         }
 
         public void Show()
         {
             root.visible = true;
+            isActive = true;
         }
     }
 }

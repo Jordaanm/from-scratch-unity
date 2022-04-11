@@ -1985,6 +1985,8 @@ MonoBehaviour:
     value: {fileID: 9197481963319205126, guid: 2756ae0cc63840d7b3be16270cba169a, type: 3}
   - key: console
     value: {fileID: 9197481963319205126, guid: 5d589253d52b14a4397f4d20284dfb73, type: 3}
+  - key: player-status
+    value: {fileID: 9197481963319205126, guid: 419d2063f60ec594cbed740d23e6daaf, type: 3}
 --- !u!1 &1249399699
 GameObject:
   m_ObjectHideFlags: 0
@@ -2234,6 +2236,7 @@ GameObject:
   - component: {fileID: 1551504739}
   - component: {fileID: 1551504740}
   - component: {fileID: 1551504741}
+  - component: {fileID: 1551504742}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -2364,6 +2367,26 @@ MonoBehaviour:
   mainCam: {fileID: 1823688466}
   thirdPersonCamera: {fileID: 381920714}
   topDownCamera: {fileID: 266978427}
+--- !u!114 &1551504742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551504734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81397aefbca544c9a4d3d7a5ac49c25a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hungerCurrent: 0
+  hungerMax: 0
+  thirstCurrent: 0
+  thirstMax: 0
+  healthCurrent: 0
+  healthMax: 0
+  staminaCurrent: 0
+  staminaMax: 0
 --- !u!1 &1600301466
 GameObject:
   m_ObjectHideFlags: 0
@@ -3337,6 +3360,7 @@ GameObject:
   - component: {fileID: 5042490517923671476}
   - component: {fileID: 5042490517923671477}
   - component: {fileID: 5042490517923671478}
+  - component: {fileID: 5042490517923671479}
   m_Layer: 7
   m_Name: Character
   m_TagString: Untagged
@@ -3367,6 +3391,7 @@ MonoBehaviour:
   intendedDirection: {x: 0, y: 0, z: 0}
   wantsToSprint: 0
   wantsToJump: 0
+  characterStatus: {fileID: 0}
 --- !u!95 &5042490517923671472
 Animator:
   serializedVersion: 3
@@ -3465,6 +3490,26 @@ MonoBehaviour:
   onModeChange:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5042490517923671479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5042490517923671470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81397aefbca544c9a4d3d7a5ac49c25a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hungerCurrent: 50
+  hungerMax: 100
+  thirstCurrent: 30
+  thirstMax: 100
+  healthCurrent: 90
+  healthMax: 100
+  staminaCurrent: 90
+  staminaMax: 100
 --- !u!1001 &6063941089536427252
 PrefabInstance:
   m_ObjectHideFlags: 0

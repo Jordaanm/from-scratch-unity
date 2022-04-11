@@ -23,8 +23,8 @@ namespace UI.HUD
             root = uiDoc.rootVisualElement;
             hudElements = new List<HudElement>();
 
-            var console = new CheatConsoleHUD();
-            AddHudElement(console);
+            AddHudElement(new CheatConsoleHUD());
+            AddHudElement(new PlayerStatusHUD());
         }
 
         private void AddHudElement(HudElement hudElement)
@@ -33,6 +33,14 @@ namespace UI.HUD
             var elementRoot = hudElement.Root;
             root.Add(elementRoot);
             hudElement.Init(this);
+        }
+
+        private void Update()
+        {
+            foreach (var hudElement in hudElements)
+            {
+                if(hudElement.IsActive) { hudElement.Update(); }
+            }
         }
 
         public T GetHudElement<T>() where T : HudElement

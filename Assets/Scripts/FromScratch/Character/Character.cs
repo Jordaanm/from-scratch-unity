@@ -35,7 +35,8 @@ namespace FromScratch.Character
         [HideInInspector] public Vector3 intendedDirection;
         [HideInInspector] public bool wantsToSprint;
         [HideInInspector] public bool wantsToJump;
-        
+        [HideInInspector] public CharacterStatus characterStatus;
+
         public Animator Animator => animator;
         public bool AreControlsDisabled => areControlsDisabled;
 
@@ -46,6 +47,8 @@ namespace FromScratch.Character
             characterEquipment = GetComponent<CharacterEquipment>();
             characterCrafting = GetComponent<CharacterCrafting>();
             modeManager = GetComponent<CharacterModeManager>();
+            characterStatus = GetComponent<CharacterStatus>();
+            
             areControlsDisabled = false;
         }
 

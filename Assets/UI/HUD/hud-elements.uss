@@ -19,3 +19,74 @@
 #cheat-console #input TextInput:focus {
     border-width: 0;
 }
+
+#player-status {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 20%;
+}
+
+#player-status #status-meters {
+    padding: 10px;
+    position: relative;
+}
+
+#player-status .status-meter {
+    position: absolute;
+    left: 0;
+    top: 0;    
+    padding: 0;
+    height: 30px;
+    width: 90%;
+    flex-direction: row;
+}
+
+#player-status .status-meter #label {
+    width: 25%;
+    align-content: center;
+    font-size: 18px;
+    padding-top: 4px;
+    color: white;
+}
+
+#player-status .status-meter #meter {
+    background-color: rgba(0,0,0,0.75);
+    flex-grow: 1;
+}
+
+#player-status #bar {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+}
+
+#player-status #health {
+    left: 0;
+    top: 0;
+}
+
+#player-status #health #bar {
+    background-color: red;
+}
+
+#player-status #hunger {
+    left: 0px;
+    top: 40px;
+}
+
+#player-status #hunger #bar {
+    background-color: green;
+}
+
+#player-status #thirst {
+    left: 0px;
+    top: 80px;
+}
+
+#player-status #thirst #bar {
+    background-color: blue;
+}

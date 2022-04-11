@@ -1,0 +1,25 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="hud-elements.uss" />
+    <ui:VisualElement name="player-status" class="full">
+        <ui:VisualElement name="status-meters">
+            <ui:VisualElement name="thirst" class="status-meter">
+                <ui:Label text="Thirst" display-tooltip-when-elided="true" name="label" />
+                <ui:VisualElement name="meter">
+                    <ui:VisualElement name="bar" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="hunger" class="status-meter">
+                <ui:Label text="Hunger" display-tooltip-when-elided="true" name="label" />
+                <ui:VisualElement name="meter">
+                    <ui:VisualElement name="bar" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="health" class="status-meter">
+                <ui:Label text="Health" display-tooltip-when-elided="true" name="label" />
+                <ui:VisualElement name="meter">
+                    <ui:VisualElement name="bar" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
