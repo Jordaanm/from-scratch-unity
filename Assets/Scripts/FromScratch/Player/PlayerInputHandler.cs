@@ -79,7 +79,14 @@ namespace FromScratch.Player
 
         private void OnSprint(InputAction.CallbackContext context)
         {
-            character.wantsToSprint = context.ReadValueAsButton();
+            if (context.ReadValueAsButton())
+            {
+                character.StartSprint();
+            }
+            else
+            {
+                character.StopSprint();
+            }
         }
 
         private void OnJump(InputAction.CallbackContext context)

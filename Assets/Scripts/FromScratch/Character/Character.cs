@@ -54,6 +54,23 @@ namespace FromScratch.Character
             areControlsDisabled = false;
         }
 
+        private void Start()
+        {
+            animator = GetComponent<Animator>();
+            characterAnimation.Setup(animator);
+        }
+
+        public void DisableControls()
+        {
+            direction = Vector3.zero;
+            areControlsDisabled = true;
+        }
+
+        public void EnableControls()
+        {
+            areControlsDisabled = false;
+        }
+
         public void Consume(ItemData item)
         {
             var consumptionData = item.consumptionData;
@@ -70,21 +87,16 @@ namespace FromScratch.Character
             });
         }
 
-        private void Start()
+        public void StartSprint()
         {
-            animator = GetComponent<Animator>();
-            characterAnimation.Setup(animator);
+            wantsToSprint = true;
+            characterStatus.isStaminaDraining = true;
         }
 
-        public void DisableControls()
+        public void StopSprint()
         {
-            direction = Vector3.zero;
-            areControlsDisabled = true;
-        }
-
-        public void EnableControls()
-        {
-            areControlsDisabled = false;
+            wantsToSprint = false;
+            characterStatus.isStaminaDraining = false;
         }
     }
 }

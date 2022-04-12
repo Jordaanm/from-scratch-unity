@@ -35,6 +35,17 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
+            <ui:VisualElement name="stamina" class="status-meter">
+                <ui:Label text="Stamina" display-tooltip-when-elided="true" name="label" />
+                <ui:VisualElement name="meter">
+                    <ui:VisualElement name="bar">
+                        <ui:VisualElement class="segment" />
+                        <ui:VisualElement class="segment" />
+                        <ui:VisualElement class="segment" />
+                        <ui:VisualElement class="segment" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

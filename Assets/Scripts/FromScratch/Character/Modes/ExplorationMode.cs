@@ -75,11 +75,28 @@ namespace FromScratch.Character.Modes
                 HandleDirection();
                 HandleRotation();
             }
-            //Handle Gravity after movement so that Gravity has an accurate reading for characterController.isGrounded
+            
+            HandleStamina();
             HandleMovement();
+            //Handle Gravity after movement so that Gravity has an accurate reading for characterController.isGrounded
             HandleGravity();
             HandleJump();
             HandleAnimation();
+        }
+
+        private void HandleStamina()
+        {
+            if (character.wantsToSprint && character.direction.sqrMagnitude > 0)
+            {
+                character.characterStatus.isStaminaDraining = true;
+            } else if (character.wantsToJump && !character.characterController.isGrounded)
+            {
+                character.characterStatus.isStaminaDraining = true;
+            }
+            else
+            {
+                character.characterStatus.isStaminaDraining = false;
+            }
         }
 
         private void OnDisable()
