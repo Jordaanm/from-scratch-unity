@@ -1,4 +1,6 @@
 using System;
+using System.Reflection;
+using FromScratch.Inventory;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -50,6 +52,22 @@ namespace FromScratch.Character
             characterStatus = GetComponent<CharacterStatus>();
             
             areControlsDisabled = false;
+        }
+
+        public void Consume(ItemData item)
+        {
+            var consumptionData = item.consumptionData;
+            if (item.usageType != ItemData.UsageType.Consume || consumptionData == null)
+            {
+                return; 
+            }
+
+            MethodInfo effect = ConsumptionEffects.Get(consumptionData.consumptionEffect);
+            effect?.Invoke(null, new object[]
+            {
+                this,
+                item
+            });
         }
 
         private void Start()

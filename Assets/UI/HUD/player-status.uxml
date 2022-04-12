@@ -5,19 +5,34 @@
             <ui:VisualElement name="thirst" class="status-meter">
                 <ui:Label text="Thirst" display-tooltip-when-elided="true" name="label" />
                 <ui:VisualElement name="meter">
-                    <ui:VisualElement name="bar" />
+                    <ui:VisualElement name="bar">
+                        <ui:VisualElement class="segment" />
+                        <ui:VisualElement class="segment" />
+                        <ui:VisualElement class="segment" />
+                        <ui:VisualElement class="segment" />
+                    </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="hunger" class="status-meter">
                 <ui:Label text="Hunger" display-tooltip-when-elided="true" name="label" />
                 <ui:VisualElement name="meter">
-                    <ui:VisualElement name="bar" />
+                    <ui:VisualElement name="bar">
+                        <ui:VisualElement class="segment" />
+                        <ui:VisualElement class="segment" />
+                        <ui:VisualElement class="segment" />
+                        <ui:VisualElement class="segment" />
+                    </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="health" class="status-meter">
                 <ui:Label text="Health" display-tooltip-when-elided="true" name="label" />
                 <ui:VisualElement name="meter">
-                    <ui:VisualElement name="bar" />
+                    <ui:VisualElement name="bar">
+                        <ui:VisualElement class="segment" />
+                        <ui:VisualElement class="segment" />
+                        <ui:VisualElement class="segment" />
+                        <ui:VisualElement class="segment" />
+                    </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

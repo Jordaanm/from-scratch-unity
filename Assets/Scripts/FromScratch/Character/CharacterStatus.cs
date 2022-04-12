@@ -17,7 +17,7 @@ namespace FromScratch.Character
 
         private void Update()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

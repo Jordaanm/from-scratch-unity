@@ -199,7 +199,7 @@ namespace UI
                 case ItemData.UsageType.Consume:
                 {
                     actionList.Add(new ContextMenuAction("consume", "Consume", () => 
-                        player.character.characterInventory.Consume(item)
+                        player.character.Consume(item.itemData)
                     ));
                     break;
                 }

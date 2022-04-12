@@ -56,6 +56,9 @@ namespace FromScratch.Inventory
 
         [PreviewField, AssetsOnly]
         public GameObject prefab;
+
+        public  ConsumptionData consumptionData = new ConsumptionData();
+
         #endregion Use Properties
 
         public bool IsUsable => usageType != UsageType.None;
