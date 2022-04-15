@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -95,6 +96,24 @@ namespace FromScratch.Interaction
         
         public List<IInteractable> AllNearby() {
             return nearbyInteractables;
+        }
+
+        public void SetInteractables(List<GameObject> gameObjects)
+        {
+            List<IInteractable> interactables = gameObjects
+                .Select(go => go.GetComponent<IInteractable>())
+                .ToList()
+                .FindAll(x => x != null);
+
+            SetInteractables(interactables);
+        }
+
+        public void SetInteractables(List<IInteractable> interactables)
+        {
+            nearbyInteractables.Clear();
+            nearbyInteractables.AddRange(interactables);
+            
+            OnChange.Invoke();
         }
 
         public void AddInteractable(GameObject gameObject)

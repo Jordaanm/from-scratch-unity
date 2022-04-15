@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using FromScratch.Interaction;
 using UnityEngine;
 
 namespace FromScratch.Player
 {
-    public class PlayerInteraction: MonoBehaviour, IInteractor
+    public class CharacterInteraction: MonoBehaviour, IInteractor
     {
+        public const float InteractionRadius = 20f;
         private Interactor interactor;
         // private GatherActionSource gatherActionSource;
         // private PickupItemActionSource pickupItemActionSource;
@@ -53,21 +56,41 @@ namespace FromScratch.Player
             action.Start(this, target);
         }
 
+        private void Update()
+        {
+            Collider[] hitColliders = new Collider[10];
+            int numColliders = Physics.OverlapSphereNonAlloc(character.transform.position, InteractionRadius, hitColliders,
+                Physics.AllLayers, QueryTriggerInteraction.Collide);
+
+            List<IInteractable> foundInteractables = new List<IInteractable>();
+            for (int i = 0; i < numColliders; ++i)
+            {
+                IInteractable interactable = hitColliders[i].gameObject.GetComponent<IInteractable>();
+                if (interactable != null)
+                {
+                    foundInteractables.Add(interactable);
+                }
+            }
+
+            if (foundInteractables.Count > 0)
+            {
+                interactor.SetInteractables(foundInteractables);
+            }
+        }
+
         private IInteractable DetermineTarget()
         {
             return interactor.FindClosestTo(transform);
         }
-        
-        public void OnTriggerEnter(Collider other)
-        {
-            Debug.LogFormat("Interactor::TriggerEntered {0}", other.name);
-            interactor.AddInteractable(other.gameObject);
-        }
 
-        public void OnTriggerExit(Collider other)
+        public IInteractable GetNearestInteractable()
         {
-            Debug.LogFormat("Interactor::TriggerExited {0}", other.name);
-            interactor.RemoveInteractable(other.gameObject);
+            var charPos = character.transform.position;
+            return interactor.AllNearby()
+                .OrderBy(x => Vector3.Distance(x.GetGameObject().transform.position, charPos))
+                .ToList()[0];
         }
+        
+        
     }
 }
