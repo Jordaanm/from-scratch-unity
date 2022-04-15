@@ -25,6 +25,7 @@ namespace UI.HUD
 
             AddHudElement(new CheatConsoleHUD());
             AddHudElement(new PlayerStatusHUD());
+            AddHudElement(new InteractionMarkerHUD());
         }
 
         private void AddHudElement(HudElement hudElement)

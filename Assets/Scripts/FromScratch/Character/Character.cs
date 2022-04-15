@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using FromScratch.Inventory;
+using FromScratch.Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -28,6 +29,9 @@ namespace FromScratch.Character
         [BoxGroup("Character"), HideInInspector]
         public CharacterModeManager modeManager;
 
+        [BoxGroup("Character"), HideInInspector]
+        public CharacterInteraction characterInteration;
+
         private bool areControlsDisabled;
         
         
@@ -50,14 +54,15 @@ namespace FromScratch.Character
             characterCrafting = GetComponent<CharacterCrafting>();
             modeManager = GetComponent<CharacterModeManager>();
             characterStatus = GetComponent<CharacterStatus>();
+            characterInteration = GetComponent<CharacterInteraction>();
+            animator = GetComponent<Animator>();
             
             areControlsDisabled = false;
         }
 
         private void Start()
         {
-            animator = GetComponent<Animator>();
-            characterAnimation.Setup(animator);
+            characterAnimation.Setup(this, animator);
         }
 
         public void DisableControls()

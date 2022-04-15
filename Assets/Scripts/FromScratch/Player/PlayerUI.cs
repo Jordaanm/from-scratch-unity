@@ -1,3 +1,5 @@
+using System;
+using FromScratch.Interaction;
 using UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -24,6 +26,20 @@ namespace FromScratch.Player
             pauseMenu.AddSubmenu(new EquipmentMenu(player));
             pauseMenu.AddSubmenu(new InventoryMenu(player));
             pauseMenu.AddSubmenu(new CraftingSubmenu(player));
+        }
+
+        private void Update()
+        {
+            Debug.Log("PlayerUI::Update");
+            IInteractable interactable = player.character.characterInteration.GetNearestInteractable();
+            if (interactable != null)
+            {
+                InteractionMarker.Instance.Show(interactable.GetGameObject());
+            }
+            else
+            {
+                InteractionMarker.Instance.Hide();
+            }
         }
 
         private void OnEnable()

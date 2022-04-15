@@ -1,0 +1,18 @@
+@import url("unity-theme://default");
+
+@import url("/Assets/UI/common.uss");
+@import url("/Assets/UI/util.uss");
+@import url("/Assets/UI/Layer Templates/LayerManager.uss");
+@import url("/Assets/UI/Layer Templates/LayerTemplate.uss");
+@import url("/Assets/UI/HUD/hud-elements.uss");
+@import url("/Assets/UI/MultiScreenMenu.uss");
+@import url("/Assets/UI/Equipment/EquipmentMenu.uss");
+@import url("/Assets/UI/Crafting/CraftingMenu.uss");
+@import url("/Assets/UI/Inventory/ItemContainerMenu.uss");
+@import url("/Assets/UI/Layer Templates/context-menu.uss");
+
+
+
+
+
+VisualElement {}

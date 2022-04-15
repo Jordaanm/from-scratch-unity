@@ -13,7 +13,7 @@ namespace FromScratch.Player
     public class PlayerInputHandler: MonoBehaviour
     {
         private FromScratchPlayer player;
-        private PlayerInteraction playerInteraction;
+        private CharacterInteraction characterInteraction;
         private Character.Character character;
         private Camera playerCamera;
         
@@ -27,7 +27,7 @@ namespace FromScratch.Player
         private void Awake()
         {
             this.player = GetComponent<FromScratchPlayer>();
-            this.playerInteraction = GetComponentInChildren<PlayerInteraction>();
+            this.characterInteraction = GetComponentInChildren<CharacterInteraction>();
             character = player.GetComponentInChildren<Character.Character>();
 
             fromScratchControls = new FromScratchControls();
@@ -46,6 +46,7 @@ namespace FromScratch.Player
             
             interactAction.Enable();
             interactAction.performed += OnInteract;
+            interactAction.canceled += OnInteractCanceled;
 
             cancelAction.Enable();
             cancelAction.performed += OnCancel;
@@ -68,6 +69,7 @@ namespace FromScratch.Player
 
             interactAction.Disable();
             interactAction.performed -= OnInteract;
+            interactAction.canceled -= OnInteractCanceled;
             
             cancelAction.Disable();
             cancelAction.performed -= OnCancel;
@@ -102,7 +104,7 @@ namespace FromScratch.Player
             if (movementType == MovementType.OnFoot || movementType == MovementType.Vehicle)
             {
                 Debug.Log("PlayerInputHandler::OnInteract");
-                playerInteraction.Activate();
+                characterInteraction.StartActivation();
             }
             
             if (movementType == MovementType.Overview)
@@ -112,6 +114,14 @@ namespace FromScratch.Player
                 {
                     placementMode.ConfirmItemPlacement();
                 }
+            }
+        }
+        private void OnInteractCanceled(InputAction.CallbackContext obj)
+        {
+            MovementType movementType = character.modeManager.MovementType;
+            if (movementType == MovementType.OnFoot || movementType == MovementType.Vehicle)
+            {
+                characterInteraction.CancelActivation();
             }
         }
         
