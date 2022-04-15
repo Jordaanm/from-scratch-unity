@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8409402220249226314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8409402220249226309}
+  - component: {fileID: 8409402220249226308}
+  m_Layer: 0
+  m_Name: Databases
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8409402220249226309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8409402220249226314}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8409402220837714874}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8409402220249226308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8409402220249226314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 364fd5aa7c2940fea9be4c6d090fe1d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipes: {fileID: 11400000, guid: d23d13bea80feed4d97f649bb0a5c0cb, type: 2}
+  equipment: {fileID: 11400000, guid: 24e91a68205458541ba53015354b7973, type: 2}
+  items: {fileID: 11400000, guid: de9ad8977d992df428bf2fdb55fd2be5, type: 2}
+--- !u!1 &8409402220444149556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8409402220444149559}
+  - component: {fileID: 8409402220444149558}
+  m_Layer: 0
+  m_Name: Asset References
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8409402220444149559
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8409402220444149556}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.6947107, y: -1.7433221, z: -1.3589172}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8409402220837714874}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8409402220444149558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8409402220444149556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9413908ab76f46cb818d9783ca0f37d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entries:
+  - key: multiscreen
+    value: {fileID: 9197481963319205126, guid: 7dcc95b82928466fa2d993cdeeaa1558, type: 3}
+  - key: inventory-menu
+    value: {fileID: 9197481963319205126, guid: e733e3ff143b4f90b81812e7980bf827, type: 3}
+  - key: inventory-menu__item
+    value: {fileID: 9197481963319205126, guid: 003bfc736e39437ca5faf7ecb27a4ea4, type: 3}
+  - key: lt-popout
+    value: {fileID: 9197481963319205126, guid: 6b8b0093c72749abb59424f28a32d6b0, type: 3}
+  - key: content-menu-action
+    value: {fileID: 9197481963319205126, guid: 85dcea14d5c9dd74abbf5d5cc6be7156, type: 3}
+  - key: equipment-menu
+    value: {fileID: 9197481963319205126, guid: 39909489f0d0f384da279c290b6556a9, type: 3}
+  - key: equipment-menu-slot
+    value: {fileID: 9197481963319205126, guid: 9be806f6dfd5a5645a1e19332c891e76, type: 3}
+  - key: crafting-menu
+    value: {fileID: 9197481963319205126, guid: ac7f057616584b845afe7888458d06cd, type: 3}
+  - key: crafting-menu--item
+    value: {fileID: 9197481963319205126, guid: 41e0b2d7dece454c8795592162e0424c, type: 3}
+  - key: crafting-menu--details-panel
+    value: {fileID: 9197481963319205126, guid: a1596864e19e46278d55d688f0f8f795, type: 3}
+  - key: crafting-menu--ingredient
+    value: {fileID: 9197481963319205126, guid: 2756ae0cc63840d7b3be16270cba169a, type: 3}
+  - key: console
+    value: {fileID: 9197481963319205126, guid: 5d589253d52b14a4397f4d20284dfb73, type: 3}
+  - key: player-status
+    value: {fileID: 9197481963319205126, guid: 419d2063f60ec594cbed740d23e6daaf, type: 3}
+  - key: interaction-marker
+    value: {fileID: 9197481963319205126, guid: eb3609f3871c6b847bc2cf76149139d7, type: 3}
+--- !u!1 &8409402220837714875
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8409402220837714874}
+  m_Layer: 0
+  m_Name: Data
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8409402220837714874
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8409402220837714875}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.684876, y: 0.23169708, z: -5.154384}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8409402220444149559}
+  - {fileID: 8409402220249226309}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
