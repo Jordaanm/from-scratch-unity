@@ -12,12 +12,12 @@ namespace FromScratch.Interaction
         public string Label => _label;
         public string ID => _id;
 
-        public virtual bool CanInteractWith(IInteractable interactable)
+        public virtual bool CanInteractWith(Interactable interactable)
         {
             return false;
         }
 
-        public abstract void Start(IInteractor interactor, IInteractable target);
+        public abstract void Start(IInteractor interactor, Interactable target);
 
         private static Dictionary<string, Interaction> GetAllInteractions()
         {

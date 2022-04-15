@@ -13,7 +13,7 @@ namespace FromScratch.Interaction
             }
         }
         
-        public List<Interaction> GetActionsForTarget(IInteractable target)
+        public List<Interaction> GetActionsForTarget(Interactable target)
         {
             if (target != null)
             {

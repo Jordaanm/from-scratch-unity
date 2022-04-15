@@ -4,6 +4,6 @@ namespace FromScratch.Interaction
 {
     public interface IInteractionSource
     {
-        List<Interaction> GetActionsForTarget(IInteractable target);
+        List<Interaction> GetActionsForTarget(Interactable target);
     }
 }

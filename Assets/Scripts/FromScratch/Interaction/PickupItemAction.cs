@@ -15,22 +15,20 @@ namespace FromScratch.Interaction
             _label = "Pick Up";
         }
         
-        public override bool CanInteractWith(IInteractable interactable)
+        public override bool CanInteractWith(Interactable interactable)
         {
             return interactable.GetInteractionType() == InteractionType.Pickup;
         } 
         
-        public override void Start(IInteractor interactor, IInteractable target)
+        public override void Start(IInteractor interactor, Interactable target)
         {
             GameObject interactorGO = interactor.GetGameObject();
-            GameObject targetGO = target.GetGameObject();
+            GameObject targetGO = target.gameObject;
             
             CharacterInventory charInventory = interactorGO.GetComponent<CharacterInventory>();
 
             ItemData itemData = targetGO.GetComponent<Pickup>().item;
 
-            interactor.RemoveInteractable(target);
-            
             GameObject.Destroy(targetGO);
             charInventory.Container.AddItem(new Item(itemData));
         }

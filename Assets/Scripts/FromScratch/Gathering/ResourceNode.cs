@@ -8,7 +8,7 @@ namespace FromScratch.Gathering
     [System.Serializable]
     public class ResourceNodeEvent : UnityEvent { }
 
-    public class ResourceNode: MonoBehaviour, IInteractable
+    public class ResourceNode: Interactable
     {
         public ResourceNodeInfo resourceNodeInfo;
         public InteractionType interactionType = InteractionType.ResourceNode;
@@ -63,14 +63,9 @@ namespace FromScratch.Gathering
             host.transform.localScale = host.transform.localScale * 0.8f;
         }
 
-        public InteractionType GetInteractionType()
+        public override InteractionType GetInteractionType()
         {
             return interactionType;
-        }
-
-        public GameObject GetGameObject()
-        {
-            return gameObject;
         }
     }
 }

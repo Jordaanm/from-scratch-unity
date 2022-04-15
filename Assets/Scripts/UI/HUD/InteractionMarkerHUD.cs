@@ -14,7 +14,7 @@ namespace UI.HUD
         private Character character;
         private Camera camera;
 
-        private GameObject target;
+        private Interactable target;
         
         private const string visualTreeAssetKey = "interaction-marker";
         private VisualElement veIndicator;
@@ -36,14 +36,20 @@ namespace UI.HUD
         
         public override void Update()
         {
-            IInteractable interactable = character.characterInteration.GetNearestInteractable();
-            if (interactable != null)
+            Interactable interactable = character.characterInteration.GetNearestInteractable();
+            Interaction interaction = character.characterInteration.GetDefaultAction(interactable);
+            if (interactable != null && interaction != null)
             {
-                AttachTo(interactable.GetGameObject());
+                AttachTo(interactable);
             }
             else
             {
                 Detach();
+            }
+
+            if (target == null)
+            {
+                return;
             }
 
             var charInteraction = character.characterInteration;
@@ -67,12 +73,20 @@ namespace UI.HUD
             }
         }
 
-        void AttachTo(GameObject newTarget)
+        void AttachTo(Interactable newTarget)
         {
             if (newTarget == target)
             {
                 
             }
+            else
+            {
+                //Update Label
+                Interaction interaction = character.characterInteration.GetDefaultAction(newTarget);
+                veLabel.text = interaction?.Label ?? "";
+            }
+
+            target = newTarget;
             
             var screenPoint = camera.WorldToScreenPoint(newTarget.transform.position);
             root.visible = true;
@@ -85,6 +99,7 @@ namespace UI.HUD
         void Detach()
         {
             root.visible = false;
+            veLabel.text = "";
         }
     }
 }

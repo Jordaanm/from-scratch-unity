@@ -16,15 +16,15 @@ namespace FromScratch.Interaction
         }
         
         
-        public override bool CanInteractWith(IInteractable interactable)
+        public override bool CanInteractWith(Interactable interactable)
         {
             return interactable.GetInteractionType() == InteractionType.ResourceNode;
         } 
         
-        public override void Start(IInteractor interactor, IInteractable target)
+        public override void Start(IInteractor interactor, Interactable target)
         {
             GameObject interactorGameObject = interactor.GetGameObject();
-            GameObject targetGameObject = target.GetGameObject();
+            GameObject targetGameObject = target.gameObject;
             
             Character.Character character = interactorGameObject.GetComponent<Character.Character>();
             CharacterAnimation charAnimation = interactorGameObject.GetComponent<CharacterAnimation>();

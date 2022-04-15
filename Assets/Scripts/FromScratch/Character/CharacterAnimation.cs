@@ -58,11 +58,11 @@ namespace FromScratch.Character
         {
             clips = new List<ManagedAnimClip>();
 
-            mixerGesturesInput = AnimationMixerPlayable.Create(graph, 1, true);
+            mixerGesturesInput = AnimationMixerPlayable.Create(graph, 1);
             mixerGesturesInput.ConnectInput(0, mixerStatesOutput, 0, 1f);
             mixerGesturesInput.SetInputWeight(0, 1f);
 
-            mixerGesturesOutput = AnimationMixerPlayable.Create(graph, 1, true);
+            mixerGesturesOutput = AnimationMixerPlayable.Create(graph, 1);
             mixerGesturesOutput.ConnectInput(0, mixerGesturesInput, 0, 1f);
             mixerGesturesOutput.SetInputWeight(0, 1f);
         }
@@ -74,7 +74,7 @@ namespace FromScratch.Character
                 runtimeController
             );
             
-            mixerStatesInput = AnimationMixerPlayable.Create(graph, 1, true);
+            mixerStatesInput = AnimationMixerPlayable.Create(graph, 1);
             mixerStatesInput.ConnectInput(0, runtimeControllerPlayable, 0, 1f);
             mixerStatesInput.SetInputWeight(0, 1f);
         }
@@ -82,7 +82,7 @@ namespace FromScratch.Character
         private void SetupAnimStates()
         {
             states = new List<ManagedAnimState>();
-            mixerStatesOutput = AnimationMixerPlayable.Create(graph, 1, true);
+            mixerStatesOutput = AnimationMixerPlayable.Create(graph, 1);
             mixerStatesOutput.ConnectInput(0, mixerStatesInput, 0, 1f);
             mixerStatesOutput.SetInputWeight(0, 1f);
         }
@@ -264,10 +264,10 @@ namespace FromScratch.Character
             }
         }
 
-        // void OnDisable()
-        // {
-        //     graph.Destroy();
-        // }
+        void OnDisable()
+        {
+            graph.Destroy();
+        }
 
     }
 }

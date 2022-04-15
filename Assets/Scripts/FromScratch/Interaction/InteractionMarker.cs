@@ -8,7 +8,7 @@ namespace FromScratch.Interaction
     public class InteractionMarker: MonoSingleton<InteractionMarker>
     {
         public FromScratchPlayer player;
-        public GameObject attachedTo;
+        public Interactable attachedTo;
         
         private void Update()
         {
@@ -24,7 +24,7 @@ namespace FromScratch.Interaction
             }
         }
 
-        public void Show(GameObject target)
+        public void Show(Interactable target)
         {
             if (attachedTo == target)
             {

@@ -3,10 +3,9 @@ using UnityEngine;
 
 namespace FromScratch.Interaction
 {
-    public class Pickup: MonoBehaviour, IInteractable
+    public class Pickup: Interactable
     {
         public ItemData item;
-        public InteractionType GetInteractionType() => InteractionType.Pickup;
-        public GameObject GetGameObject() => gameObject;
+        public override InteractionType GetInteractionType() => InteractionType.Pickup;
     }
 }

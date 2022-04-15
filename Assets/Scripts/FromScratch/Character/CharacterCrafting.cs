@@ -17,12 +17,15 @@ namespace FromScratch.Character
         private CharacterEquipment characterEquipment;
         
         private List<Recipe> knownRecipes = new List<Recipe>();
+        private Interaction.Interaction craftingTableInteraction;
+
 
         private void Awake()
         {
             character = GetComponent<Character>();
             characterInventory = GetComponent<CharacterInventory>();
             characterEquipment = GetComponent<CharacterEquipment>();
+            craftingTableInteraction = Interaction.Interaction.GetInteraction("craftingtable");
         }
 
         public bool CanCraft(Recipe recipe)
@@ -83,11 +86,11 @@ namespace FromScratch.Character
             return count >= ingredient.amount;
         }
 
-        public List<Interaction.Interaction> GetActionsForTarget(IInteractable target)
+        public List<Interaction.Interaction> GetActionsForTarget(Interactable target)
         {
             return new List<Interaction.Interaction>
             {
-                Interaction.Interaction.GetInteraction("craftingtable")
+                craftingTableInteraction
             };
         }
     }

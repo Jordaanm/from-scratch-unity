@@ -30,16 +30,15 @@ namespace FromScratch.Player
 
         private void Update()
         {
-            Debug.Log("PlayerUI::Update");
-            IInteractable interactable = player.character.characterInteration.GetNearestInteractable();
-            if (interactable != null)
-            {
-                InteractionMarker.Instance.Show(interactable.GetGameObject());
-            }
-            else
-            {
-                InteractionMarker.Instance.Hide();
-            }
+            // Interactable interactable = player.character.characterInteration.GetNearestInteractable(true);
+            // if (interactable != null)
+            // {
+            //     InteractionMarker.Instance.Show(interactable);
+            // }
+            // else
+            // {
+            //     InteractionMarker.Instance.Hide();
+            // }
         }
 
         private void OnEnable()

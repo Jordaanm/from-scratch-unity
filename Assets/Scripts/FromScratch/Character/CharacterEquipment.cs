@@ -134,7 +134,7 @@ namespace FromScratch.Character
             }
         }
 
-        public List<Interaction.Interaction> GetActionsForTarget(IInteractable target)
+        public List<Interaction.Interaction> GetActionsForTarget(Interactable target)
         {
             return equipped.Values.ToList()
                 .FindAll(x => x != null) //Filter out empty slots

@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace FromScratch.Interaction
 {
-    public class GenericInteractable: MonoBehaviour, IInteractable
+    public class GenericInteractable: Interactable
     {
         [EnumToggleButtons]
         public InteractionType interactionType = InteractionType.Other;
-        public InteractionType GetInteractionType()
+        public override InteractionType GetInteractionType()
         {
             return interactionType;
         }

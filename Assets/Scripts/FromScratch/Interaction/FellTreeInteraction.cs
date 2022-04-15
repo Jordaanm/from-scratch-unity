@@ -16,16 +16,16 @@ namespace FromScratch.Interaction
         }
         
                 
-        public override bool CanInteractWith(IInteractable interactable)
+        public override bool CanInteractWith(Interactable interactable)
         {
-            var tree = interactable.GetGameObject().GetComponent<FromScratchTree>();
+            var tree = interactable.gameObject.GetComponent<FromScratchTree>();
             return tree != null;
         } 
         
-        public override async void Start(IInteractor interactor, IInteractable target)
+        public override async void Start(IInteractor interactor, Interactable target)
         {
             GameObject interactorGO = interactor.GetGameObject();
-            GameObject targetGO = target.GetGameObject();
+            GameObject targetGO = target.gameObject;
             
             Character.Character character = interactorGO.GetComponent<Character.Character>();
             CharacterAnimation charAnimation = interactorGO.GetComponent<CharacterAnimation>();

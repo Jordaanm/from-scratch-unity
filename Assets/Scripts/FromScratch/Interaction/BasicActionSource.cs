@@ -17,7 +17,7 @@ namespace FromScratch.Interaction
             };
         }
         
-        public List<Interaction> GetActionsForTarget(IInteractable target)
+        public List<Interaction> GetActionsForTarget(Interactable target)
         {
             return interactions.FindAll(x => x.CanInteractWith(target));
         }

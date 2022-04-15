@@ -16,15 +16,15 @@ namespace FromScratch.Crafting
             _label = "Craft at Station";
         }
 
-        public override bool CanInteractWith(IInteractable interactable)
+        public override bool CanInteractWith(Interactable interactable)
         {
-            return interactable?.GetInteractionType() == InteractionType.CraftingStation;
+            return interactable.GetInteractionType() == InteractionType.CraftingStation;
         }
         
-        public override void Start(IInteractor interactor, IInteractable target)
+        public override void Start(IInteractor interactor, Interactable target)
         {
             var player = interactor.GetGameObject().GetComponentInParent<FromScratchPlayer>();
-            var craftingTable = target.GetGameObject().GetComponent<CraftingTable>();
+            var craftingTable = target.gameObject.GetComponent<CraftingTable>();
             var menu = new CraftingFullscreenMenu(craftingTable).SetPlayer(player);
             FullscreenMenuHost.Instance.OpenMenu(menu);
             // menu.OpenForPlayer(player);

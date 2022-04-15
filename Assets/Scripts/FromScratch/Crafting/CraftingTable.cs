@@ -16,19 +16,14 @@ namespace FromScratch.Crafting
         Electronics = 1 << 5,
     }
     
-    public class CraftingTable : MonoBehaviour, IInteractable
+    public class CraftingTable : Interactable
     {
         [EnumToggleButtons]
         public CraftingStationCapability capabilities;
         
-        public InteractionType GetInteractionType()
+        public override InteractionType GetInteractionType()
         {
             return InteractionType.CraftingStation;
-        }
-
-        public GameObject GetGameObject()
-        {
-            return gameObject;
         }
     }
 }

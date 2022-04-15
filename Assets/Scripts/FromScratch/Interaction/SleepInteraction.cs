@@ -14,16 +14,16 @@ namespace FromScratch.Interaction
             _label = "Sleep";
         }
 
-        public override bool CanInteractWith(IInteractable interactable)
+        public override bool CanInteractWith(Interactable interactable)
         {
-            var bed = interactable.GetGameObject().GetComponent<Bed>();
+            var bed = interactable.gameObject.GetComponent<Bed>();
             return bed != null;
         }
 
-        public override void Start(IInteractor interactor, IInteractable target)
+        public override void Start(IInteractor interactor, Interactable target)
         {
             GameObject interactorGO = interactor.GetGameObject();
-            GameObject targetGO = target.GetGameObject();
+            GameObject targetGO = target.gameObject;
 
             var bed = targetGO.GetComponent<Bed>();
             var character = interactorGO.GetComponent<Character.Character>();

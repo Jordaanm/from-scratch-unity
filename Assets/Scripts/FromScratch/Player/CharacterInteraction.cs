@@ -26,9 +26,12 @@ namespace FromScratch.Player
             character = GetComponent<Character.Character>();
             interactor = new Interactor();
             basicActionSource = new BasicActionSource();
-            interactor.AddInteractionSource(basicActionSource);
-
             
+        }
+
+        private void Start()
+        {
+            interactor.AddInteractionSource(basicActionSource);
             interactor.AddInteractionSource(character.characterEquipment);
             interactor.AddInteractionSource(character.characterCrafting);
         }
@@ -38,16 +41,11 @@ namespace FromScratch.Player
             return character == null ? gameObject : character.gameObject;
         }
 
-        public void RemoveInteractable(IInteractable interactable)
-        {
-            interactor.RemoveInteractable(interactable);
-        }
-
         public void StartActivation()
         {
             Debug.Log("Start Activation");
-            IInteractable target = DetermineTarget();
-            Debug.LogFormat("Found Target: {0}", target == null ? "Null" : target.GetGameObject().name);
+            Interactable target = DetermineTarget();
+            Debug.LogFormat("Found Target: {0}", target == null ? "Null" : target.gameObject.name);
             List<FromScratch.Interaction.Interaction> actions = interactor.GetActionsForTarget(target);
 
             if (actions == null || actions.Count == 0)
@@ -61,7 +59,7 @@ namespace FromScratch.Player
             activationCoroutine = StartCoroutine(ActivateAfterTimer(action, target));
         }
 
-        private IEnumerator ActivateAfterTimer(Interaction.Interaction action, IInteractable target)
+        private IEnumerator ActivateAfterTimer(Interaction.Interaction action, Interactable target)
         {
             activationDuration = 0;
             yield return new WaitForSeconds(ActivationHoldTime);
@@ -108,10 +106,10 @@ namespace FromScratch.Player
             int numColliders = Physics.OverlapSphereNonAlloc(character.transform.position, InteractionRadius, hitColliders,
                 Physics.AllLayers, QueryTriggerInteraction.Collide);
 
-            List<IInteractable> foundInteractables = new List<IInteractable>();
+            List<Interactable> foundInteractables = new List<Interactable>();
             for (int i = 0; i < numColliders; ++i)
             {
-                IInteractable interactable = hitColliders[i].gameObject.GetComponent<IInteractable>();
+                Interactable interactable = hitColliders[i].gameObject.GetComponent<Interactable>();
                 if (interactable != null)
                 {
                     foundInteractables.Add(interactable);
@@ -124,12 +122,12 @@ namespace FromScratch.Player
             }
         }
 
-        private IInteractable DetermineTarget()
+        private Interactable DetermineTarget()
         {
-            return GetNearestInteractable();
+            return GetNearestInteractable(true);
         }
 
-        public IInteractable GetNearestInteractable()
+        public Interactable GetNearestInteractable(bool canInteractWith = false)
         {
             var charPos = character.transform.position;
             var allInteractables = interactor?.AllNearby();
@@ -139,9 +137,29 @@ namespace FromScratch.Player
                 return null;
             }
 
+            if (canInteractWith)
+            {
+                allInteractables = allInteractables.FindAll(x => interactor.GetActionsForTarget(x).Count > 0);
+            }
+
             return allInteractables
-                .OrderBy(x => Vector3.Distance(x.GetGameObject().transform.position, charPos))
+                .OrderBy(x => Vector3.Distance(x.transform.position, charPos))
                 .ToList()[0];
+        }
+
+        public Interaction.Interaction GetDefaultAction(Interactable target)
+        {
+            if (target == null)
+            {
+                return null; 
+            }
+            var actions = interactor.GetActionsForTarget(target);
+            if (actions.Count == 0)
+            {
+                return null;
+            }
+
+            return actions[0];
         }
     }
 }
