@@ -13,7 +13,8 @@ namespace FromScratch.Interaction
             {
                 Interaction.GetInteraction("sleep"),
                 Interaction.GetInteraction("pickup"),
-                Interaction.GetInteraction("gather")
+                Interaction.GetInteraction("gather"),
+                Interaction.GetInteraction("startclimb")
             };
         }
         

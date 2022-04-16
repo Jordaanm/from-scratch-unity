@@ -62,7 +62,7 @@ namespace FromScratch.Character
 
         private void Start()
         {
-            characterAnimation.Setup(animator);
+            characterAnimation.Setup(this, animator);
         }
 
         public void DisableControls()

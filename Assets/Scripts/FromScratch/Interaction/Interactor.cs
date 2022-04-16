@@ -11,7 +11,8 @@ namespace FromScratch.Interaction
         Other,
         ResourceNode,
         Pickup,
-        CraftingStation
+        CraftingStation,
+        Climb,
     }
 
     public interface IInteractor

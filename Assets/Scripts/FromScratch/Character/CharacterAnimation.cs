@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using FromScratch.Character.Animation;
 using UnityEngine;
 using UnityEngine.Animations;
@@ -13,6 +14,7 @@ namespace FromScratch.Character
         public const float EPSILON = 0.01f;
         private const string GraphName = "FromScratch Character Graph";
         private PlayableGraph graph;
+        private Character character;
         private RuntimeAnimatorController runtimeController;
         private AnimatorControllerPlayable runtimeControllerPlayable;
 
@@ -25,11 +27,14 @@ namespace FromScratch.Character
         private List<ManagedAnimState> states;
 
         private List<string> activeGUIDs;
+        private Animator animator;
         
         #region Initialization
-        public void Setup(Animator animator)
+        public void Setup(Character character, Animator animator)
         {
             activeGUIDs = new List<string>();
+            this.character = character;
+            this.animator = animator;
             
             // //Destroy Existing Graph for Idempotency
             if (animator.playableGraph.IsValid())
@@ -261,6 +266,15 @@ namespace FromScratch.Character
                     clips.RemoveAt(i);
                     
                 }
+            }
+        }
+
+        void OnAnimatorIK()
+        {
+            var activeMode = character.modeManager.GetActiveMode();
+            if (activeMode != null && activeMode.HandlesIK)
+            {
+                activeMode.PerformIK(animator);
             }
         }
 

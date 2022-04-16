@@ -147,6 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0950ed952e342118d7fd4b8aff362c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activationDuration: 0
+  activeLabel: 
 --- !u!114 &2230711006483574648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,6 +390,7 @@ GameObject:
   - component: {fileID: 6561627833063680722}
   - component: {fileID: 6561627833063680723}
   - component: {fileID: 6561627833063680748}
+  - component: {fileID: 1124469571934992507}
   m_Layer: 7
   m_Name: Modes
   m_TagString: Untagged
@@ -462,6 +465,19 @@ MonoBehaviour:
   character: {fileID: 0}
   animatorController: {fileID: 0}
   clip: {fileID: 7400000, guid: 0c39389aa8687264c8d46ba53e6a123e, type: 3}
+--- !u!114 &1124469571934992507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6561627833063680720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fed9bad62f943f9b07e5094dacc5dc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 0}
 --- !u!1 &6561627833709787146
 GameObject:
   m_ObjectHideFlags: 0

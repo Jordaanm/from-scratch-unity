@@ -139,6 +139,11 @@ namespace FromScratch.Player
                     placementMode.CancelItemPlacement();
                 }
             }
+
+            if (movementType == MovementType.Climbing)
+            {
+                character.modeManager.SetActiveMode<ExplorationMode>();
+            }
         }
 
 
@@ -182,6 +187,16 @@ namespace FromScratch.Player
                         placementMode.MoveReticule(position);
                     }
                 }
+            }
+
+            if (movementType == MovementType.Climbing)
+            {
+                var inputDirection = moveAction.ReadValue<Vector2>();
+            
+                Vector3 intendedDirection = camT.up * inputDirection.y + camT.right * inputDirection.x;
+                intendedDirection.Normalize();
+
+                character.intendedDirection = intendedDirection;
             }
         }
     }
