@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using FromScratch.Inventory;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Unlockable;
 using Util;
 
 namespace FromScratch.Crafting
@@ -26,7 +27,7 @@ namespace FromScratch.Crafting
     
     [ManageableData]
     [CreateAssetMenu(menuName = "From Scratch/Recipe")]
-    public class Recipe: ScriptableData
+    public class Recipe: ScriptableData, IUnlock
     {
         [BoxGroup("BasicInfo")]
         public string id;
@@ -52,9 +53,32 @@ namespace FromScratch.Crafting
         [BoxGroup("Visuals")]
         public AnimationClip animation;
         
+        [SerializeField, TableList, BoxGroup("Unlock")]
+        private List<Prerequisite> prerequisites;
+
+        [SerializeField, EnumToggleButtons, BoxGroup("Unlock")] private Significance significance;
         public override string GetID()
         {
             return id;
+        }
+
+        #region IUnlock
+        public string ID => id;
+        public List<Prerequisite> Prerequisites => prerequisites;
+        public Significance Significance => significance;
+
+        #endregion
+
+
+        public static Recipe FindFromPrereq(Prerequisite prereq)
+        {
+            var DB = GameDatabases.Instance.recipes.GetDatabase();
+            if (DB != null && DB.ContainsKey(prereq.id))
+            {
+                return DB[prereq.id];
+            }
+
+            return null;
         }
     }
 }

@@ -14,6 +14,7 @@ namespace FromScratch.Crafting
         Masonry = 1 << 3,
         Forging = 1 << 4,
         Electronics = 1 << 5,
+        HeatProcessing = 1<<6,
     }
     
     public class CraftingTable : Interactable

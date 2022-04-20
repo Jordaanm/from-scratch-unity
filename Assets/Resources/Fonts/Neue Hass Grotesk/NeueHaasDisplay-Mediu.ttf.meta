@@ -1,3 +1,27 @@
 fileFormatVersion: 2
 guid: b68f5f7dd6c0428ab60f4a77eb70195b
-timeCreated: 1648453495
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Neue Haas Grotesk Display Pro
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 61f65469fd1a405c831c6d6ee44b3e95, type: 3}
+  - {fileID: 12800000, guid: f4339348d2874e9db3fd1a60e0282bea, type: 3}
+  - {fileID: 12800000, guid: 834e059563694f7b866ef46c2551cd67, type: 3}
+  - {fileID: 12800000, guid: f53cfd6d0bd44b95a0401854bcc1ad8c, type: 3}
+  - {fileID: 12800000, guid: 24b952a0971e405d94ea2bfef669c9fb, type: 3}
+  - {fileID: 12800000, guid: e1aba7c706f642e2be6142d8c63df626, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

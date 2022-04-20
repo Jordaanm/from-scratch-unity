@@ -1282,6 +1282,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8409402220249226308, guid: 9340fec8ff2f49444b6ca9fd9e3e0bb3, type: 3}
+      propertyPath: tech
+      value: 
+      objectReference: {fileID: 11400000, guid: 53fe8b0e1f7a75e4eb53c65d774df927, type: 2}
+    - target: {fileID: 8409402220249226308, guid: 9340fec8ff2f49444b6ca9fd9e3e0bb3, type: 3}
+      propertyPath: skills
+      value: 
+      objectReference: {fileID: 11400000, guid: d815e3af08241db4883bdfa68092c8a9, type: 2}
+    - target: {fileID: 8409402220444149558, guid: 9340fec8ff2f49444b6ca9fd9e3e0bb3, type: 3}
+      propertyPath: entries.Array.size
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409402220444149558, guid: 9340fec8ff2f49444b6ca9fd9e3e0bb3, type: 3}
+      propertyPath: entries.Array.data[14].key
+      value: roadmap
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409402220444149558, guid: 9340fec8ff2f49444b6ca9fd9e3e0bb3, type: 3}
+      propertyPath: entries.Array.data[15].key
+      value: roadmap-node
+      objectReference: {fileID: 0}
+    - target: {fileID: 8409402220444149558, guid: 9340fec8ff2f49444b6ca9fd9e3e0bb3, type: 3}
+      propertyPath: entries.Array.data[14].value
+      value: 
+      objectReference: {fileID: 9197481963319205126, guid: 0284819d08f194f4794d35adc577216a, type: 3}
+    - target: {fileID: 8409402220444149558, guid: 9340fec8ff2f49444b6ca9fd9e3e0bb3, type: 3}
+      propertyPath: entries.Array.data[15].value
+      value: 
+      objectReference: {fileID: 9197481963319205126, guid: ec92d06b744917942a2cb4a40a66d0a6, type: 3}
     - target: {fileID: 8409402220837714874, guid: 9340fec8ff2f49444b6ca9fd9e3e0bb3, type: 3}
       propertyPath: m_RootOrder
       value: 0

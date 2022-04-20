@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Messaging;
 using System.Reflection;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -34,7 +36,22 @@ namespace Util
             entries.ForEach(entry =>
             {
                 if (entry == null) return;
-                database.Add(entry.GetID(), entry);
+                var id = entry.GetID();
+                if (id != null || id == "")
+                {
+                    try
+                    {
+                        database.Add(entry.GetID(), entry);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.Log("woooo");
+                    }
+                }
+                else
+                {
+                    Debug.LogErrorFormat("No ID present for Entry: {0}", entry.name);
+                }
             });
             
             return database;
@@ -59,7 +76,8 @@ namespace Util
             }
             
             entries.Clear();
-            entries.AddRange(syncedEntries);            
+            entries.AddRange(syncedEntries);
+            database = BuildDatabase();
         }
 
         protected string GetFolderPath()

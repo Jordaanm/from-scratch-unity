@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25efd41a81014c12a5c7df714ba03edd, type: 3}
   m_Name: Plank
   m_EditorClassIdentifier: 
-  id: plank
+  id: woodplank
   label: Wooden Plank
   description: Carve a log into several planks
   requiredCapability: 0
@@ -24,3 +24,8 @@ MonoBehaviour:
     item: {fileID: 11400000, guid: 828e67087684d674fbd75208233a5ed9, type: 2}
   craftingTime: -1
   animation: {fileID: 7400000, guid: 410ebf92af92032488ad809b7c5b7f63, type: 3}
+  prerequisites:
+  - type: 0
+    id: carpentry
+    level: 1
+  significance: 0

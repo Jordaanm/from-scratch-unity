@@ -1,0 +1,65 @@
+#roadmap-view {
+    
+}
+
+#roadmap-view #roadmap {
+    position: relative;
+    background-color: rgba(0,0,0,0.75);
+    height: 100%;
+    width:  100%;
+}
+
+#roadmap-node {
+    position: absolute;
+    border-width: 3px;
+    border-color: rgba(255,255,255,0.5);
+    background-color: rgba(255, 0, 255, 1);
+    translate: -50% -50%;
+}
+
+#roadmap-node:hover {
+    border-color: white;
+    flex-direction: column;
+}
+
+#roadmap-node #icon {
+    min-width: 40px;
+    min-height: 40px;
+}
+
+#roadmap-node #label {
+    -unity-text-align: middle-center;
+    padding: 5px;
+}
+
+#roadmap-view #title {
+    position: absolute;
+    -unity-text-align: middle-center;
+    left: 0;
+    right: 0;
+    top: 0;
+    font-size: 24;
+}
+
+#roadmap #edges {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#roadmap #nodes {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#roadmap #edges .edge {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    /*background-color: rgba(255,255,0,0.5);*/
+}

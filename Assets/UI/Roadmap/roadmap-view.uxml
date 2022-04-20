@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/UI/util.uss?fileID=7433441132597879392&amp;guid=1e95a0f226e74611a820fcf31d7b0a19&amp;type=3#util" />
+    <Style src="project://database/Assets/UI/Roadmap/roadmap.uss?fileID=7433441132597879392&amp;guid=b2f93b78ce8a0104cba04727a1e67b3a&amp;type=3#roadmap" />
+    <ui:VisualElement name="roadmap-view" class="full">
+        <ui:VisualElement name="roadmap" class="full">
+            <ui:VisualElement name="edges" />
+            <ui:VisualElement name="nodes" />
+        </ui:VisualElement>
+        <ui:Label text="Label" display-tooltip-when-elided="true" name="title" />
+    </ui:VisualElement>
+</ui:UXML>
