@@ -7,8 +7,10 @@ namespace Roadmap
 {
     public class RoadmapTreeNode: TreeNode<IUnlock>
     {
-        public RoadmapTreeNode(IUnlock data)
+        public bool isCentral; 
+        public RoadmapTreeNode(IUnlock data, bool isCentral = false)
         {
+            this.isCentral = isCentral;
             this.data = data;
         }
 

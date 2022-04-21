@@ -6,6 +6,6 @@
             <ui:VisualElement name="edges" />
             <ui:VisualElement name="nodes" />
         </ui:VisualElement>
-        <ui:Label text="Label" display-tooltip-when-elided="true" name="title" />
+        <ui:Label text="Label" display-tooltip-when-elided="true" name="title" style="" />
     </ui:VisualElement>
 </ui:UXML>

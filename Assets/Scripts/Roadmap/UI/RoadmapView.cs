@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AssetReferences;
+using UI;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -47,6 +48,7 @@ namespace Roadmap.UI
         private void Init()
         {
             root = VisualTreeAssetReference.Create(VisualTreeAssetKey);
+            root.style.backgroundImage = new StyleBackground(UISpriteReferences.Instance.GetAsset("blueprint-bg"));
             lblTitle = root.Q<Label>("title");
             veRoadmap = root.Q("roadmap");
             veEdges = root.Q("edges");
@@ -81,8 +83,6 @@ namespace Roadmap.UI
             {
                 GenerateEdge(edge);
             }
-            // await Task.Delay(1000); //Wait 1s so the Node views have resolved dimensions/positions//
-            // GenerateEdge(roadmap.Edges[0]);
         }
 
         private void GenerateEdge(TreeEdge<IUnlock> edge)
@@ -90,30 +90,16 @@ namespace Roadmap.UI
             var edgeVE = new VisualElement();
             edgeVE.AddToClassList("edge");
 
-            var fromVE = veNodes.Children().ToList().Find(x => x.userData == edge.from);
-            var toVE = veNodes.Children().ToList().Find(x => x.userData == edge.to);
+            Vector2 avgPos = (edge.from.position + edge.to.position) / 2;
+            Vector2 delta = (edge.to.position - edge.from.position);
+            float height = Mathf.Min(8, Vector2.Distance(edge.@from.position, edge.to.position));
+            float angle = Vector2.SignedAngle(Vector2.right, delta);
 
-            
-            //Find rectangle between their centers
-            var vEdgeA = fromVE.style.top;
-            var vEdgeB = toVE.style.top;
-            var hEdgeA = fromVE.style.left;
-            var hEdgeB = toVE.style.left;
-
-            var top = Mathf.Min(vEdgeA.value.value, vEdgeB.value.value);
-            var left = Mathf.Min(hEdgeA.value.value, hEdgeB.value.value);
-            var height = Mathf.Max(1, Mathf.Abs(fromVE.resolvedStyle.top - toVE.resolvedStyle.top));
-            var width = Mathf.Max(1, Mathf.Abs(fromVE.resolvedStyle.left - toVE.resolvedStyle.left));
-
-            bool isAscending = (vEdgeA.value.value > vEdgeB.value.value) != (hEdgeA.value.value > hEdgeB.value.value);
-
-            edgeVE.style.left = new Length(left, LengthUnit.Percent);
-            edgeVE.style.width = new Length(width, LengthUnit.Pixel);
-            edgeVE.style.top = new Length(top, LengthUnit.Percent);
-            edgeVE.style.height = new Length(height, LengthUnit.Pixel);
-            
-            Texture2D tex = DrawSplineToTexture(width, height, isAscending);
-            edgeVE.style.backgroundImage = new StyleBackground(tex);
+            edgeVE.style.width = new Length(height, LengthUnit.Percent);
+            edgeVE.style.left = new Length(avgPos.x, LengthUnit.Percent);
+            edgeVE.style.top = new Length(avgPos.y, LengthUnit.Percent);
+            edgeVE.style.rotate = new StyleRotate(new Rotate(new Angle(angle, AngleUnit.Degree)));
+            edgeVE.style.backgroundImage = new StyleBackground(UISpriteReferences.Instance.GetAsset("roadmap-arrow-straight"));
             veEdges.Add(edgeVE);
         }
 
@@ -122,7 +108,6 @@ namespace Roadmap.UI
             int w = Mathf.CeilToInt(width);
             int h = Mathf.CeilToInt(height);
             var tex = new Texture2D(w, h);
-            tex.filterMode = FilterMode.Bilinear;
 
             //Map to Positions
             Vector2 fromPos = new Vector2(ascending ? 0: w, 0);
@@ -159,10 +144,18 @@ namespace Roadmap.UI
         {
             var nodeRoot = VisualTreeAssetReference.Create(NodeVisualTreeAssetKey);
             nodeRoot.userData = node;
+            var backgroundSpriteKey = node.isCentral ? "roadmap-rect" : "roadmap-capsule";
+            nodeRoot.style.backgroundImage =
+                new StyleBackground(UISpriteReferences.Instance.GetAsset(backgroundSpriteKey));
             nodeRoot.Q<Label>("label").text = node.data.ID;
             nodeRoot.style.left = new Length(node.position.x, LengthUnit.Percent);
             nodeRoot.style.top = new Length(node.position.y, LengthUnit.Percent);
+
+            //TODO: Add Icon
             
+            string significance = node.isCentral ? "central" : node.data.Significance.ToString().ToLower();
+            nodeRoot.AddToClassList($"node--{significance}");
+
             veNodes.Add(nodeRoot);
         }
     }

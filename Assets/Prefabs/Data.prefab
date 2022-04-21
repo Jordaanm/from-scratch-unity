@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 364fd5aa7c2940fea9be4c6d090fe1d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tech: {fileID: 11400000, guid: 53fe8b0e1f7a75e4eb53c65d774df927, type: 2}
   recipes: {fileID: 11400000, guid: d23d13bea80feed4d97f649bb0a5c0cb, type: 2}
   equipment: {fileID: 11400000, guid: 24e91a68205458541ba53015354b7973, type: 2}
   items: {fileID: 11400000, guid: de9ad8977d992df428bf2fdb55fd2be5, type: 2}
+  skills: {fileID: 11400000, guid: d815e3af08241db4883bdfa68092c8a9, type: 2}
 --- !u!1 &8409402220444149556
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,6 +59,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8409402220444149559}
   - component: {fileID: 8409402220444149558}
+  - component: {fileID: 1941441165}
   m_Layer: 0
   m_Name: Asset References
   m_TagString: Untagged
@@ -120,6 +123,27 @@ MonoBehaviour:
     value: {fileID: 9197481963319205126, guid: 419d2063f60ec594cbed740d23e6daaf, type: 3}
   - key: interaction-marker
     value: {fileID: 9197481963319205126, guid: eb3609f3871c6b847bc2cf76149139d7, type: 3}
+  - key: roadmap
+    value: {fileID: 9197481963319205126, guid: 0284819d08f194f4794d35adc577216a, type: 3}
+  - key: roadmap-node
+    value: {fileID: 9197481963319205126, guid: ec92d06b744917942a2cb4a40a66d0a6, type: 3}
+--- !u!114 &1941441165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8409402220444149556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfb80ce343d54857a011e3a3f6ffe950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entries:
+  - key: arrow
+    value: {fileID: 21300000, guid: 7e954b9f15b36c747badead66fdc33c7, type: 3}
+  - key: pow
+    value: {fileID: 21300000, guid: 66d8bbda804619a41b907a2c2176b88b, type: 3}
 --- !u!1 &8409402220837714875
 GameObject:
   m_ObjectHideFlags: 0

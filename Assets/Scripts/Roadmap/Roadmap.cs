@@ -50,8 +50,8 @@ namespace Roadmap
         private void LayoutNodes(IUnlock keystone)
         {
             RoadmapTreeNode node = GetNodeForUnlock(keystone);
+            node.isCentral = true;
             node.position = new Vector2(50, 50);
-            node.significance = NodeSignificance.Key;
 
             LayoutChildNodes(node);
         }
