@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting;
 using FromScratch.Interaction;
 using UnityEngine;
 
-namespace FromScratch.Player
+namespace FromScratch.Character
 {
     public class CharacterInteraction: MonoBehaviour, IInteractor
     {
@@ -14,7 +12,7 @@ namespace FromScratch.Player
         private Interactor interactor;
         private BasicActionSource basicActionSource;
         
-        private Character.Character character;
+        private FromScratch.Character.Character character;
         
         public static float ActivationHoldTime = 0.5f;
         private Coroutine activationCoroutine;
@@ -23,7 +21,7 @@ namespace FromScratch.Player
 
         private void Awake()
         {
-            character = GetComponent<Character.Character>();
+            character = GetComponent<Character>();
             interactor = new Interactor();
             basicActionSource = new BasicActionSource();
             

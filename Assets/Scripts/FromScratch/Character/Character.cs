@@ -1,10 +1,7 @@
-using System;
 using System.Reflection;
 using FromScratch.Inventory;
-using FromScratch.Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace FromScratch.Character
 {
