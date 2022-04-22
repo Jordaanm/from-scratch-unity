@@ -30,7 +30,7 @@ namespace FromScratch.Character
         public CharacterModeManager modeManager;
 
         [BoxGroup("Character"), HideInInspector]
-        public CharacterInteraction characterInteration;
+        public CharacterInteraction characterInteraction;
 
         private bool areControlsDisabled;
         
@@ -54,7 +54,7 @@ namespace FromScratch.Character
             characterCrafting = GetComponent<CharacterCrafting>();
             modeManager = GetComponent<CharacterModeManager>();
             characterStatus = GetComponent<CharacterStatus>();
-            characterInteration = GetComponent<CharacterInteraction>();
+            characterInteraction = GetComponent<CharacterInteraction>();
             animator = GetComponent<Animator>();
             
             areControlsDisabled = false;

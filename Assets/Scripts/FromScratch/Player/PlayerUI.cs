@@ -30,7 +30,7 @@ namespace FromScratch.Player
 
         private void Update()
         {
-            // Interactable interactable = player.character.characterInteration.GetNearestInteractable(true);
+            // Interactable interactable = player.character.characterInteraction.GetNearestInteractable(true);
             // if (interactable != null)
             // {
             //     InteractionMarker.Instance.Show(interactable);

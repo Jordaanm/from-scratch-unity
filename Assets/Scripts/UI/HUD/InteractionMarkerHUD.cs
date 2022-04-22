@@ -36,8 +36,8 @@ namespace UI.HUD
         
         public override void Update()
         {
-            Interactable interactable = character.characterInteration.GetNearestInteractable();
-            Interaction interaction = character.characterInteration.GetDefaultAction(interactable);
+            Interactable interactable = character.characterInteraction.GetNearestInteractable();
+            Interaction interaction = character.characterInteraction.GetDefaultAction(interactable);
             if (interactable != null && interaction != null)
             {
                 AttachTo(interactable);
@@ -52,7 +52,7 @@ namespace UI.HUD
                 return;
             }
 
-            var charInteraction = character.characterInteration;
+            var charInteraction = character.characterInteraction;
             int borderThickness =
                 Mathf.CeilToInt((charInteraction.activationDuration / CharacterInteraction.ActivationHoldTime) *
                                 MaxBorderThickness);
@@ -82,7 +82,7 @@ namespace UI.HUD
             else
             {
                 //Update Label
-                Interaction interaction = character.characterInteration.GetDefaultAction(newTarget);
+                Interaction interaction = character.characterInteraction.GetDefaultAction(newTarget);
                 veLabel.text = interaction?.Label ?? "";
             }
 
