@@ -9,7 +9,7 @@ using Util;
 
 namespace Roadmap.Editor
 {
-    public class RoadmapEditorWindow: OdinMenuEditorWindow
+    public class RoadmapEditorWindow: EditorWindow
     {
         private VisualElement root;
         private RoadmapView roadmapView;
@@ -17,17 +17,13 @@ namespace Roadmap.Editor
         private static readonly string commonStylesheetPath = "Assets/UI/common.uss";
         private static readonly string utilStylesheetPath = "Assets/UI/util.uss";
 
-
-
         [MenuItem("From Scratch/Roadmap")]
         public static void ShowSkillTreeWindow() {
             RoadmapEditorWindow wnd = GetWindow<RoadmapEditorWindow>();
             wnd.titleContent = new GUIContent("Roadmap Editor");
         }
 
-        
-
-        public void OnEnable()
+        protected void OnEnable()
         {
             Debug.Log("RoadmapEditorWindow::OnEnable");
             if (root == null)
@@ -45,13 +41,6 @@ namespace Roadmap.Editor
                 rootVisualElement.styleSheets.Add(AssetDatabase.LoadAssetAtPath<StyleSheet>(utilStylesheetPath));
                 rootVisualElement.styleSheets.Add(styleSheet);
             }
-        }
-
-        protected override OdinMenuTree BuildMenuTree()
-        {
-            var tree = new OdinMenuTree();
-            tree.AddAllAssetsAtPath("Roadmaps", "Assets/Data/Roadmaps", typeof(Roadmap), false, false);
-            return tree;
         }
     }
 }

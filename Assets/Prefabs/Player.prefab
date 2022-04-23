@@ -81,7 +81,7 @@ MonoBehaviour:
   characterCrafting: {fileID: 0}
   characterEquipment: {fileID: 0}
   modeManager: {fileID: 0}
-  characterInteration: {fileID: 0}
+  characterInteraction: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
   directionVelocity: {x: 0, y: 0, z: 0}
   intendedDirection: {x: 0, y: 0, z: 0}
@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 6561627833001990063}
   - component: {fileID: 6561627833001990056}
   - component: {fileID: 6561627833001990057}
-  - component: {fileID: 6561627833001990058}
+  - component: {fileID: 1940847965}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -240,7 +240,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6561627833001990034}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 22.08236, y: 8.259303, z: -21.650568}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -328,6 +328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PreviewTexture: {fileID: 8400000, guid: e390413c877a27c4a9bb6d1eb4e4cde3, type: 2}
   character: {fileID: 2230711006483574627}
+  progress: {fileID: 0}
 --- !u!114 &6561627833001990056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,7 +358,7 @@ MonoBehaviour:
   mainCam: {fileID: 0}
   thirdPersonCamera: {fileID: 0}
   topDownCamera: {fileID: 0}
---- !u!114 &6561627833001990058
+--- !u!114 &1940847965
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -366,18 +367,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6561627833001990034}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81397aefbca544c9a4d3d7a5ac49c25a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c3b8aa2a21d4e9db056c1c59ded6706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hungerCurrent: 0
-  hungerMax: 0
-  thirstCurrent: 0
-  thirstMax: 0
-  healthCurrent: 0
-  healthMax: 0
-  staminaCurrent: 0
-  staminaMax: 0
-  isStaminaDraining: 0
+  unlockedSkills: []
+  unlockedTechnologies: []
+  unlockedRecipes: []
+  OnUnlocksChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6561627833063680720
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,12 +470,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6561627833063680720}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fed9bad62f943f9b07e5094dacc5dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
+  chest: {fileID: 6693277392643624610}
 --- !u!1 &6561627833709787146
 GameObject:
   m_ObjectHideFlags: 0
@@ -979,5 +978,10 @@ PrefabInstance:
 --- !u!4 &6666784038919887246 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
+  m_PrefabInstance: {fileID: 6561627832301993573}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6693277392643624610 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8652301172574506809, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
   m_PrefabInstance: {fileID: 6561627832301993573}
   m_PrefabAsset: {fileID: 0}

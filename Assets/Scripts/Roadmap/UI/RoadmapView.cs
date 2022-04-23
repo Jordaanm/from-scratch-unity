@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AssetReferences;
+using FromScratch.Player;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,11 @@ namespace Roadmap.UI
         private VisualElement veNodes;
         private VisualElement veEdges;
         private VisualElement veRoadmap;
+
+        private bool isBound = false;
+        private FromScratchPlayer player = null;
+
+        public VisualElement Root => root;
         
         public RoadmapView()
         {
@@ -43,7 +49,15 @@ namespace Roadmap.UI
             BindToRoadmap();
         }
 
-        public VisualElement Root => root;
+        public void SetPlayer(FromScratchPlayer player)
+        {
+            this.player = player;
+            if (isBound)
+            {
+                ApplyPlayerUnlocks();
+            }
+        }
+
 
         private void Init()
         {
@@ -82,6 +96,11 @@ namespace Roadmap.UI
             foreach (var edge in roadmap.Edges)
             {
                 GenerateEdge(edge);
+            }
+            isBound = true;
+            if (player != null)
+            {
+                ApplyPlayerUnlocks();
             }
         }
 
@@ -157,6 +176,11 @@ namespace Roadmap.UI
             nodeRoot.AddToClassList($"node--{significance}");
 
             veNodes.Add(nodeRoot);
+        }
+
+        private void ApplyPlayerUnlocks()
+        {
+            
         }
     }
 }
