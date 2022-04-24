@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/UI/Main%20Menu/main-menu.uss?fileID=7433441132597879392&amp;guid=d13bf3cd1d853ff449e0f62b0b1a9541&amp;type=3#main-menu" />
+    <ui:VisualElement name="main-menu" class="full" style="background-image: url(&apos;project://database/Assets/Images/Light-HD-Background1.jpg?fileID=2800000&amp;guid=14e1da08bfa58654e891be7c53c5b336&amp;type=3#Light-HD-Background1&apos;);">
+        <ui:VisualElement name="actions">
+            <ui:Button text="New Game" display-tooltip-when-elided="true" name="btn-new" />
+            <ui:Button text="Load" display-tooltip-when-elided="true" name="btn-load" />
+            <ui:Button text="Quit" display-tooltip-when-elided="true" name="btn-quit" />
+        </ui:VisualElement>
+        <ui:Label text="From Scratch" display-tooltip-when-elided="true" name="title" />
+    </ui:VisualElement>
+</ui:UXML>

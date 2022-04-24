@@ -1,0 +1,41 @@
+#main-menu {
+    height: 100%;
+    width: 100%;
+    flex-direction: row;
+    background-color: white;
+    align-items: center;
+    
+}
+
+#main-menu #title {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    -unity-text-align: middle-center;
+    padding: 20px;
+    font-size: 128px;
+    -unity-font: resource("Fonts/chawp/chawp");
+    -unity-font-definition: resource("Fonts/chawp/chawp SDF");
+}
+
+#main-menu #actions {
+    flex-direction: column;
+    margin: 10px;
+}
+
+#main-menu #actions Button {
+    border-radius: 1px;
+    border-width: 0px;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: rgb(22, 22, 22);
+    font-size: 24px;
+    padding: 24px;
+    margin-bottom: 24px;
+    -unity-font: resource("Fonts/chawp/chawp");
+    -unity-font-definition: resource("Fonts/chawp/chawp SDF");
+}
+
+#main-menu #actions Button:hover {
+    background-color: rgba(255, 255, 255, 0.75);
+}
