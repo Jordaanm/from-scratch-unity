@@ -26,9 +26,8 @@ namespace FromScratch.Player
         
         private void Awake()
         {
-            this.player = GetComponent<FromScratchPlayer>();
-            this.characterInteraction = GetComponentInChildren<CharacterInteraction>();
-            character = player.GetComponentInChildren<Character.Character>();
+            player = GetComponent<FromScratchPlayer>();
+            player.OnceCharacterIsSet(SetupCharacterReferences);
 
             fromScratchControls = new FromScratchControls();
             interactAction = fromScratchControls.Player.Interact;
@@ -39,7 +38,13 @@ namespace FromScratch.Player
 
             playerCamera = Camera.main;
         }
-        
+
+        private void SetupCharacterReferences()
+        {
+            character = player.GetComponentInChildren<Character.Character>();
+            characterInteraction = character.characterInteraction;
+        }
+
         private void OnEnable()
         {
             moveAction.Enable();
