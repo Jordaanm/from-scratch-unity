@@ -60,6 +60,12 @@ namespace UI
             return this;
         }
 
+        public MultiScreenMenu RemoveAllSubmenus()
+        {
+            submenus.Clear();
+            return this;
+        }
+
         public MultiScreenMenu RemoveMenu(Submenu menu) {
             submenus.Remove(menu);
             return this;
@@ -200,16 +206,20 @@ namespace UI
                 activeSubmenu.GetRoot().RemoveFromHierarchy();
             }
 
-            // m_previousSubmenu = activeSubmenu;
-            activeSubmenu = submenu;
-            activeSubmenu.SetIsActive(true);
-            veMain.Add(activeSubmenu.GetRoot());
-            activeSubmenu.OnOpen();
+            if (submenu != null)
+            {
+                // m_previousSubmenu = activeSubmenu;
+                activeSubmenu = submenu;
+                activeSubmenu.SetIsActive(true);
+                veMain.Add(activeSubmenu.GetRoot());
+                activeSubmenu.OnOpen();
+            }
+            
             UpdateTitle();
         }
 
         private void UpdateTitle() {
-            string title = CurrentSubmenu?.GetTitle();
+            string title = CurrentSubmenu?.GetTitle() ?? "-";
             string prevTitle = GetSubmenuAtIndex(currentSubmenuIndex - 1)?.GetTitle();
             string nextTitle = GetSubmenuAtIndex(currentSubmenuIndex + 1)?.GetTitle();
 

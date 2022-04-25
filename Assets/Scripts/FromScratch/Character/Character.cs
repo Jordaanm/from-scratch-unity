@@ -1,5 +1,7 @@
+using System;
 using System.Reflection;
 using FromScratch.Inventory;
+using SaveLoad.SaveState;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -30,8 +32,9 @@ namespace FromScratch.Character
         public CharacterInteraction characterInteraction;
 
         private bool areControlsDisabled;
-        
-        
+
+        public string guid;
+
         //Shared Movement Fields
         [HideInInspector] public Vector3 direction = Vector3.zero;
         [HideInInspector] public Vector3 directionVelocity = Vector3.zero;
@@ -42,9 +45,11 @@ namespace FromScratch.Character
 
         public Animator Animator => animator;
         public bool AreControlsDisabled => areControlsDisabled;
-
+        
         private void Awake()
         {
+            guid ??= Guid.NewGuid().ToString();
+            
             characterAnimation = GetComponent<CharacterAnimation>();
             characterInventory = GetComponent<CharacterInventory>();
             characterEquipment = GetComponent<CharacterEquipment>();
@@ -55,6 +60,12 @@ namespace FromScratch.Character
             animator = GetComponent<Animator>();
             
             areControlsDisabled = false;
+        }
+
+        [Button]
+        public void GenerateGuid()
+        {
+            guid = Guid.NewGuid().ToString();
         }
 
         private void Start()
@@ -99,6 +110,16 @@ namespace FromScratch.Character
         {
             wantsToSprint = false;
             characterStatus.isStaminaDraining = false;
+        }
+
+        public CharacterState BuildSaveState()
+        {
+            var state = new CharacterState();
+            state.guid = guid;
+            state.location = transform.position;
+            state.rotation = transform.rotation;
+
+            return state;
         }
     }
 }

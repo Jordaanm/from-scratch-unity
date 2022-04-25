@@ -98,13 +98,21 @@ namespace FromScratch.Player
         
         private void OnInteract(InputAction.CallbackContext context)
         {
+            if (characterInteraction == null)
+            {
+                characterInteraction = GetComponentInChildren<CharacterInteraction>();
+            }
+            
             MovementType movementType = character.modeManager.MovementType;
             CharacterMode activeMode = character.modeManager.GetActiveMode();
 
             if (movementType == MovementType.OnFoot || movementType == MovementType.Vehicle)
             {
-                Debug.Log("PlayerInputHandler::OnInteract");
-                characterInteraction.StartActivation();
+                if (characterInteraction != null)
+                {
+                    Debug.Log("PlayerInputHandler::OnInteract");
+                    characterInteraction.StartActivation();
+                }
             }
             
             if (movementType == MovementType.Overview)
@@ -149,6 +157,15 @@ namespace FromScratch.Player
 
         private void Update()
         {
+            if (character == null)
+            {
+                if (player.character == null)
+                {
+                    return;
+                }
+                character = player.character;
+            }
+            
             var camT = playerCamera.transform;
 
             MovementType movementType = character.modeManager.MovementType;

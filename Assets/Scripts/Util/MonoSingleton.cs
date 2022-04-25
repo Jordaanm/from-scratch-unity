@@ -12,12 +12,6 @@ namespace Util
 		public static bool IS_EXITING = false;
 		protected bool IsExiting => IS_EXITING;
 
-
-		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-		public static void OnRuntimeStartSingleton() {
-			IS_EXITING = false;
-		}
-
 		public static T Instance {
 			get {
 

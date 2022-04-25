@@ -26,3 +26,5 @@ MonoBehaviour:
     item: {fileID: 11400000, guid: 225d312e2bad80040bd32911434c2fe0, type: 2}
   craftingTime: -1
   animation: {fileID: 7400000, guid: 29a01bd85c33f1a4d9d5f7be77387a57, type: 3}
+  prerequisites: []
+  significance: 0

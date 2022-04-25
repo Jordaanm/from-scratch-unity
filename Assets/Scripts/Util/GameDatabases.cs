@@ -14,5 +14,10 @@ namespace Util
         public EquipmentDatabase equipment;
         public ItemDatabase items;
         public SkillDatabase skills;
+        
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        public static void OnRuntimeStartSingleton() {
+            IS_EXITING = false;
+        }
     }
 }

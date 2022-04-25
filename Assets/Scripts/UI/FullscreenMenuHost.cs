@@ -88,5 +88,10 @@ namespace UI
         }
 
         public bool HasMenuOpen => currentMenu != null;
+        
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        public static void OnRuntimeStartSingleton() {
+            IS_EXITING = false;
+        }
     }
 }

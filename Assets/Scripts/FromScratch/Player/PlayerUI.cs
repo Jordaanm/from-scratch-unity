@@ -17,17 +17,20 @@ namespace FromScratch.Player
 
         private void Awake()
         {
+            player = GetComponent<FromScratchPlayer>();
             pauseMenu = new PauseMenu(player);
             fromScratchControls = new FromScratchControls();
+            player.OnceCharacterIsSet(OnCharacterSet);
         }
-
-        private void Start()
+        
+        private void OnCharacterSet()
         {
+            pauseMenu.RemoveAllSubmenus();
             pauseMenu.AddSubmenu(new EquipmentMenu(player));
             pauseMenu.AddSubmenu(new InventoryMenu(player));
             pauseMenu.AddSubmenu(new CraftingSubmenu(player));
         }
-
+        
         private void Update()
         {
             // Interactable interactable = player.character.characterInteraction.GetNearestInteractable(true);

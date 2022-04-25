@@ -30,12 +30,16 @@ namespace UI.HUD
         public override void Init(MainHUD mainHUD)
         {
             base.Init(mainHUD);
-            character = mainHUD.player.character;
             camera = Camera.main;
         }
         
         public override void Update()
         {
+            if (character == null)
+            {
+                character = MainHUD.Instance.Player.character;
+            }
+            
             Interactable interactable = character.characterInteraction.GetNearestInteractable();
             Interaction interaction = character.characterInteraction.GetDefaultAction(interactable);
             if (interactable != null && interaction != null)

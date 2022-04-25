@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SaveLoad;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -7,6 +8,8 @@ using UnityEngine.UIElements;
 public class MainMenu : MonoBehaviour
 {
     private VisualElement root;
+    public SaveDataCarrier saveDataCarrier;
+    
     void Start()
     {
         UIDocument uiDocument = GetComponent<UIDocument>();
@@ -31,6 +34,11 @@ public class MainMenu : MonoBehaviour
 
     private void NewGameClick(ClickEvent evt)
     {
+        //Todo: Set Preset New Game Save Data
+        
+        
+        DontDestroyOnLoad(saveDataCarrier.gameObject);
+        saveDataCarrier.loadGameOnSceneLoad = true;
         SceneManager.LoadScene(1);
     }
     

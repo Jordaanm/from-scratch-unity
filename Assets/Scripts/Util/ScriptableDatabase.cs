@@ -39,14 +39,7 @@ namespace Util
                 var id = entry.GetID();
                 if (id != null || id == "")
                 {
-                    try
-                    {
-                        database.Add(entry.GetID(), entry);
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.Log("woooo");
-                    }
+                    database.Add(entry.GetID(), entry);
                 }
                 else
                 {

@@ -40,15 +40,13 @@ namespace UI.HUD
             staminaMeter = root.Q("stamina");
             staminaBar = staminaMeter.Q("bar");
         }
-
-        public override void Init(MainHUD mainHUD)
-        {
-            base.Init(mainHUD);
-            characterStatus = mainHUD.player.character.characterStatus;
-        }
-
+        
         public override void Update()
         {
+            if (characterStatus == null)
+            {
+                characterStatus = MainHUD.Instance.Player.character.characterStatus;
+            }
             var healthPc = Percent(characterStatus.healthCurrent, characterStatus.healthMax);
             var hungerPc = Percent(characterStatus.hungerCurrent, characterStatus.hungerMax);
             var thirstPc = Percent(characterStatus.thirstCurrent, characterStatus.thirstMax);

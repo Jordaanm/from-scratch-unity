@@ -20,5 +20,10 @@ namespace Util
         public T GetAsset(string key) {
             return entries.Find(x => x.key == key)?.value;
         }
+        
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        public static void OnRuntimeStartSingleton() {
+            IS_EXITING = false;
+        }
     }
 }

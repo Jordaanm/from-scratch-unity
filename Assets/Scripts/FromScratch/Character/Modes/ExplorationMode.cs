@@ -124,6 +124,11 @@ namespace FromScratch.Character.Modes
 
         private void HandleAnimation()
         {
+            if (!character.Animator.isInitialized)
+            {
+                return;
+            }
+            
             Vector3 normalizedVelocity = character.characterController.velocity / movementSpeed;
             normalizedVelocity.y = 0;
             //Walking speed bound between 0 and 0.5. Sprinting bound between 0.5 and 1;

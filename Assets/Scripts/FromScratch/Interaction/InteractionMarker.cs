@@ -1,15 +1,27 @@
 ﻿using System;
 using FromScratch.Player;
 using UnityEngine;
+using UnityEngine.Events;
 using Util;
 
 namespace FromScratch.Interaction
 {
     public class InteractionMarker: MonoSingleton<InteractionMarker>
     {
-        public FromScratchPlayer player;
+        private FromScratchPlayer player;
         public Interactable attachedTo;
-        
+
+        private void Start()
+        {
+            player = GameManager.Instance.Player;
+            GameManager.Instance.OnPlayerChanged.AddListener(OnPlayerChanged);
+        }
+
+        private void OnPlayerChanged(FromScratchPlayer newPlayer)
+        {
+            player = newPlayer;
+        }
+
         private void Update()
         {
             FaceTowardsPlayerCamera();
@@ -42,6 +54,11 @@ namespace FromScratch.Interaction
             transform.SetParent(null);
             transform.localPosition = Vector3.zero;
             gameObject.SetActive(false);
+        }
+        
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        public static void OnRuntimeStartSingleton() {
+            IS_EXITING = false;
         }
     }
 }
